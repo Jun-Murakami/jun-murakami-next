@@ -5,11 +5,7 @@ type ReleaseInfo = { version: string; body: string } | null;
 
 const getLatestVersion = async (repoUrl: string): Promise<ReleaseInfo> => {
   try {
-    const response = await fetch(`https://api.github.com/repos/${repoUrl}/releases/latest`, {
-      headers: {
-        Authorization: `Bearer ${process.env.NEXT_PUBLIC_GIT_HUB_PATOKEN}`,
-      },
-    });
+    const response = await fetch(`https://api.github.com/repos/${repoUrl}/releases/latest`);
     const data = await response.json();
     return {
       version: data.tag_name.replace('v', ''),

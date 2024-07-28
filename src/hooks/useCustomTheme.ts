@@ -86,6 +86,12 @@ const createCustomTheme = (dpi: number): Theme => {
         styleOverrides: {
           // ユーザーエージェントにWinを含むか、プラットフォームがWinから始まる場合にスクロールバーのスタイルを適用
           body: navigator.userAgent?.indexOf('Win') > 0 || navigator.platform.startsWith('Win') ? windowsScrollbarStylesDark : {},
+          a: {
+            color: '#9c89ff',
+          },
+          'a:hover': {
+            color: '#ac99ff',
+          },
           Paepr: {
             styleOverrides: {
               root: {

@@ -1,3 +1,4 @@
+'use client';
 import { Typography, Box, Button, Card, Divider } from '@mui/material';
 import ReplyIcon from '@mui/icons-material/Reply';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';

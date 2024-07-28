@@ -1,3 +1,4 @@
+'use client';
 import { ReactNode, useState } from 'react';
 import Image, { StaticImageData } from 'next/image';
 import { Button, Box, Card, Divider, Typography, Tooltip, Popper, Fade } from '@mui/material';

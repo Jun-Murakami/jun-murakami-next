@@ -1,35 +1,16 @@
-'use client';
-import { useState } from 'react';
-import Image from 'next/image';
-import { useMediaQuery, Button, Box, IconButton, Typography, Tooltip, Popper, Fade, CircularProgress } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
+import dynamic from 'next/dynamic';
+import { Button, Box, IconButton, Typography, Tooltip } from '@mui/material';
 import { NoteLogoIcon, IMDbLogoIcon, VGMdbLogoIcon, WikiLogoIcon } from '@/components/Icons';
 import XIcon from '@mui/icons-material/X';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import InstagramIcon from '@mui/icons-material/Instagram';
-import KeyboardDoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrowDown';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import * as screenshots from '@/assets/screenshots';
-import { AppCard } from '@/components/AppCard';
-import { useGitHubReleases } from '@/hooks/useGitHubReleases';
+import { StaticAppCard } from '@/components/StaticAppCard';
+
+const DynamicMobileScrollButton = dynamic(() => import('@/components/DynamicMobileScrollButton'), { ssr: false });
 
 export default function HomePage() {
-  const [openNotice, setOpenNotice] = useState(false);
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-
-  const { isLoading, releases } = useGitHubReleases();
-
-  const handleNotice = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-    setOpenNotice((previousOpen) => !previousOpen);
-  };
-
-  const canBeOpen = openNotice && Boolean(anchorEl);
-  const id = canBeOpen ? 'transition-popper' : undefined;
-
   const socialLinks = [
     { title: 'note (ブログ記事など)', url: 'https://note.com/junmurakami/', icon: <NoteLogoIcon fontSize='large' /> },
     { title: 'X (Twitter)', url: 'https://twitter.com/jun_murakami', icon: <XIcon fontSize='medium' /> },
@@ -46,19 +27,6 @@ export default function HomePage() {
 
   return (
     <>
-      {isLoading && (
-        <Box
-          sx={{
-            position: 'fixed',
-            left: '50%',
-            top: '50%',
-            transform: 'translateX(-50%)',
-            zIndex: 1000,
-          }}
-        >
-          <CircularProgress size={75} />
-        </Box>
-      )}
       <Typography variant='body2' sx={{ p: { xs: 1, sm: 0 } }}>
         音楽ディレクター / プロデューサーの村上純 (高橋純)
         です。業務の合間に開発したアプリケーションや、音楽制作用のライブラリなどを配布しています。
@@ -67,30 +35,16 @@ export default function HomePage() {
       <Box sx={{ mt: 1, mb: 5, textAlign: { xs: 'center', sm: 'left' } }}>
         {socialLinks.map((link) => (
           <Tooltip title={link.title} key={link.title}>
-            <IconButton sx={{ height: 50, width: 50 }} onClick={() => window.open(link.url)}>
+            <IconButton sx={{ height: 50, width: 50 }} component='a' target='_blank' href={link.url}>
               {link.icon}
             </IconButton>
           </Tooltip>
         ))}
       </Box>
 
-      {isMobile && (
-        <Box sx={{ height: 'calc(100vh - 330px)', textAlign: 'center' }}>
-          <IconButton
-            sx={{ height: 50, width: 50 }}
-            onClick={() => {
-              const targetElement = document.querySelector('#wlsib');
-              if (targetElement) {
-                targetElement.scrollIntoView({ behavior: 'smooth' });
-              }
-            }}
-          >
-            <KeyboardDoubleArrowDownIcon fontSize='large' />
-          </IconButton>
-        </Box>
-      )}
+      <DynamicMobileScrollButton />
 
-      <AppCard
+      <StaticAppCard
         appName='レンズ何持ってく？'
         sectionId='wlsib'
         screenshot={screenshots.wlsib}
@@ -109,7 +63,7 @@ export default function HomePage() {
         webAppUrl='https://lensdore-c55ce.web.app/'
       />
 
-      <AppCard
+      <StaticAppCard
         appName='よみがなコンバーター'
         sectionId='yomigana'
         screenshot={screenshots.yomigana}
@@ -123,26 +77,16 @@ export default function HomePage() {
             ボーカロイドやAIシンガーの制作にも便利な「は」←→「わ」変換機能などを追加しています。
           </>
         }
-        latestRelease={releases.YomiganaConverter}
+        gitHubRepo='Jun-Murakami/YomiganaConverter'
         noteUrl='https://note.com/junmurakami/n/n35cd70b8dc12'
         gitHubUrl='https://github.com/Jun-Murakami/YomiganaConverter'
         webAppUrl='https://yomiganaconverterreact.web.app/'
-        windowsAppUrl={
-          releases.YomiganaConverter &&
-          `https://github.com/Jun-Murakami/YomiganaConverter/releases/download/v${releases.YomiganaConverter.version}/YomiganaConverter_v${releases.YomiganaConverter.version}_win.zip`
-        }
-        macAppleSiliconAppUrl={
-          releases.YomiganaConverter &&
-          `https://github.com/Jun-Murakami/YomiganaConverter/releases/download/v${releases.YomiganaConverter.version}/YomiganaConverter_v${releases.YomiganaConverter.version}_mac_arm64.zip`
-        }
-        macIntelAppUrl={
-          releases.YomiganaConverter &&
-          `https://github.com/Jun-Murakami/YomiganaConverter/releases/download/v${releases.YomiganaConverter.version}/YomiganaConverter_v${releases.YomiganaConverter.version}_mac_x64.zip`
-        }
-        handleNotice={handleNotice}
+        windowsAppUrl={`https://github.com/Jun-Murakami/YomiganaConverter/releases/download/v{{version}}/YomiganaConverter_v{{version}}_win.zip`}
+        macAppleSiliconAppUrl={`https://github.com/Jun-Murakami/YomiganaConverter/releases/download/v{{version}}/YomiganaConverter_v{{version}}_mac_arm64.zip`}
+        macIntelAppUrl={`https://github.com/Jun-Murakami/YomiganaConverter/releases/download/v{{version}}/YomiganaConverter_v{{version}}_mac_x64.zip`}
       />
 
-      <AppCard
+      <StaticAppCard
         appName='Dropbox Sync Skipper'
         sectionId='dropbox-skipper'
         screenshot={screenshots.dropboxSkipper}
@@ -161,19 +105,12 @@ export default function HomePage() {
         zennUrl='https://zenn.dev/jun_murakami/articles/1dc9d0a2ffa3d6'
         noteUrl='https://note.com/junmurakami/n/n0911c5853082'
         gitHubUrl='https://github.com/Jun-Murakami/dropboxskipper'
-        latestRelease={releases.dropboxskipper}
-        windowsAppUrl={
-          releases.dropboxskipper &&
-          `https://github.com/Jun-Murakami/dropboxskipper/releases/download/v${releases.dropboxskipper.version}/DropboxSkipper-win64-installer-${releases.dropboxskipper.version}.exe`
-        }
-        macUniversalAppUrl={
-          releases.dropboxskipper &&
-          `https://github.com/Jun-Murakami/dropboxskipper/releases/download/v${releases.dropboxskipper.version}/DropboxSkipper-macOS-universal-${releases.dropboxskipper.version}.dmg`
-        }
-        handleNotice={handleNotice}
+        gitHubRepo='Jun-Murakami/dropboxskipper'
+        windowsAppUrl={`https://github.com/Jun-Murakami/dropboxskipper/releases/download/v{{version}}/DropboxSkipper-win64-installer-{{version}}.exe`}
+        macUniversalAppUrl={`https://github.com/Jun-Murakami/dropboxskipper/releases/download/v{{version}}/DropboxSkipper-macOS-universal-{{version}}.dmg`}
       />
 
-      <AppCard
+      <StaticAppCard
         appName='TaskTrees'
         sectionId='tasktrees'
         screenshot={screenshots.taskTrees}
@@ -182,29 +119,19 @@ export default function HomePage() {
             ツリー形式でタスクやメモを自由に作成し、整理できるアプリです。他の人とツリーを共有することもできます。iOS版、Android版もリリースしました。
           </>
         }
-        latestRelease={releases['TaskTrees-Electron']}
+        gitHubRepo='Jun-Murakami/TaskTrees-Electron'
         noteUrl='https://note.com/junmurakami/n/n651efffaf343'
         gitHubUrl='https://github.com/Jun-Murakami/TaskTrees'
         policyUrl='/privacy-policy-tasktrees'
         webAppUrl='https://tasktree-s.web.app/'
         appStoreUrl='https://apps.apple.com/jp/app/tasktrees/id6482979857'
         googlePlayUrl='https://play.google.com/store/apps/details?id=com.tasktrees.app'
-        windowsAppUrl={
-          releases['TaskTrees-Electron'] &&
-          `https://github.com/Jun-Murakami/TaskTrees-Electron/releases/download/v${releases['TaskTrees-Electron'].version}/TaskTrees-${releases['TaskTrees-Electron'].version}-setup_win_x64.exe`
-        }
-        macAppleSiliconAppUrl={
-          releases['TaskTrees-Electron'] &&
-          `https://github.com/Jun-Murakami/TaskTrees-Electron/releases/download/v${releases['TaskTrees-Electron'].version}/TaskTrees-${releases['TaskTrees-Electron'].version}_mac_arm64.dmg`
-        }
-        macIntelAppUrl={
-          releases['TaskTrees-Electron'] &&
-          `https://github.com/Jun-Murakami/TaskTrees-Electron/releases/download/v${releases['TaskTrees-Electron'].version}/TaskTrees-${releases['TaskTrees-Electron'].version}_mac_x64.dmg`
-        }
-        handleNotice={handleNotice}
+        windowsAppUrl={`https://github.com/Jun-Murakami/TaskTrees-Electron/releases/download/v{{version}}/TaskTrees-{{version}}-setup_win_x64.exe`}
+        macAppleSiliconAppUrl={`https://github.com/Jun-Murakami/TaskTrees-Electron/releases/download/v{{version}}/TaskTrees-{{version}}_mac_arm64.dmg`}
+        macIntelAppUrl={`https://github.com/Jun-Murakami/TaskTrees-Electron/releases/download/v{{version}}/TaskTrees-{{version}}_mac_x64.dmg`}
       />
 
-      <AppCard
+      <StaticAppCard
         appName='AI-Browser'
         sectionId='aiBrowser'
         screenshot={screenshots.aiBrowser}
@@ -215,25 +142,15 @@ export default function HomePage() {
             Editor(VSCodeと同じエディタエンジン)を統合しているのでプログラマーの方もどうぞ。
           </>
         }
-        latestRelease={releases['AI-Browser']}
+        gitHubRepo='Jun-Murakami/AI-Browser'
         noteUrl='https://note.com/junmurakami/n/n5d674f5977e6'
         gitHubUrl='https://github.com/Jun-Murakami/AI-Browser'
-        windowsAppUrl={
-          releases['AI-Browser'] &&
-          `https://github.com/Jun-Murakami/AI-Browser/releases/download/v${releases['AI-Browser'].version}/AI-Browser-${releases['AI-Browser'].version}-setup_win_x64.exe`
-        }
-        macAppleSiliconAppUrl={
-          releases['AI-Browser'] &&
-          `https://github.com/Jun-Murakami/AI-Browser/releases/download/v${releases['AI-Browser'].version}/AI-Browser-${releases['AI-Browser'].version}_mac_arm64.dmg`
-        }
-        macIntelAppUrl={
-          releases['AI-Browser'] &&
-          `https://github.com/Jun-Murakami/AI-Browser/releases/download/v${releases['AI-Browser'].version}/AI-Browser-${releases['AI-Browser'].version}_mac_x64.dmg`
-        }
-        handleNotice={handleNotice}
+        windowsAppUrl={`https://github.com/Jun-Murakami/AI-Browser/releases/download/v{{version}}/AI-Browser-{{version}}-setup_win_x64.exe`}
+        macAppleSiliconAppUrl={`https://github.com/Jun-Murakami/AI-Browser/releases/download/v{{version}}/AI-Browser-{{version}}_mac_arm64.dmg`}
+        macIntelAppUrl={`https://github.com/Jun-Murakami/AI-Browser/releases/download/v{{version}}/AI-Browser-{{version}}_mac_x64.dmg`}
       />
 
-      <AppCard
+      <StaticAppCard
         appName='Cubase DrumMap Editor'
         sectionId='cubaseDMEditor'
         screenshot={screenshots.cubaseDMEditor}
@@ -251,25 +168,15 @@ export default function HomePage() {
             からダウンロードできます。
           </>
         }
-        latestRelease={releases.CubaseDrumMapEditor}
+        gitHubRepo='Jun-Murakami/CubaseDrumMapEditor'
         noteUrl='https://note.com/junmurakami/n/n13650982fc7f'
         gitHubUrl='https://github.com/Jun-Murakami/CubaseDrumMapEditor'
-        windowsAppUrl={
-          releases.CubaseDrumMapEditor &&
-          `https://github.com/Jun-Murakami/CubaseDrumMapEditor/releases/download/v${releases.CubaseDrumMapEditor.version}/CubaseDrumMapEditor_v${releases.CubaseDrumMapEditor.version}_win.zip`
-        }
-        macAppleSiliconAppUrl={
-          releases.CubaseDrumMapEditor &&
-          `https://github.com/Jun-Murakami/CubaseDrumMapEditor/releases/download/v${releases.CubaseDrumMapEditor.version}/CubaseDrumMapEditor_v${releases.CubaseDrumMapEditor.version}_mac_arm64.zip`
-        }
-        macIntelAppUrl={
-          releases.CubaseDrumMapEditor &&
-          `https://github.com/Jun-Murakami/CubaseDrumMapEditor/releases/download/v${releases.CubaseDrumMapEditor.version}/CubaseDrumMapEditor_v${releases.CubaseDrumMapEditor.version}_mac_x64.zip`
-        }
-        handleNotice={handleNotice}
+        windowsAppUrl={`https://github.com/Jun-Murakami/CubaseDrumMapEditor/releases/download/v{{version}}/CubaseDrumMapEditor_v{{version}}_win.zip`}
+        macAppleSiliconAppUrl={`https://github.com/Jun-Murakami/CubaseDrumMapEditor/releases/download/v{{version}}/CubaseDrumMapEditor_v{{version}}_mac_arm64.zip`}
+        macIntelAppUrl={`https://github.com/Jun-Murakami/CubaseDrumMapEditor/releases/download/v{{version}}/CubaseDrumMapEditor_v{{version}}_mac_x64.zip`}
       />
 
-      <AppCard
+      <StaticAppCard
         appName='Famitone 2A03'
         sectionId='famitone'
         screenshot={screenshots.famitone}
@@ -285,54 +192,12 @@ export default function HomePage() {
         noteUrl='https://note.com/junmurakami/n/n1e525af59ada'
       />
 
-      <Popper id={id} open={openNotice} anchorEl={anchorEl} transition placement='top'>
-        {({ TransitionProps }) => (
-          <Fade {...TransitionProps} timeout={350}>
-            <Box
-              sx={{
-                border: 1,
-                p: 2,
-                borderRadius: 3,
-                bgcolor: 'rgba(50,50,50,0.3)',
-                backdropFilter: 'blur(10px)',
-                textAlign: 'center',
-              }}
-            >
-              <Box sx={{ maxWidth: 900, height: 'auto' }}>
-                <Image
-                  src='/images/install-note-win.png'
-                  alt='Install Note'
-                  priority
-                  width={900}
-                  height={506}
-                  style={{
-                    width: '100%',
-                    height: 'auto',
-                  }}
-                />
-              </Box>
-              <Typography variant='body2'>
-                Windowsの場合、インストール時にセキュリティ警告が表示されます。
-                その際は「詳細情報」をクリックし、「実行」を選択してください。
-                <br />
-                <br />
-              </Typography>
-              <Typography variant='caption'>
-                ※プログラムが未署名であることによる警告です。ソースコードを公開しているので、
-                不安のある方はご自身でコードを確認の上ビルドしてください。(MacOS版は署名済み)
-              </Typography>
-            </Box>
-          </Fade>
-        )}
-      </Popper>
-
       <Box sx={{ display: 'flex', justifyContent: 'center', mb: 0 }}>
         <Button
           variant={'outlined'}
           startIcon={<MailOutlineIcon />}
-          onClick={() => {
-            window.location.href = '/contact';
-          }}
+          component='a'
+          href='/contact'
           sx={{ mb: 10, backgroundColor: 'rgba(50, 50, 50, 0.5)', backdropFilter: 'blur(10px)' }}
         >
           お問い合わせ

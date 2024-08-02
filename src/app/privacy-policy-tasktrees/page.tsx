@@ -1,4 +1,3 @@
-'use client';
 import { Typography, Box, Button, Card, Divider } from '@mui/material';
 import ReplyIcon from '@mui/icons-material/Reply';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
@@ -90,9 +89,8 @@ export default function PrivacyPolicyTaskTrees() {
           <Button
             variant={'outlined'}
             startIcon={<MailOutlineIcon />}
-            onClick={() => {
-              window.location.href = '/contact';
-            }}
+            component={'a'}
+            href={'/contact'}
             sx={{ mb: 2, backgroundColor: 'rgba(50, 50, 50, 0.5)', backdropFilter: 'blur(10px)' }}
           >
             お問い合わせ
@@ -104,9 +102,8 @@ export default function PrivacyPolicyTaskTrees() {
         <Button
           variant={'outlined'}
           startIcon={<ReplyIcon />}
-          onClick={() => {
-            window.location.href = '/';
-          }}
+          component={'a'}
+          href={'/'}
           sx={{ mb: 10, backgroundColor: 'rgba(50, 50, 50, 0.5)', backdropFilter: 'blur(10px)' }}
         >
           戻る

@@ -1,24 +1,12 @@
-'use client';
-
-import { CssBaseline, ThemeProvider, useMediaQuery, Box, Typography } from '@mui/material';
+import { CssBaseline, ThemeProvider, Box, Typography } from '@mui/material';
 import { ScrollHandler } from '@/components/ScrollHandler';
-import { useCustomTheme } from '@/hooks/useCustomTheme';
+import theme from '@/hooks/useCustomTheme';
 
 export default function ClientLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const theme = useCustomTheme();
-  const isMobile = useMediaQuery(theme?.breakpoints.down('sm') ?? '(max-width:600px)');
-
-  if (!theme) {
-    return null; // テーマがロードされるまで何も表示しない
-  }
-
-  const logoSize = isMobile ? 'h5' : 'h2';
-  const logoAlign = isMobile ? 'center' : 'left';
-
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -53,7 +41,16 @@ export default function ClientLayout({
             width: { xs: '100%', sm: '70%' },
           }}
         >
-          <Typography variant={logoSize} align={logoAlign} sx={{ mt: { xs: 5, sm: 10 }, mb: 5 }}>
+          <Typography
+            sx={{
+              mt: { xs: 5, sm: 10 },
+              mb: 5,
+              fontWeight: 300,
+              fontSize: { xs: 25, sm: 63 },
+              textAlign: { xs: 'center', sm: 'left' },
+            }}
+            component='h1'
+          >
             Jun Murakami App Factory
           </Typography>
           {children}

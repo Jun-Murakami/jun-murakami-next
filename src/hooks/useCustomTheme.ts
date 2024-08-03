@@ -1,20 +1,13 @@
 'use client';
-import { useEffect, useState } from 'react';
 import { createTheme, Theme } from '@mui/material/styles';
-import '@fontsource/biz-udpgothic';
 import '@fontsource/m-plus-1p';
 import '@fontsource-variable/urbanist';
 
-const createCustomTheme = (dpi: number): Theme => {
-  let mainFont = '"BIZ UDPGothic"';
-
-  if (dpi >= 1.5) {
-    mainFont = '"M PLUS 1p"';
-  }
+const createCustomTheme = (): Theme => {
 
   const fontFamilySet = [
-    'Urbanist Variable',
-    `${mainFont}`,
+    '"Urbanist Variable"',
+    '"M PLUS 1p"',
     '-apple-system',
     'BlinkMacSystemFont',
     '"Segoe UI"',
@@ -26,23 +19,6 @@ const createCustomTheme = (dpi: number): Theme => {
     '"Segoe UI Emoji"',
     '"Segoe UI Symbol"',
   ].join(',');
-
-  let typographyStyles = {};
-  if (dpi >= 1.5) {
-    typographyStyles = {
-      fontFamily: fontFamilySet,
-    };
-  } else {
-    typographyStyles = {
-      fontFamily: fontFamilySet,
-      h3: {
-        fontSize: '35px',
-      },
-      caption: {
-        fontSize: '11px',
-      },
-    };
-  }
 
   const breakpointsValues = {
     xs: 0,
@@ -80,12 +56,17 @@ const createCustomTheme = (dpi: number): Theme => {
         main: '#ef0a0a',
       },
     },
-    typography: typographyStyles,
+    typography: {
+      fontFamily: fontFamilySet,
+      body1: {
+        fontSize: '17px',
+      },
+    },
     components: {
       MuiCssBaseline: {
         styleOverrides: {
           // ユーザーエージェントにWinを含むか、プラットフォームがWinから始まる場合にスクロールバーのスタイルを適用
-          body: navigator.userAgent?.indexOf('Win') > 0 || navigator.platform.startsWith('Win') ? windowsScrollbarStylesDark : {},
+          body: windowsScrollbarStylesDark,
           a: {
             color: '#9c89ff',
           },
@@ -106,22 +87,6 @@ const createCustomTheme = (dpi: number): Theme => {
 
 };
 
-export const useCustomTheme = () => {
-  const [theme, setTheme] = useState<Theme | null>(null);
+const theme = createCustomTheme();
 
-  useEffect(() => {
-    setTheme(createCustomTheme(window.devicePixelRatio));
-
-    const updateDpi = () => {
-      setTheme(createCustomTheme(window.devicePixelRatio));
-    };
-
-    window.addEventListener('resize', updateDpi);
-
-    return () => {
-      window.removeEventListener('resize', updateDpi);
-    };
-  }, []);
-
-  return theme;
-};
+export default theme;

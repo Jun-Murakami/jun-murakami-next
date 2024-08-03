@@ -60,6 +60,7 @@ const createCustomTheme = (): Theme => {
       fontFamily: fontFamilySet,
       body1: {
         fontSize: '17px',
+        lineHeight: '1.7',
       },
     },
     components: {

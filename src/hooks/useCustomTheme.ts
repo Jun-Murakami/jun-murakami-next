@@ -1,6 +1,7 @@
 'use client';
 import { createTheme, Theme } from '@mui/material/styles';
-import '@fontsource/m-plus-1p';
+import '@fontsource/m-plus-1p/300.css';
+import '@fontsource/m-plus-1p/400.css';
 import '@fontsource-variable/urbanist';
 
 const createCustomTheme = (): Theme => {
@@ -58,9 +59,12 @@ const createCustomTheme = (): Theme => {
     },
     typography: {
       fontFamily: fontFamilySet,
+      h5: {
+        fontWeight: 300,
+      },
       body1: {
-        fontSize: '17px',
-        lineHeight: '1.7',
+        fontWeight: 300,
+        lineHeight: 1.7,
       },
     },
     components: {
@@ -80,6 +84,13 @@ const createCustomTheme = (): Theme => {
                 backgroundColor: '#14151f',
               },
             },
+          },
+        },
+      },
+      MuiTypography: {
+        styleOverrides: {
+          root: {
+            transform: 'rotate(0.05deg)',
           },
         },
       },

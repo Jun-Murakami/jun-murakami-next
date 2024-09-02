@@ -17,7 +17,11 @@ export default function HomePage() {
     { title: 'Instagram', url: 'https://www.instagram.com/jun9989/', icon: <InstagramIcon fontSize='medium' /> },
     { title: 'GitHub', url: 'https://github.com/Jun-Murakami', icon: <GitHubIcon fontSize='medium' /> },
     { title: 'IMDb (映画関連)', url: 'https://www.imdb.com/name/nm2687359', icon: <IMDbLogoIcon fontSize='large' /> },
-    { title: 'VGMdb (ゲーム/アニメ音楽関連)', url: 'https://vgmdb.net/artist/3937', icon: <VGMdbLogoIcon fontSize='large' /> },
+    {
+      title: 'VGMdb (ゲーム/アニメ音楽関連)',
+      url: 'https://vgmdb.net/artist/3937',
+      icon: <VGMdbLogoIcon fontSize='large' />,
+    },
     {
       title: 'Wikipedia',
       url: 'https://ja.wikipedia.org/wiki/%E6%9D%91%E4%B8%8A%E7%B4%94_(%E9%9F%B3%E6%A5%BD%E5%AE%B6)',
@@ -97,7 +101,8 @@ export default function HomePage() {
             動作原理はDropboxの仕様に準じて、WindowsではNTFSの代替ファイルストリーム、MacOS/Linuxでは拡張属性を書き換えます。ファイルの内容自体は変更されませんが、自己責任でどうぞ。
             <br />
             <br />
-            このアプリはサイズが小さいため、MacOS版はユニバーサルアプリ（一つのインストーラでAppleSilicon/Intel Mac両対応）です。
+            このアプリはサイズが小さいため、MacOS版はユニバーサルアプリ（一つのインストーラでAppleSilicon/Intel
+            Mac両対応）です。
             <br />
             また、ソースコードとしてはLinuxも対応していますが、Dropboxのテストがほとんどできていないので、Linuxをお使いの方はご自分でビルドしてお使いください。（非常にシンプルなWailsアプリです）
           </>
@@ -137,7 +142,8 @@ export default function HomePage() {
         screenshot={screenshots.aiBrowser}
         description={
           <>
-            ChatGPT、Gemini、Claude、Phind、Perplexityに対応したチャットAI専用ブラウザです。縦に5つまで分割できる広いエディタで文章を切り貼りして、各サービスに直接プロンプトを送信できます。
+            ChatGPT、Gemini、Claude、Phind、Perplexity、Genspark、Google AI
+            Studioに対応したチャットAI専用ブラウザです。縦に5つまで分割できる広いエディタで文章を切り貼りして、各サービスに直接プロンプトを送信できます。
             送信履歴から同じプロンプトを何度も呼び出して調整しながら複数のサービスに展開可能、一括送信もできます。Monaco
             Editor(VSCodeと同じエディタエンジン)を統合しているのでプログラマーの方もどうぞ。
           </>
@@ -183,7 +189,10 @@ export default function HomePage() {
         description={
           <>
             ファミコン実機をサンプリングしたKONTAKT音源ライブラリです。
-            <a href='https://github.com/Jun-Murakami/Famitone/releases/download/v1.0/Famitone2A03_v1.0.zip' target='_blank'>
+            <a
+              href='https://github.com/Jun-Murakami/Famitone/releases/download/v1.0/Famitone2A03_v1.0.zip'
+              target='_blank'
+            >
               こちら
             </a>
             からダウンロードできます。

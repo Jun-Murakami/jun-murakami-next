@@ -4,6 +4,7 @@ const nextConfig = {
     unoptimized: true,
   },
   trailingSlash: false,
+  distDir: 'out',
 };
 
 export default nextConfig;

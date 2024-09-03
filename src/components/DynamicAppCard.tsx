@@ -43,19 +43,20 @@ const DynamicAppCard = ({
     const fetchLatestRelease = async () => {
       setIsLoading(true);
       try {
-        const response = await fetch(`/api/github/releases/${gitHubRepo}`);
-
+        const response = await fetch(
+          `https://api.github.com/repos/${gitHubRepo}/releases/latest?client_id=${clientId}&client_secret=${clientSecret}`
+        );
         const data = await response.json();
         setLatestRelease({
-          version: data.version,
+          version: data.tag_name.replace('v', ''),
           body: data.body,
         });
         if (windowsAppUrl || macAppleSiliconAppUrl || macIntelAppUrl || macUniversalAppUrl) {
           setReplacedUrls({
-            windowsAppUrl: windowsAppUrl?.replace(/{{version}}/g, data.version),
-            macAppleSiliconAppUrl: macAppleSiliconAppUrl?.replace(/{{version}}/g, data.version),
-            macIntelAppUrl: macIntelAppUrl?.replace(/{{version}}/g, data.version),
-            macUniversalAppUrl: macUniversalAppUrl?.replace(/{{version}}/g, data.version),
+            windowsAppUrl: windowsAppUrl?.replace(/{{version}}/g, data.tag_name.replace('v', '')),
+            macAppleSiliconAppUrl: macAppleSiliconAppUrl?.replace(/{{version}}/g, data.tag_name.replace('v', '')),
+            macIntelAppUrl: macIntelAppUrl?.replace(/{{version}}/g, data.tag_name.replace('v', '')),
+            macUniversalAppUrl: macUniversalAppUrl?.replace(/{{version}}/g, data.tag_name.replace('v', '')),
           });
         }
       } catch (error) {

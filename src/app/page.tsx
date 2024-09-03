@@ -81,7 +81,7 @@ export default function HomePage() {
             ボーカロイドやAIシンガーの制作にも便利な「は」←→「わ」変換機能などを追加しています。
           </>
         }
-        gitHubRepo='YomiganaConverter'
+        gitHubRepo='Jun-Murakami/YomiganaConverter'
         noteUrl='https://note.com/junmurakami/n/n35cd70b8dc12'
         gitHubUrl='https://github.com/Jun-Murakami/YomiganaConverter'
         webAppUrl='https://yomiganaconverterreact.web.app/'
@@ -110,7 +110,7 @@ export default function HomePage() {
         zennUrl='https://zenn.dev/jun_murakami/articles/1dc9d0a2ffa3d6'
         noteUrl='https://note.com/junmurakami/n/n0911c5853082'
         gitHubUrl='https://github.com/Jun-Murakami/dropboxskipper'
-        gitHubRepo='dropboxskipper'
+        gitHubRepo='Jun-Murakami/dropboxskipper'
         windowsAppUrl={`https://github.com/Jun-Murakami/dropboxskipper/releases/download/v{{version}}/DropboxSkipper-win64-installer-{{version}}.exe`}
         macUniversalAppUrl={`https://github.com/Jun-Murakami/dropboxskipper/releases/download/v{{version}}/DropboxSkipper-macOS-universal-{{version}}.dmg`}
       />
@@ -124,7 +124,7 @@ export default function HomePage() {
             ツリー形式でタスクやメモを自由に作成し、整理できるアプリです。他の人とツリーを共有することもできます。iOS版、Android版もリリースしました。
           </>
         }
-        gitHubRepo='TaskTrees-Electron'
+        gitHubRepo='Jun-Murakami/TaskTrees-Electron'
         noteUrl='https://note.com/junmurakami/n/n651efffaf343'
         gitHubUrl='https://github.com/Jun-Murakami/TaskTrees'
         policyUrl='/privacy-policy-tasktrees'
@@ -148,7 +148,7 @@ export default function HomePage() {
             Editor(VSCodeと同じエディタエンジン)を統合しているのでプログラマーの方もどうぞ。
           </>
         }
-        gitHubRepo='AI-Browser'
+        gitHubRepo='Jun-Murakami/AI-Browser'
         noteUrl='https://note.com/junmurakami/n/n5d674f5977e6'
         gitHubUrl='https://github.com/Jun-Murakami/AI-Browser'
         windowsAppUrl={`https://github.com/Jun-Murakami/AI-Browser/releases/download/v{{version}}/AI-Browser-{{version}}-setup_win_x64.exe`}
@@ -174,7 +174,7 @@ export default function HomePage() {
             からダウンロードできます。
           </>
         }
-        gitHubRepo='CubaseDrumMapEditor'
+        gitHubRepo='Jun-Murakami/CubaseDrumMapEditor'
         noteUrl='https://note.com/junmurakami/n/n13650982fc7f'
         gitHubUrl='https://github.com/Jun-Murakami/CubaseDrumMapEditor'
         windowsAppUrl={`https://github.com/Jun-Murakami/CubaseDrumMapEditor/releases/download/v{{version}}/CubaseDrumMapEditor_v{{version}}_win.zip`}

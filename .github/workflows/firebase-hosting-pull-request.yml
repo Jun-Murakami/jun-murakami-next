@@ -19,6 +19,8 @@ jobs:
           NEXT_PUBLIC_MAIL_SERVICE_ID: ${{ secrets.NEXT_PUBLIC_MAIL_SERVICE_ID }}
           NEXT_PUBLIC_MAIL_TEMPLATE_ID: ${{ secrets.NEXT_PUBLIC_MAIL_TEMPLATE_ID }}
           NEXT_PUBLIC_GIT_HUB_PATOKEN: ${{ secrets.NEXT_PUBLIC_GIT_HUB_PATOKEN }}
+          NEXT_PUBLIC_GIT_HUB_APP_CLIENT_ID: ${{ secrets.NEXT_PUBLIC_GIT_HUB_APP_CLIENT_ID }}
+          NEXT_PUBLIC_GIT_HUB_APP_CLIENT_SECRET: ${{ secrets.NEXT_PUBLIC_GIT_HUB_APP_CLIENT_SECRET }}
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'

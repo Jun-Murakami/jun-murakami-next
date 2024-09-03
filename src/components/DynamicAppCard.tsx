@@ -6,6 +6,9 @@ import Image from 'next/image';
 import * as badges from '@/assets/badges';
 import ReactMarkdown from 'react-markdown';
 
+const clientId = process.env.NEXT_PUBLIC_GIT_HUB_APP_CLIENT_ID;
+const clientSecret = process.env.NEXT_PUBLIC_GIT_HUB_APP_CLIENT_SECRET;
+
 interface DynamicAppCardProps {
   gitHubRepo?: string;
   appStoreUrl?: string;
@@ -40,18 +43,19 @@ const DynamicAppCard = ({
     const fetchLatestRelease = async () => {
       setIsLoading(true);
       try {
-        const response = await fetch(`https://api.github.com/repos/${gitHubRepo}/releases/latest`);
+        const response = await fetch(`/api/github/releases/${gitHubRepo}`);
+
         const data = await response.json();
         setLatestRelease({
-          version: data.tag_name.replace('v', ''),
+          version: data.version,
           body: data.body,
         });
         if (windowsAppUrl || macAppleSiliconAppUrl || macIntelAppUrl || macUniversalAppUrl) {
           setReplacedUrls({
-            windowsAppUrl: windowsAppUrl?.replace(/{{version}}/g, data.tag_name.replace('v', '')),
-            macAppleSiliconAppUrl: macAppleSiliconAppUrl?.replace(/{{version}}/g, data.tag_name.replace('v', '')),
-            macIntelAppUrl: macIntelAppUrl?.replace(/{{version}}/g, data.tag_name.replace('v', '')),
-            macUniversalAppUrl: macUniversalAppUrl?.replace(/{{version}}/g, data.tag_name.replace('v', '')),
+            windowsAppUrl: windowsAppUrl?.replace(/{{version}}/g, data.version),
+            macAppleSiliconAppUrl: macAppleSiliconAppUrl?.replace(/{{version}}/g, data.version),
+            macIntelAppUrl: macIntelAppUrl?.replace(/{{version}}/g, data.version),
+            macUniversalAppUrl: macUniversalAppUrl?.replace(/{{version}}/g, data.version),
           });
         }
       } catch (error) {

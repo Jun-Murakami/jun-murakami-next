@@ -100,10 +100,6 @@ export default function HomePage() {
             <br />
             動作原理はDropboxの仕様に準じて、WindowsではNTFSの代替ファイルストリーム、MacOS/Linuxでは拡張属性を書き換えます。ファイルの内容自体は変更されませんが、自己責任でどうぞ。
             <br />
-            <br />
-            このアプリはサイズが小さいため、MacOS版はユニバーサルアプリ（一つのインストーラでAppleSilicon/Intel
-            Mac両対応）です。
-            <br />
             また、ソースコードとしてはLinuxも対応していますが、Dropboxのテストがほとんどできていないので、Linuxをお使いの方はご自分でビルドしてお使いください。（非常にシンプルなWailsアプリです）
           </>
         }
@@ -132,8 +128,7 @@ export default function HomePage() {
         appStoreUrl='https://apps.apple.com/jp/app/tasktrees/id6482979857'
         googlePlayUrl='https://play.google.com/store/apps/details?id=com.tasktrees.app'
         windowsAppUrl={`https://github.com/Jun-Murakami/TaskTrees-Electron/releases/download/v{{version}}/TaskTrees-{{version}}-setup_win_x64.exe`}
-        macAppleSiliconAppUrl={`https://github.com/Jun-Murakami/TaskTrees-Electron/releases/download/v{{version}}/TaskTrees-{{version}}_mac_arm64.dmg`}
-        macIntelAppUrl={`https://github.com/Jun-Murakami/TaskTrees-Electron/releases/download/v{{version}}/TaskTrees-{{version}}_mac_x64.dmg`}
+        macUniversalAppUrl={`https://github.com/Jun-Murakami/TaskTrees-Electron/releases/download/v{{version}}/TaskTrees-{{version}}_mac_universal.dmg`}
       />
 
       <StaticAppCard
@@ -189,10 +184,7 @@ export default function HomePage() {
         description={
           <>
             ファミコン実機をサンプリングしたKONTAKT音源ライブラリです。
-            <a
-              href='https://github.com/Jun-Murakami/Famitone/releases/download/v1.0/Famitone2A03_v1.0.zip'
-              target='_blank'
-            >
+            <a href='https://github.com/Jun-Murakami/Famitone/releases/download/v1.0/Famitone2A03_v1.0.zip' target='_blank'>
               こちら
             </a>
             からダウンロードできます。

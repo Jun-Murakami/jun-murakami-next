@@ -137,8 +137,8 @@ export default function HomePage() {
         screenshot={screenshots.aiBrowser}
         description={
           <>
-            ChatGPT、Gemini、Claude、Phind、Perplexity、Genspark、Google AI
-            Studioに対応したチャットAI専用ブラウザです。縦に5つまで分割できる広いエディタで文章を切り貼りして、各サービスに直接プロンプトを送信できます。
+            ChatGPT、Google
+            Gemini、Claude、Phind、Perplexity、Genspark、Felo、JENOVAに対応したチャットAI専用ブラウザです。縦に5つまで分割できる広いエディタで文章を切り貼りして、各サービスに直接プロンプトを送信できます。
             送信履歴から同じプロンプトを何度も呼び出して調整しながら複数のサービスに展開可能、一括送信もできます。Monaco
             Editor(VSCodeと同じエディタエンジン)を統合しているのでプログラマーの方もどうぞ。
           </>
@@ -147,8 +147,7 @@ export default function HomePage() {
         noteUrl='https://note.com/junmurakami/n/n5d674f5977e6'
         gitHubUrl='https://github.com/Jun-Murakami/AI-Browser'
         windowsAppUrl={`https://github.com/Jun-Murakami/AI-Browser/releases/download/v{{version}}/AI-Browser-{{version}}-setup_win_x64.exe`}
-        macAppleSiliconAppUrl={`https://github.com/Jun-Murakami/AI-Browser/releases/download/v{{version}}/AI-Browser-{{version}}_mac_arm64.dmg`}
-        macIntelAppUrl={`https://github.com/Jun-Murakami/AI-Browser/releases/download/v{{version}}/AI-Browser-{{version}}_mac_x64.dmg`}
+        macUniversalAppUrl={`https://github.com/Jun-Murakami/AI-Browser/releases/download/v{{version}}/AI-Browser-{{version}}_mac_universal.dmg`}
       />
 
       <StaticAppCard

@@ -140,7 +140,7 @@ export default function HomePage() {
             ChatGPT、Google
             Gemini、Claude、Phind、Perplexity、Genspark、Felo、JENOVAに対応したチャットAI専用ブラウザです。縦に5つまで分割できる広いエディタで文章を切り貼りして、各サービスに直接プロンプトを送信できます。
             送信履歴から同じプロンプトを何度も呼び出して調整しながら複数のサービスに展開可能、一括送信もできます。Monaco
-            Editor(VSCodeと同じエディタエンジン)を統合しているのでプログラマーの方もどうぞ。
+            Editor(VSCodeと同じテキストエディタエンジン)を統合しているのでプログラマーの方もどうぞ。
           </>
         }
         gitHubRepo='Jun-Murakami/AI-Browser'

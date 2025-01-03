@@ -16,7 +16,7 @@ interface DynamicAppCardProps {
   macUniversalAppUrl?: string | null;
 }
 
-const DynamicAppCard = dynamic<DynamicAppCardProps>(() => import('@/components/DynamicAppCard'), { ssr: false });
+const DynamicAppCard = dynamic<DynamicAppCardProps>(() => import('@/components/DynamicAppCard'));
 
 interface StaticAppCardProps {
   appName: string;

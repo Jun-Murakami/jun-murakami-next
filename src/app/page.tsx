@@ -8,7 +8,7 @@ import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import * as screenshots from '@/assets/screenshots';
 import { StaticAppCard } from '@/components/StaticAppCard';
 
-const DynamicMobileScrollButton = dynamic(() => import('@/components/DynamicMobileScrollButton'), { ssr: false });
+const DynamicMobileScrollButton = dynamic(() => import('@/components/DynamicMobileScrollButton'));
 
 export default function HomePage() {
   const socialLinks = [

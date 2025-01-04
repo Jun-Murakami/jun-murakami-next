@@ -45,6 +45,7 @@ const createCustomTheme = (): Theme => {
   };
 
   return createTheme({
+    cssVariables: true,
     breakpoints: {
       values: breakpointsValues,
     },

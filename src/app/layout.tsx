@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
+import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
 import ClientLayout from './ClientLayout';
+import { GoogleAnalytics } from '@next/third-parties/google';
 
 export const metadata: Metadata = {
   title: 'Jun Murakami App Factory',
@@ -37,10 +39,15 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const googleAnalyticsId = 'G-JK7QMBRBPV';
+
   return (
     <html lang='ja'>
       <body>
-        <ClientLayout>{children}</ClientLayout>
+        <AppRouterCacheProvider>
+          <GoogleAnalytics gaId={googleAnalyticsId} />
+          <ClientLayout>{children}</ClientLayout>
+        </AppRouterCacheProvider>
       </body>
     </html>
   );

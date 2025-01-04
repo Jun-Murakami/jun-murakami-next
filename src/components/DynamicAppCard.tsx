@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { sendGAEvent } from '@next/third-parties/google';
 import { Box, Button, Tooltip, Divider, Typography, Popper, Fade, CircularProgress } from '@mui/material';
 import Image from 'next/image';
 import * as badges from '@/assets/badges';
@@ -88,6 +89,14 @@ const DynamicAppCard = ({
     setOpenNotice((previousOpen) => !previousOpen);
   };
 
+  const sendLogEvent = (eventName: string, eventParams?: any) => {
+    if (process.env.NODE_ENV === 'production') {
+      sendGAEvent(eventName, eventParams);
+    } else {
+      console.log('Event:', eventName, eventParams);
+    }
+  };
+
   const canBeOpen = openReleaseLog && Boolean(anchorEl);
   const id = canBeOpen ? 'transition-popper' : undefined;
 
@@ -135,55 +144,105 @@ const DynamicAppCard = ({
             )}
             {appStoreUrl && (
               <Tooltip title='App Storeで開く'>
-                <Button sx={openAppStyle} component='a' href={appStoreUrl} target='_blank'>
+                <Button
+                  sx={openAppStyle}
+                  component='a'
+                  href={appStoreUrl}
+                  target='_blank'
+                  onClick={() => sendLogEvent('app_store_click', { url: appStoreUrl })}
+                >
                   <Image src={badges.appleStore} alt='Apple App Store' height={45} />
                 </Button>
               </Tooltip>
             )}
             {googlePlayUrl && (
               <Tooltip title='Google Playで開く'>
-                <Button sx={openAppStyle} component='a' href={googlePlayUrl} target='_blank'>
+                <Button
+                  sx={openAppStyle}
+                  component='a'
+                  href={googlePlayUrl}
+                  target='_blank'
+                  onClick={() => sendLogEvent('google_play_click', { url: googlePlayUrl })}
+                >
                   <Image src={badges.googlePlay} alt='Google Play' height={45} />
                 </Button>
               </Tooltip>
             )}
             {webAppUrl && (
               <Tooltip title='Webアプリを開く'>
-                <Button sx={openAppStyle} component='a' href={webAppUrl} target='_blank'>
+                <Button
+                  sx={openAppStyle}
+                  component='a'
+                  href={webAppUrl}
+                  target='_blank'
+                  onClick={() => sendLogEvent('web_app_click', { url: webAppUrl })}
+                >
                   <Image src={badges.webApp} alt='Web App' height={45} />
                 </Button>
               </Tooltip>
             )}
             {replacedUrls.windowsAppUrl && (
               <Tooltip title='Windowsアプリをダウンロード'>
-                <Button sx={openAppStyle} component='a' href={replacedUrls.windowsAppUrl} download>
+                <Button
+                  sx={openAppStyle}
+                  component='a'
+                  href={replacedUrls.windowsAppUrl}
+                  download
+                  onClick={() => sendLogEvent('windows_app_click', { url: replacedUrls.windowsAppUrl })}
+                >
                   <Image src={badges.windows} alt='Windows' height={45} />
                 </Button>
               </Tooltip>
             )}
             {replacedUrls.macAppleSiliconAppUrl && (
               <Tooltip title='macOSアプリ(Apple Silicon/M1, M2, M3...)をダウンロード'>
-                <Button sx={openAppStyle} component='a' href={replacedUrls.macAppleSiliconAppUrl} download>
+                <Button
+                  sx={openAppStyle}
+                  component='a'
+                  href={replacedUrls.macAppleSiliconAppUrl}
+                  download
+                  onClick={() => sendLogEvent('mac_apple_silicon_app_click', { url: replacedUrls.macAppleSiliconAppUrl })}
+                >
                   <Image src={badges.macAppleSilicon} alt='Apple Silicon Mac' height={45} />
                 </Button>
               </Tooltip>
             )}
             {replacedUrls.macIntelAppUrl && (
               <Tooltip title='macOSアプリ(Intel Mac)をダウンロード'>
-                <Button sx={openAppStyle} component='a' href={replacedUrls.macIntelAppUrl} download>
+                <Button
+                  sx={openAppStyle}
+                  component='a'
+                  href={replacedUrls.macIntelAppUrl}
+                  download
+                  onClick={() => sendLogEvent('mac_intel_app_click', { url: replacedUrls.macIntelAppUrl })}
+                >
                   <Image src={badges.macIntel} alt='Intel Mac' height={45} />
                 </Button>
               </Tooltip>
             )}
             {replacedUrls.macUniversalAppUrl && (
               <Tooltip title='macOSアプリ(Universal)をダウンロード'>
-                <Button sx={openAppStyle} component='a' href={replacedUrls.macUniversalAppUrl} download>
+                <Button
+                  sx={openAppStyle}
+                  component='a'
+                  href={replacedUrls.macUniversalAppUrl}
+                  download
+                  onClick={() => sendLogEvent('mac_universal_app_click', { url: replacedUrls.macUniversalAppUrl })}
+                >
                   <Image src={badges.macUniversal} alt='Universal Mac' height={45} />
                 </Button>
               </Tooltip>
             )}
             {replacedUrls.windowsAppUrl && (
-              <Button variant='text' size='small' sx={{ mt: 2, textTransform: 'none' }} onClick={handleNotice}>
+              <Button
+                variant='text'
+                size='small'
+                sx={{ mt: 2, textTransform: 'none' }}
+                onClick={(e) => {
+                  sendLogEvent('windows_app_notice_click');
+                  handleNotice(e);
+                }}
+              >
                 ※Windows版のセキュリティ警告について
               </Button>
             )}

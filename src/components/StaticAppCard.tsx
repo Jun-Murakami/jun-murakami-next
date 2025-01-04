@@ -4,8 +4,10 @@ import { Box, Typography, Card, Divider, Button } from '@mui/material';
 import { NoteSmallLogoIcon, ZennLogoIcon } from '@/components/Icons';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import PolicyIcon from '@mui/icons-material/Policy';
+import { firebaseLogEvent } from '@/lib/firebase';
 
 interface DynamicAppCardProps {
+  appName: string;
   gitHubRepo?: string;
   appStoreUrl?: string;
   googlePlayUrl?: string;
@@ -16,7 +18,7 @@ interface DynamicAppCardProps {
   macUniversalAppUrl?: string | null;
 }
 
-const DynamicAppCard = dynamic<DynamicAppCardProps>(() => import('@/components/DynamicAppCard'));
+const DynamicAppCard = dynamic<DynamicAppCardProps>(() => import('@/components/DynamicAppCard').then((mod) => mod.default));
 
 interface StaticAppCardProps {
   appName: string;
@@ -55,6 +57,14 @@ export const StaticAppCard = ({
   macIntelAppUrl,
   macUniversalAppUrl,
 }: StaticAppCardProps) => {
+  const handleLinkClick = (linkType: string, url: string) => {
+    firebaseLogEvent('link_click', {
+      app_name: appName,
+      link_type: linkType,
+      url: url,
+    });
+  };
+
   return (
     <Card sx={{ p: 2, marginY: 4, backgroundColor: 'rgba(50, 50, 50, 0.5)', backdropFilter: 'blur(10px)' }}>
       <Typography variant='h5' id={sectionId}>
@@ -82,6 +92,7 @@ export const StaticAppCard = ({
               target='_blank'
               startIcon={<NoteSmallLogoIcon />}
               sx={{ textTransform: 'none', mr: 2 }}
+              onClick={() => handleLinkClick('note', noteUrl!)}
             >
               noteの紹介記事
             </Button>
@@ -93,23 +104,37 @@ export const StaticAppCard = ({
               target='_blank'
               startIcon={<ZennLogoIcon />}
               sx={{ textTransform: 'none', mr: 2 }}
+              onClick={() => handleLinkClick('zenn', zennUrl!)}
             >
               Zennの記事
             </Button>
           )}
           {gitHubUrl && (
-            <Button component='a' href={gitHubUrl} target='_blank' startIcon={<GitHubIcon />} sx={{ mr: 2 }}>
+            <Button
+              component='a'
+              href={gitHubUrl}
+              target='_blank'
+              startIcon={<GitHubIcon />}
+              sx={{ mr: 2 }}
+              onClick={() => handleLinkClick('github', gitHubUrl!)}
+            >
               ソースコード
             </Button>
           )}
           {policyUrl && (
-            <Button component='a' href={policyUrl} startIcon={<PolicyIcon />}>
+            <Button
+              component='a'
+              href={policyUrl}
+              startIcon={<PolicyIcon />}
+              onClick={() => handleLinkClick('policy', policyUrl!)}
+            >
               プライバシーポリシー
             </Button>
           )}
         </Box>
       )}
       <DynamicAppCard
+        appName={appName}
         gitHubRepo={gitHubRepo}
         appStoreUrl={appStoreUrl}
         googlePlayUrl={googlePlayUrl}

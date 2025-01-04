@@ -138,7 +138,7 @@ export default function HomePage() {
         description={
           <>
             ChatGPT、Google
-            Gemini、Claude、Phind、Perplexity、Genspark、Felo、JENOVA、Codyに対応したチャットAI専用ブラウザです。縦に5つまで分割できる広いエディタで文章を切り貼りして、各サービスに直接プロンプトを送信できます。
+            Gemini、Claude、DeepSeek、Phind、Perplexity、Genspark、Felo、JENOVA、Codyに対応したチャットAI専用ブラウザです。縦に5つまで分割できる広いエディタで文章を切り貼りして、各サービスに直接プロンプトを送信できます。
             送信履歴から同じプロンプトを何度も呼び出したり、一括送信もできます。Monaco
             Editor(VSCodeと同じテキストエディタエンジン)を統合しているのでプログラマーの方もどうぞ。
           </>

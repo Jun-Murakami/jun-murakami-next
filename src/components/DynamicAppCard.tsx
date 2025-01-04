@@ -5,13 +5,11 @@ import { Box, Button, Tooltip, Divider, Typography, Popper, Fade, CircularProgre
 import Image from 'next/image';
 import * as badges from '@/assets/badges';
 import ReactMarkdown from 'react-markdown';
-import { firebaseLogEvent } from '@/lib/firebase';
 
 const clientId = process.env.NEXT_PUBLIC_GIT_HUB_APP_CLIENT_ID;
 const clientSecret = process.env.NEXT_PUBLIC_GIT_HUB_APP_CLIENT_SECRET;
 
 interface DynamicAppCardProps {
-  appName: string;
   gitHubRepo?: string;
   appStoreUrl?: string;
   googlePlayUrl?: string;
@@ -23,7 +21,6 @@ interface DynamicAppCardProps {
 }
 
 const DynamicAppCard = ({
-  appName,
   gitHubRepo,
   appStoreUrl,
   googlePlayUrl,
@@ -94,14 +91,6 @@ const DynamicAppCard = ({
   const canBeOpen = openReleaseLog && Boolean(anchorEl);
   const id = canBeOpen ? 'transition-popper' : undefined;
 
-  const handleLinkClick = (linkType: string, url: string) => {
-    firebaseLogEvent('link_click', {
-      app_name: appName,
-      link_type: linkType,
-      url: url,
-    });
-  };
-
   return (
     <>
       {(appStoreUrl ||
@@ -119,13 +108,7 @@ const DynamicAppCard = ({
                 <Typography variant='caption'>
                   {' '}
                   v{latestRelease.version} :{' '}
-                  <Button
-                    onClick={(event) => {
-                      handleReleaseLog(event);
-                      handleLinkClick('release_notes', 'release_notes');
-                    }}
-                    sx={{ textTransform: 'none' }}
-                  >
+                  <Button onClick={handleReleaseLog} sx={{ textTransform: 'none' }}>
                     Release Notes
                   </Button>
                 </Typography>
@@ -152,105 +135,55 @@ const DynamicAppCard = ({
             )}
             {appStoreUrl && (
               <Tooltip title='App Storeで開く'>
-                <Button
-                  sx={openAppStyle}
-                  component='a'
-                  href={appStoreUrl}
-                  target='_blank'
-                  onClick={() => handleLinkClick('app_store', appStoreUrl)}
-                >
+                <Button sx={openAppStyle} component='a' href={appStoreUrl} target='_blank'>
                   <Image src={badges.appleStore} alt='Apple App Store' height={45} />
                 </Button>
               </Tooltip>
             )}
             {googlePlayUrl && (
               <Tooltip title='Google Playで開く'>
-                <Button
-                  sx={openAppStyle}
-                  component='a'
-                  href={googlePlayUrl}
-                  target='_blank'
-                  onClick={() => handleLinkClick('google_play', googlePlayUrl)}
-                >
+                <Button sx={openAppStyle} component='a' href={googlePlayUrl} target='_blank'>
                   <Image src={badges.googlePlay} alt='Google Play' height={45} />
                 </Button>
               </Tooltip>
             )}
             {webAppUrl && (
               <Tooltip title='Webアプリを開く'>
-                <Button
-                  sx={openAppStyle}
-                  component='a'
-                  href={webAppUrl}
-                  target='_blank'
-                  onClick={() => handleLinkClick('web_app', webAppUrl)}
-                >
+                <Button sx={openAppStyle} component='a' href={webAppUrl} target='_blank'>
                   <Image src={badges.webApp} alt='Web App' height={45} />
                 </Button>
               </Tooltip>
             )}
             {replacedUrls.windowsAppUrl && (
               <Tooltip title='Windowsアプリをダウンロード'>
-                <Button
-                  sx={openAppStyle}
-                  component='a'
-                  href={replacedUrls.windowsAppUrl}
-                  download
-                  onClick={() => handleLinkClick('windows_app', replacedUrls.windowsAppUrl!)}
-                >
+                <Button sx={openAppStyle} component='a' href={replacedUrls.windowsAppUrl} download>
                   <Image src={badges.windows} alt='Windows' height={45} />
                 </Button>
               </Tooltip>
             )}
             {replacedUrls.macAppleSiliconAppUrl && (
               <Tooltip title='macOSアプリ(Apple Silicon/M1, M2, M3...)をダウンロード'>
-                <Button
-                  sx={openAppStyle}
-                  component='a'
-                  href={replacedUrls.macAppleSiliconAppUrl}
-                  download
-                  onClick={() => handleLinkClick('mac_apple_silicon_app', replacedUrls.macAppleSiliconAppUrl!)}
-                >
+                <Button sx={openAppStyle} component='a' href={replacedUrls.macAppleSiliconAppUrl} download>
                   <Image src={badges.macAppleSilicon} alt='Apple Silicon Mac' height={45} />
                 </Button>
               </Tooltip>
             )}
             {replacedUrls.macIntelAppUrl && (
               <Tooltip title='macOSアプリ(Intel Mac)をダウンロード'>
-                <Button
-                  sx={openAppStyle}
-                  component='a'
-                  href={replacedUrls.macIntelAppUrl}
-                  download
-                  onClick={() => handleLinkClick('mac_intel_app', replacedUrls.macIntelAppUrl!)}
-                >
+                <Button sx={openAppStyle} component='a' href={replacedUrls.macIntelAppUrl} download>
                   <Image src={badges.macIntel} alt='Intel Mac' height={45} />
                 </Button>
               </Tooltip>
             )}
             {replacedUrls.macUniversalAppUrl && (
               <Tooltip title='macOSアプリ(Universal)をダウンロード'>
-                <Button
-                  sx={openAppStyle}
-                  component='a'
-                  href={replacedUrls.macUniversalAppUrl}
-                  download
-                  onClick={() => handleLinkClick('mac_universal_app', replacedUrls.macUniversalAppUrl!)}
-                >
+                <Button sx={openAppStyle} component='a' href={replacedUrls.macUniversalAppUrl} download>
                   <Image src={badges.macUniversal} alt='Universal Mac' height={45} />
                 </Button>
               </Tooltip>
             )}
             {replacedUrls.windowsAppUrl && (
-              <Button
-                variant='text'
-                size='small'
-                sx={{ mt: 2, textTransform: 'none' }}
-                onClick={(event) => {
-                  handleNotice(event);
-                  handleLinkClick('windows_security_notice', 'windows_security_notice');
-                }}
-              >
+              <Button variant='text' size='small' sx={{ mt: 2, textTransform: 'none' }} onClick={handleNotice}>
                 ※Windows版のセキュリティ警告について
               </Button>
             )}

@@ -7,7 +7,6 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import * as screenshots from '@/assets/screenshots';
 import { StaticAppCard } from '@/components/StaticAppCard';
-import { firebaseLogEvent } from '@/lib/firebase';
 
 const DynamicMobileScrollButton = dynamic(() => import('@/components/DynamicMobileScrollButton'));
 
@@ -30,13 +29,6 @@ export default function HomePage() {
     },
   ];
 
-  const handleSocialLinkClick = (linkType: string, url: string) => {
-    firebaseLogEvent('social_link_click', {
-      link_type: linkType,
-      url: url,
-    });
-  };
-
   return (
     <>
       <Typography variant='body2' sx={{ p: { xs: 1, sm: 0 } }}>
@@ -47,13 +39,7 @@ export default function HomePage() {
       <Box sx={{ mt: 1, mb: 5, textAlign: { xs: 'center', sm: 'left' } }}>
         {socialLinks.map((link) => (
           <Tooltip title={link.title} key={link.title}>
-            <IconButton
-              sx={{ height: 50, width: 50 }}
-              component='a'
-              target='_blank'
-              href={link.url}
-              onClick={() => handleSocialLinkClick(link.title, link.url)}
-            >
+            <IconButton sx={{ height: 50, width: 50 }} component='a' target='_blank' href={link.url}>
               {link.icon}
             </IconButton>
           </Tooltip>

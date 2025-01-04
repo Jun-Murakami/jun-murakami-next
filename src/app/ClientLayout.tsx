@@ -1,23 +1,12 @@
-'use client';
-
 import { CssBaseline, ThemeProvider, Box, Typography } from '@mui/material';
 import { ScrollHandler } from '@/components/ScrollHandler';
 import theme from '@/hooks/useCustomTheme';
-import { useEffect } from 'react';
-import { firebaseLogEvent } from '@/lib/firebase';
-import { usePathname } from 'next/navigation';
 
 export default function ClientLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const pathname = usePathname();
-
-  useEffect(() => {
-    firebaseLogEvent('page_view', { page_path: pathname });
-  }, [pathname]);
-
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />

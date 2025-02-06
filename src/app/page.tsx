@@ -68,6 +68,44 @@ export default function HomePage() {
       />
 
       <StaticAppCard
+        appName='AI-Browser'
+        sectionId='aiBrowser'
+        screenshot={screenshots.aiBrowser}
+        description={
+          <>
+            ChatGPT、Google
+            Gemini、Claude、DeepSeek、Phind、Perplexity、Genspark、Felo、JENOVA、Codyに対応したチャットAI専用ブラウザです。縦に5つまで分割できる広いエディタで文章を切り貼りして、各サービスに直接プロンプトを送信できます。
+            送信履歴から同じプロンプトを何度も呼び出したり、一括送信もできます。Monaco
+            Editorを統合しているのでプログラマーの方もどうぞ。
+          </>
+        }
+        gitHubRepo='Jun-Murakami/AI-Browser'
+        noteUrl='https://note.com/junmurakami/n/n5d674f5977e6'
+        gitHubUrl='https://github.com/Jun-Murakami/AI-Browser'
+        windowsAppUrl={`https://github.com/Jun-Murakami/AI-Browser/releases/download/v{{version}}/AI-Browser-{{version}}-setup_win_x64.exe`}
+        macUniversalAppUrl={`https://github.com/Jun-Murakami/AI-Browser/releases/download/v{{version}}/AI-Browser-{{version}}_mac_universal.dmg`}
+      />
+
+      <StaticAppCard
+        appName='Monaco Notepad'
+        sectionId='monacoNotepad'
+        screenshot={screenshots.monacoNotepad}
+        description={
+          <>
+            EvernoteとVSCodeとメモ帳を足して10くらいで割ったアプリです。プログラマー向け。
+            エディタ部分はMonacoEditor(VSCodeと同じエディタエンジン)。
+            ファイルを開いて直接編集することはできません。プログラマの人はそういう時はIDE使うと思うので、インポートとエクスポートのみ可能なあくまでメモ帳です。
+            そのかわりGoogle Driveでクラウド同期できるようにしました。
+          </>
+        }
+        gitHubRepo='Jun-Murakami/monaco-notepad'
+        zennUrl='https://zenn.dev/jun_murakami/articles/1dc9d0a2ffa3d6'
+        gitHubUrl='https://github.com/Jun-Murakami/monaco-notepad'
+        windowsAppUrl={`https://github.com/Jun-Murakami/AI-Browser/releases/download/v{{version}}/AI-Browser-{{version}}-setup_win_x64.exe`}
+        macUniversalAppUrl={`https://github.com/Jun-Murakami/AI-Browser/releases/download/v{{version}}/AI-Browser-{{version}}_mac_universal.dmg`}
+      />
+
+      <StaticAppCard
         appName='よみがなコンバーター'
         sectionId='yomigana'
         screenshot={screenshots.yomigana}
@@ -129,25 +167,6 @@ export default function HomePage() {
         googlePlayUrl='https://play.google.com/store/apps/details?id=com.tasktrees.app'
         windowsAppUrl={`https://github.com/Jun-Murakami/TaskTrees-Electron/releases/download/v{{version}}/TaskTrees-{{version}}-setup_win_x64.exe`}
         macUniversalAppUrl={`https://github.com/Jun-Murakami/TaskTrees-Electron/releases/download/v{{version}}/TaskTrees-{{version}}_mac_universal.dmg`}
-      />
-
-      <StaticAppCard
-        appName='AI-Browser'
-        sectionId='aiBrowser'
-        screenshot={screenshots.aiBrowser}
-        description={
-          <>
-            ChatGPT、Google
-            Gemini、Claude、DeepSeek、Phind、Perplexity、Genspark、Felo、JENOVA、Codyに対応したチャットAI専用ブラウザです。縦に5つまで分割できる広いエディタで文章を切り貼りして、各サービスに直接プロンプトを送信できます。
-            送信履歴から同じプロンプトを何度も呼び出したり、一括送信もできます。Monaco
-            Editor(VSCodeと同じテキストエディタエンジン)を統合しているのでプログラマーの方もどうぞ。
-          </>
-        }
-        gitHubRepo='Jun-Murakami/AI-Browser'
-        noteUrl='https://note.com/junmurakami/n/n5d674f5977e6'
-        gitHubUrl='https://github.com/Jun-Murakami/AI-Browser'
-        windowsAppUrl={`https://github.com/Jun-Murakami/AI-Browser/releases/download/v{{version}}/AI-Browser-{{version}}-setup_win_x64.exe`}
-        macUniversalAppUrl={`https://github.com/Jun-Murakami/AI-Browser/releases/download/v{{version}}/AI-Browser-{{version}}_mac_universal.dmg`}
       />
 
       <StaticAppCard

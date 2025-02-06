@@ -20,6 +20,7 @@ const ppMarkdown = `
   
 サービス提供者 氏名：村上純 (高橋純)
 
+--------------------------------
 
 This app does not collect any personal information.
 
@@ -34,7 +35,7 @@ This app does not collect any personal information.
   The app does not access any data outside of the dedicated data folder.
 
 
-  
+
   Service provider: Jun Murakami (Takahashi Jun)
   
 `;

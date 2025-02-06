@@ -102,8 +102,8 @@ export default function HomePage() {
         gitHubRepo='Jun-Murakami/monaco-notepad'
         zennUrl='https://zenn.dev/jun_murakami/articles/1dc9d0a2ffa3d6'
         gitHubUrl='https://github.com/Jun-Murakami/monaco-notepad'
-        windowsAppUrl={`https://github.com/Jun-Murakami/AI-Browser/releases/download/v{{version}}/AI-Browser-{{version}}-setup_win_x64.exe`}
-        macUniversalAppUrl={`https://github.com/Jun-Murakami/AI-Browser/releases/download/v{{version}}/AI-Browser-{{version}}_mac_universal.dmg`}
+        windowsAppUrl={`https://github.com/Jun-Murakami/monaco-notepad/releases/download/v{{version}}/MonacoNotepad-win64-installer-{{version}}.exe`}
+        macUniversalAppUrl={`https://github.com/Jun-Murakami/monaco-notepad/releases/download/v{{version}}/MonacoNotepad-mac-universal-{{version}}.dmg`}
       />
 
       <StaticAppCard

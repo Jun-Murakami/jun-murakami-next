@@ -90,6 +90,7 @@ export default function HomePage() {
         appName='Monaco Notepad'
         sectionId='monacoNotepad'
         screenshot={screenshots.monacoNotepad}
+        policyUrl='/privacy-policy-monaco-notepad'
         description={
           <>
             EvernoteとVSCodeとメモ帳を足して10くらいで割ったアプリです。プログラマー向け。

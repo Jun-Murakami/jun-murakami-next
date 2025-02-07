@@ -1,6 +1,6 @@
-import { Card, CardContent, CardMedia, Typography, Grid } from '@mui/material';
+import { Card, CardContent, Typography } from '@mui/material';
 import Link from 'next/link';
-import { StaticImageData } from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 
 interface AppGridCardProps {
   title: string;
@@ -25,12 +25,17 @@ export function AppGridCard({ title, screenshot, description, sectionId }: AppGr
         textDecoration: 'none',
       }}
     >
-      <CardMedia
-        component='img'
-        image={screenshot.src}
-        alt={title}
-        sx={{ height: 140, objectFit: 'cover', imageRendering: 'smooth' }}
-      />
+      <div style={{ position: 'relative', width: '100%', height: '140px' }}>
+        <Image
+          src={screenshot}
+          alt={title}
+          fill
+          sizes='(max-width: 600px) 50vw, 25vw'
+          style={{
+            objectFit: 'cover',
+          }}
+        />
+      </div>
       <CardContent>
         <Typography variant='h6' component='div' gutterBottom sx={{ fontSize: '1.1rem' }}>
           {title}

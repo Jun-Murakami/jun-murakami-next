@@ -25,7 +25,12 @@ export function AppGridCard({ title, screenshot, description, sectionId }: AppGr
         textDecoration: 'none',
       }}
     >
-      <CardMedia component='img' image={screenshot.src} alt={title} sx={{ height: 140, objectFit: 'cover' }} />
+      <CardMedia
+        component='img'
+        image={screenshot.src}
+        alt={title}
+        sx={{ height: 140, objectFit: 'cover', imageRendering: 'smooth' }}
+      />
       <CardContent>
         <Typography variant='h6' component='div' gutterBottom sx={{ fontSize: '1.1rem' }}>
           {title}

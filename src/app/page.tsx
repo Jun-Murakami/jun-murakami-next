@@ -98,15 +98,15 @@ export default function HomePage() {
         ))}
       </Box>
 
-      <Grid2 container spacing={2} sx={{ mb: 5 }}>
+      <DynamicMobileScrollButton />
+
+      <Grid2 container spacing={2} sx={{ mb: 10 }} className='digest-grid'>
         {appGridItems.map((app) => (
           <Grid2 size={{ xs: 6, md: 3 }} key={app.sectionId}>
             <AppGridCard {...app} />
           </Grid2>
         ))}
       </Grid2>
-
-      <DynamicMobileScrollButton />
 
       <StaticAppCard
         appName='レンズ何持ってく？'

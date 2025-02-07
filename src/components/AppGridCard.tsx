@@ -37,7 +37,6 @@ export function AppGridCard({ title, screenshot, description, sectionId }: AppGr
             overflow: 'hidden',
             textOverflow: 'ellipsis',
             display: '-webkit-box',
-            WebkitLineClamp: 3,
             WebkitBoxOrient: 'vertical',
           }}
         >

@@ -8,19 +8,11 @@ export default function DynamicMobileScrollButton() {
   return (
     <>
       {isMobile && (
-        <Box
-          sx={{
-            height: 'calc(100vh - 330px)',
-            textAlign: 'center',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
+        <Box sx={{ height: 'calc(100vh - 330px)', textAlign: 'center' }}>
           <IconButton
             sx={{ height: 50, width: 50 }}
             onClick={() => {
-              const targetElement = document.querySelector('#wlsib');
+              const targetElement = document.querySelector('.digest-grid');
               if (targetElement) {
                 targetElement.scrollIntoView({ behavior: 'smooth' });
               }

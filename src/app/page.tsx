@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic';
-import { Button, Box, IconButton, Typography, Tooltip } from '@mui/material';
+import { Button, Box, IconButton, Typography, Tooltip, Grid2 } from '@mui/material';
 import { NoteLogoIcon, IMDbLogoIcon, VGMdbLogoIcon, WikiLogoIcon } from '@/components/Icons';
 import XIcon from '@mui/icons-material/X';
 import GitHubIcon from '@mui/icons-material/GitHub';
@@ -7,6 +7,7 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import * as screenshots from '@/assets/screenshots';
 import { StaticAppCard } from '@/components/StaticAppCard';
+import { AppGridCard } from '@/components/AppGridCard';
 
 const DynamicMobileScrollButton = dynamic(() => import('@/components/DynamicMobileScrollButton'));
 
@@ -29,6 +30,57 @@ export default function HomePage() {
     },
   ];
 
+  const appGridItems = [
+    {
+      title: 'レンズ何持ってく？',
+      screenshot: screenshots.wlsib,
+      description: '撮影や旅行・イベントの際に、どのレンズを持っていくかを決める時に役立つアプリです。',
+      sectionId: 'wlsib',
+    },
+    {
+      title: 'AI-Browser',
+      screenshot: screenshots.aiBrowser,
+      description: 'ChatGPT、Google Gemini、Claude等に対応したチャットAI専用ブラウザです。',
+      sectionId: 'aiBrowser',
+    },
+    {
+      title: 'Monaco Notepad',
+      screenshot: screenshots.monacoNotepad,
+      description: 'Evernoteと、VSCodeと、メモ帳を、足して10くらいで割ったアプリです。',
+      sectionId: 'monacoNotepad',
+    },
+    {
+      title: 'よみがなコンバーター',
+      screenshot: screenshots.yomigana,
+      description: 'ボーカリスト用メロディ譜面(所謂「メロ譜」)の歌詞入力支援ツールです。',
+      sectionId: 'yomigana',
+    },
+    {
+      title: 'Dropbox Sync Skipper',
+      screenshot: screenshots.dropboxSkipper,
+      description: 'DropBoxの条件を指定して一括で除外設定できるアプリです。',
+      sectionId: 'dropbox-skipper',
+    },
+    {
+      title: 'TaskTrees',
+      screenshot: screenshots.taskTrees,
+      description: 'ツリー形式でタスクやメモを自由に作成し、整理できるアプリです。',
+      sectionId: 'tasktrees',
+    },
+    {
+      title: 'Cubase DrumMap Editor',
+      screenshot: screenshots.cubaseDMEditor,
+      description: 'Cubase用のシンプルなドラムマップエディターです。',
+      sectionId: 'cubaseDMEditor',
+    },
+    {
+      title: 'Famitone 2A03',
+      screenshot: screenshots.famitone,
+      description: 'ファミコン実機をサンプリングしたKONTAKT音源ライブラリです。',
+      sectionId: 'famitone',
+    },
+  ];
+
   return (
     <>
       <Typography variant='body2' sx={{ p: { xs: 1, sm: 0 } }}>
@@ -45,6 +97,14 @@ export default function HomePage() {
           </Tooltip>
         ))}
       </Box>
+
+      <Grid2 container spacing={2} sx={{ mb: 5 }}>
+        {appGridItems.map((app) => (
+          <Grid2 size={{ xs: 6, md: 3 }} key={app.sectionId}>
+            <AppGridCard {...app} />
+          </Grid2>
+        ))}
+      </Grid2>
 
       <DynamicMobileScrollButton />
 
@@ -93,8 +153,8 @@ export default function HomePage() {
         policyUrl='/privacy-policy-monaco-notepad'
         description={
           <>
-            EvernoteとVSCodeとメモ帳を足して10くらいで割ったアプリです。プログラマー向け。
-            エディタ部分はMonacoEditor(VSCodeと同じエディタエンジン)。
+            Evernoteと、VSCodeと、メモ帳を、足して10くらいで割ったアプリです。プログラマー向け。 エディタ部分はMonacoEditor
+            (VSCodeと同じエディタエンジン)。
             ファイルを開いて直接編集することはできません。プログラマの人はそういう時はIDE使うと思うので、インポートとエクスポートのみが可能な、あくまでも使い捨てのメモ帳です。
             そのかわりGoogle Driveでクラウド同期できるようにしました。
           </>

@@ -8,7 +8,15 @@ export default function DynamicMobileScrollButton() {
   return (
     <>
       {isMobile && (
-        <Box sx={{ height: 'calc(100vh - 330px)', textAlign: 'center' }}>
+        <Box
+          sx={{
+            height: 'calc(100vh - 330px)',
+            textAlign: 'center',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
           <IconButton
             sx={{ height: 50, width: 50 }}
             onClick={() => {

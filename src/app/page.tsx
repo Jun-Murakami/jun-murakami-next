@@ -156,7 +156,8 @@ export default function HomePage() {
             Evernoteと、VSCodeと、メモ帳を、足して10くらいで割ったアプリです。プログラマー向け。 エディタ部分はMonacoEditor
             (VSCodeと同じエディタエンジン)。
             ファイルを開いて直接編集することはできません。プログラマの人はそういう時はIDE使うと思うので、インポートとエクスポートのみが可能な、あくまでも使い捨てのメモ帳です。
-            そのかわりGoogle Driveでクラウド同期できるようにしました。
+            そのかわりGoogle Driveでクラウド同期できるようにしました。Google
+            DriveはユーザーのGoogleアカウントの専用フォルダを使用します。（このアプリは専用フォルダにしかアクセスしません）
           </>
         }
         gitHubRepo='Jun-Murakami/monaco-notepad'

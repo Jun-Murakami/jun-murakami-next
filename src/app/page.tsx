@@ -161,7 +161,7 @@ export default function HomePage() {
           </>
         }
         gitHubRepo='Jun-Murakami/monaco-notepad'
-        zennUrl='https://zenn.dev/jun_murakami/articles/1dc9d0a2ffa3d6'
+        zennUrl='https://zenn.dev/jun_murakami/articles/e80016061b4df5'
         gitHubUrl='https://github.com/Jun-Murakami/monaco-notepad'
         windowsAppUrl={`https://github.com/Jun-Murakami/monaco-notepad/releases/download/v{{version}}/MonacoNotepad-win64-installer-{{version}}.exe`}
         macUniversalAppUrl={`https://github.com/Jun-Murakami/monaco-notepad/releases/download/v{{version}}/MonacoNotepad-mac-universal-{{version}}.dmg`}

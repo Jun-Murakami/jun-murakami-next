@@ -91,9 +91,9 @@ const DynamicAppCard = ({
 
   const sendLogEvent = (eventName: string, eventParams?: string) => {
     if (typeof window !== 'undefined' && window.location.hostname !== 'localhost') {
-      sendGAEvent('event', 'button_clicked', { button_name: eventName, url: eventParams });
+      sendGAEvent('event', 'buttonClicked', { button_name: eventName, url: eventParams });
     } else {
-      console.log('Event:', 'button_clicked', { button_name: eventName, url: eventParams });
+      console.log('Event:', 'buttonClicked', { button_name: eventName, url: eventParams });
     }
   };
 

@@ -94,17 +94,17 @@ export default function HomePage() {
 
   const handleSNSClick = (snsName: string) => {
     if (typeof window !== 'undefined' && window.location.hostname !== 'localhost') {
-      sendGAEvent('event', 'button_clicked', { button_name: snsName });
+      sendGAEvent('event', 'buttonClicked', { button_name: snsName });
     } else {
-      console.log('Event:', 'button_clicked', { button_name: snsName });
+      console.log('Event:', 'buttonClicked', { button_name: snsName });
     }
   };
 
   const handleAppClick = (appName: string) => {
     if (typeof window !== 'undefined' && window.location.hostname !== 'localhost') {
-      sendGAEvent('event', 'button_clicked', { button_name: appName });
+      sendGAEvent('event', 'buttonClicked', { button_name: appName });
     } else {
-      console.log('Event:', 'button_clicked', { button_name: appName });
+      console.log('Event:', 'buttonClicked', { button_name: appName });
     }
   };
 

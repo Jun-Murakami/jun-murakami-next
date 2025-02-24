@@ -100,7 +100,7 @@ export default function HomePage() {
       <Box sx={{ mt: 1, mb: 5, textAlign: { xs: 'center', sm: 'left' } }}>
         {socialLinks.map((link) => (
           <Tooltip title={link.title} key={link.title}>
-            <IconButton sx={{ height: 50, width: 50 }} component='a' target='_blank' href={link.url}>
+            <IconButton sx={{ height: { xs: 45, sm: 50 }, width: { xs: 45, sm: 50 } }} component='a' target='_blank' href={link.url}>
               {link.icon}
             </IconButton>
           </Tooltip>

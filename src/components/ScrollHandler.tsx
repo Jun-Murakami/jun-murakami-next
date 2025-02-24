@@ -9,7 +9,7 @@ export const ScrollHandler = () => {
       window.location.hash = '';
       window.location.hash = savedHash;
       const observer = new MutationObserver((mutations) => {
-        mutations.forEach((mutation) => {
+        for (const mutation of mutations) {
           if (mutation.type === 'childList') {
             const hash = window.location.hash;
             const targetElement = document.querySelector(hash);
@@ -20,7 +20,7 @@ export const ScrollHandler = () => {
               }, 300);
             }
           }
-        });
+        }
       });
 
       observer.observe(document.body, { childList: true, subtree: true });

@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import { Button, Tooltip, Typography } from '@mui/material';
 import TranslateIcon from '@mui/icons-material/Translate';
 import { useLanguage } from '@/contexts/LanguageContext';

@@ -10,6 +10,7 @@ import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import * as screenshots from '@/assets/screenshots';
 import { StaticAppCard } from '@/components/StaticAppCard';
 import { AppGridCard } from '@/components/AppGridCard';
+import { ScrollToTopButton } from '@/components/ScrollToTop';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { ja } from '@/locales/ja';
 import { en } from '@/locales/en';
@@ -250,6 +251,7 @@ export default function HomePage() {
           {t.common.contact}
         </Button>
       </Box>
+      <ScrollToTopButton />
     </>
   );
 }

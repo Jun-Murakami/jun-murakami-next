@@ -1,4 +1,4 @@
-import Image, { StaticImageData } from 'next/image';
+import Image, { type StaticImageData } from 'next/image';
 import dynamic from 'next/dynamic';
 import { Box, Typography, Card, Divider, Button } from '@mui/material';
 import { NoteSmallLogoIcon, ZennLogoIcon } from '@/components/Icons';

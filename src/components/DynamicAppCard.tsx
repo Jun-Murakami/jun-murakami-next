@@ -21,6 +21,8 @@ interface DynamicAppCardProps {
   macUniversalAppUrl?: string | null;
 }
 
+type EventParams = Record<string, string>;
+
 const DynamicAppCard = ({
   gitHubRepo,
   appStoreUrl,
@@ -89,9 +91,9 @@ const DynamicAppCard = ({
     setOpenNotice((previousOpen) => !previousOpen);
   };
 
-  const sendLogEvent = (eventName: string, eventParams?: any) => {
+  const sendLogEvent = (eventName: string, eventParams?: EventParams) => {
     if (process.env.NODE_ENV === 'production') {
-      sendGAEvent(eventName, eventParams);
+      sendGAEvent(eventName, eventParams ?? {});
     } else {
       console.log('Event:', eventName, eventParams);
     }
@@ -109,146 +111,146 @@ const DynamicAppCard = ({
         replacedUrls.macAppleSiliconAppUrl ||
         replacedUrls.macIntelAppUrl ||
         replacedUrls.macUniversalAppUrl) && (
-        <>
-          <Divider sx={{ mb: 2 }} />
-          <Box sx={{ marginY: 2 }}>
-            {latestRelease && (
-              <Box sx={{ mt: { xs: 0, sm: -2 }, mb: { xs: 0, sm: -2 }, ml: 0.5 }}>
-                <Typography variant='caption'>
-                  {' '}
-                  v{latestRelease.version} :{' '}
-                  <Button onClick={handleReleaseLog} sx={{ textTransform: 'none' }}>
-                    Release Notes
+          <>
+            <Divider sx={{ mb: 2 }} />
+            <Box sx={{ marginY: 2 }}>
+              {latestRelease && (
+                <Box sx={{ mt: { xs: 0, sm: -2 }, mb: { xs: 0, sm: -2 }, ml: 0.5 }}>
+                  <Typography variant='caption'>
+                    {' '}
+                    v{latestRelease.version} :{' '}
+                    <Button onClick={handleReleaseLog} sx={{ textTransform: 'none' }}>
+                      Release Notes
+                    </Button>
+                  </Typography>
+                  <Popper id={id} open={openReleaseLog} anchorEl={anchorEl} transition placement='top'>
+                    {({ TransitionProps }) => (
+                      <Fade {...TransitionProps} timeout={350}>
+                        <Box
+                          sx={{
+                            border: 1,
+                            p: 1,
+                            borderRadius: 3,
+                            bgcolor: 'rgba(50,50,50,0.3)',
+                            backdropFilter: 'blur(10px)',
+                            textAlign: 'left',
+                            marginX: 2,
+                          }}
+                        >
+                          <ReactMarkdown>{latestRelease.body}</ReactMarkdown>
+                        </Box>
+                      </Fade>
+                    )}
+                  </Popper>
+                </Box>
+              )}
+              {appStoreUrl && (
+                <Tooltip title='App Storeで開く'>
+                  <Button
+                    sx={openAppStyle}
+                    component='a'
+                    href={appStoreUrl}
+                    target='_blank'
+                    onClick={() => sendLogEvent('app_store_click', { url: appStoreUrl })}
+                  >
+                    <Image src={badges.appleStore} alt='Apple App Store' height={45} />
                   </Button>
-                </Typography>
-                <Popper id={id} open={openReleaseLog} anchorEl={anchorEl} transition placement='top'>
-                  {({ TransitionProps }) => (
-                    <Fade {...TransitionProps} timeout={350}>
-                      <Box
-                        sx={{
-                          border: 1,
-                          p: 1,
-                          borderRadius: 3,
-                          bgcolor: 'rgba(50,50,50,0.3)',
-                          backdropFilter: 'blur(10px)',
-                          textAlign: 'left',
-                          marginX: 2,
-                        }}
-                      >
-                        <ReactMarkdown>{latestRelease.body}</ReactMarkdown>
-                      </Box>
-                    </Fade>
-                  )}
-                </Popper>
-              </Box>
-            )}
-            {appStoreUrl && (
-              <Tooltip title='App Storeで開く'>
+                </Tooltip>
+              )}
+              {googlePlayUrl && (
+                <Tooltip title='Google Playで開く'>
+                  <Button
+                    sx={openAppStyle}
+                    component='a'
+                    href={googlePlayUrl}
+                    target='_blank'
+                    onClick={() => sendLogEvent('google_play_click', { url: googlePlayUrl })}
+                  >
+                    <Image src={badges.googlePlay} alt='Google Play' height={45} />
+                  </Button>
+                </Tooltip>
+              )}
+              {webAppUrl && (
+                <Tooltip title='Webアプリを開く'>
+                  <Button
+                    sx={openAppStyle}
+                    component='a'
+                    href={webAppUrl}
+                    target='_blank'
+                    onClick={() => sendLogEvent('web_app_click', { url: webAppUrl })}
+                  >
+                    <Image src={badges.webApp} alt='Web App' height={45} />
+                  </Button>
+                </Tooltip>
+              )}
+              {replacedUrls.windowsAppUrl && (
+                <Tooltip title='Windowsアプリをダウンロード'>
+                  <Button
+                    sx={openAppStyle}
+                    component='a'
+                    href={replacedUrls.windowsAppUrl}
+                    download
+                    onClick={() => sendLogEvent('windows_app_click', { url: replacedUrls.windowsAppUrl ?? '' })}
+                  >
+                    <Image src={badges.windows} alt='Windows' height={45} />
+                  </Button>
+                </Tooltip>
+              )}
+              {replacedUrls.macAppleSiliconAppUrl && (
+                <Tooltip title='macOSアプリ(Apple Silicon/M1, M2, M3...)をダウンロード'>
+                  <Button
+                    sx={openAppStyle}
+                    component='a'
+                    href={replacedUrls.macAppleSiliconAppUrl}
+                    download
+                    onClick={() => sendLogEvent('mac_apple_silicon_app_click', { url: replacedUrls.macAppleSiliconAppUrl ?? '' })}
+                  >
+                    <Image src={badges.macAppleSilicon} alt='Apple Silicon Mac' height={45} />
+                  </Button>
+                </Tooltip>
+              )}
+              {replacedUrls.macIntelAppUrl && (
+                <Tooltip title='macOSアプリ(Intel Mac)をダウンロード'>
+                  <Button
+                    sx={openAppStyle}
+                    component='a'
+                    href={replacedUrls.macIntelAppUrl}
+                    download
+                    onClick={() => sendLogEvent('mac_intel_app_click', { url: replacedUrls.macIntelAppUrl ?? '' })}
+                  >
+                    <Image src={badges.macIntel} alt='Intel Mac' height={45} />
+                  </Button>
+                </Tooltip>
+              )}
+              {replacedUrls.macUniversalAppUrl && (
+                <Tooltip title='macOSアプリ(Universal)をダウンロード'>
+                  <Button
+                    sx={openAppStyle}
+                    component='a'
+                    href={replacedUrls.macUniversalAppUrl}
+                    download
+                    onClick={() => sendLogEvent('mac_universal_app_click', { url: replacedUrls.macUniversalAppUrl ?? '' })}
+                  >
+                    <Image src={badges.macUniversal} alt='Universal Mac' height={45} />
+                  </Button>
+                </Tooltip>
+              )}
+              {replacedUrls.windowsAppUrl && (
                 <Button
-                  sx={openAppStyle}
-                  component='a'
-                  href={appStoreUrl}
-                  target='_blank'
-                  onClick={() => sendLogEvent('app_store_click', { url: appStoreUrl })}
+                  variant='text'
+                  size='small'
+                  sx={{ mt: 2, textTransform: 'none' }}
+                  onClick={(e) => {
+                    sendLogEvent('windows_app_notice_click');
+                    handleNotice(e);
+                  }}
                 >
-                  <Image src={badges.appleStore} alt='Apple App Store' height={45} />
+                  ※Windows版のセキュリティ警告について
                 </Button>
-              </Tooltip>
-            )}
-            {googlePlayUrl && (
-              <Tooltip title='Google Playで開く'>
-                <Button
-                  sx={openAppStyle}
-                  component='a'
-                  href={googlePlayUrl}
-                  target='_blank'
-                  onClick={() => sendLogEvent('google_play_click', { url: googlePlayUrl })}
-                >
-                  <Image src={badges.googlePlay} alt='Google Play' height={45} />
-                </Button>
-              </Tooltip>
-            )}
-            {webAppUrl && (
-              <Tooltip title='Webアプリを開く'>
-                <Button
-                  sx={openAppStyle}
-                  component='a'
-                  href={webAppUrl}
-                  target='_blank'
-                  onClick={() => sendLogEvent('web_app_click', { url: webAppUrl })}
-                >
-                  <Image src={badges.webApp} alt='Web App' height={45} />
-                </Button>
-              </Tooltip>
-            )}
-            {replacedUrls.windowsAppUrl && (
-              <Tooltip title='Windowsアプリをダウンロード'>
-                <Button
-                  sx={openAppStyle}
-                  component='a'
-                  href={replacedUrls.windowsAppUrl}
-                  download
-                  onClick={() => sendLogEvent('windows_app_click', { url: replacedUrls.windowsAppUrl })}
-                >
-                  <Image src={badges.windows} alt='Windows' height={45} />
-                </Button>
-              </Tooltip>
-            )}
-            {replacedUrls.macAppleSiliconAppUrl && (
-              <Tooltip title='macOSアプリ(Apple Silicon/M1, M2, M3...)をダウンロード'>
-                <Button
-                  sx={openAppStyle}
-                  component='a'
-                  href={replacedUrls.macAppleSiliconAppUrl}
-                  download
-                  onClick={() => sendLogEvent('mac_apple_silicon_app_click', { url: replacedUrls.macAppleSiliconAppUrl })}
-                >
-                  <Image src={badges.macAppleSilicon} alt='Apple Silicon Mac' height={45} />
-                </Button>
-              </Tooltip>
-            )}
-            {replacedUrls.macIntelAppUrl && (
-              <Tooltip title='macOSアプリ(Intel Mac)をダウンロード'>
-                <Button
-                  sx={openAppStyle}
-                  component='a'
-                  href={replacedUrls.macIntelAppUrl}
-                  download
-                  onClick={() => sendLogEvent('mac_intel_app_click', { url: replacedUrls.macIntelAppUrl })}
-                >
-                  <Image src={badges.macIntel} alt='Intel Mac' height={45} />
-                </Button>
-              </Tooltip>
-            )}
-            {replacedUrls.macUniversalAppUrl && (
-              <Tooltip title='macOSアプリ(Universal)をダウンロード'>
-                <Button
-                  sx={openAppStyle}
-                  component='a'
-                  href={replacedUrls.macUniversalAppUrl}
-                  download
-                  onClick={() => sendLogEvent('mac_universal_app_click', { url: replacedUrls.macUniversalAppUrl })}
-                >
-                  <Image src={badges.macUniversal} alt='Universal Mac' height={45} />
-                </Button>
-              </Tooltip>
-            )}
-            {replacedUrls.windowsAppUrl && (
-              <Button
-                variant='text'
-                size='small'
-                sx={{ mt: 2, textTransform: 'none' }}
-                onClick={(e) => {
-                  sendLogEvent('windows_app_notice_click');
-                  handleNotice(e);
-                }}
-              >
-                ※Windows版のセキュリティ警告について
-              </Button>
-            )}
-          </Box>
-        </>
-      )}
+              )}
+            </Box>
+          </>
+        )}
       {isLoading && <CircularProgress />}
       <Popper id={id} open={openNotice} anchorEl={anchorElPopper} transition placement='top'>
         {({ TransitionProps }) => (

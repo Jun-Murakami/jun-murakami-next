@@ -1,6 +1,6 @@
 import { Card, CardContent, Typography } from '@mui/material';
 import Link from 'next/link';
-import Image, { StaticImageData } from 'next/image';
+import Image, { type StaticImageData } from 'next/image';
 
 interface AppGridCardProps {
   title: string;

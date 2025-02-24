@@ -7,6 +7,7 @@ export const en = {
   },
   social: {
     note: 'note (Blog posts)',
+    zenn: 'Zenn (Program-related articles)',
     twitter: 'X (Twitter)',
     instagram: 'Instagram',
     github: 'GitHub',

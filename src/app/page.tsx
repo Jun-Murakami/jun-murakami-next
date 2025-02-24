@@ -2,7 +2,7 @@
 
 import dynamic from 'next/dynamic';
 import { Button, Box, IconButton, Typography, Tooltip, Grid2 } from '@mui/material';
-import { NoteLogoIcon, IMDbLogoIcon, VGMdbLogoIcon, WikiLogoIcon } from '@/components/Icons';
+import { NoteLogoIcon, ZennLogoIcon, IMDbLogoIcon, VGMdbLogoIcon, WikiLogoIcon } from '@/components/Icons';
 import XIcon from '@mui/icons-material/X';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import InstagramIcon from '@mui/icons-material/Instagram';
@@ -23,6 +23,7 @@ export default function HomePage() {
 
   const socialLinks = [
     { title: t.social.note, url: 'https://note.com/junmurakami/', icon: <NoteLogoIcon fontSize='large' /> },
+    { title: t.social.zenn, url: 'https://zenn.dev/jun_murakami', icon: <ZennLogoIcon fontSize='medium' /> },
     { title: t.social.twitter, url: 'https://twitter.com/jun_murakami', icon: <XIcon fontSize='medium' /> },
     { title: t.social.instagram, url: 'https://www.instagram.com/jun9989/', icon: <InstagramIcon fontSize='medium' /> },
     { title: t.social.github, url: 'https://github.com/Jun-Murakami', icon: <GitHubIcon fontSize='medium' /> },

@@ -7,6 +7,7 @@ export const ja = {
   },
   social: {
     note: 'note (ブログ記事など)',
+    zenn: 'Zenn (プログラム関連の記事など)',
     twitter: 'X (Twitter)',
     instagram: 'Instagram',
     github: 'GitHub',

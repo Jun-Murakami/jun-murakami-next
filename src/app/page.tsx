@@ -1,3 +1,5 @@
+'use client';
+
 import dynamic from 'next/dynamic';
 import { Button, Box, IconButton, Typography, Tooltip, Grid2 } from '@mui/material';
 import { NoteLogoIcon, IMDbLogoIcon, VGMdbLogoIcon, WikiLogoIcon } from '@/components/Icons';
@@ -8,23 +10,29 @@ import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import * as screenshots from '@/assets/screenshots';
 import { StaticAppCard } from '@/components/StaticAppCard';
 import { AppGridCard } from '@/components/AppGridCard';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { ja } from '@/locales/ja';
+import { en } from '@/locales/en';
 
 const DynamicMobileScrollButton = dynamic(() => import('@/components/DynamicMobileScrollButton'));
 
 export default function HomePage() {
+  const { language } = useLanguage();
+  const t = language === 'ja' ? ja : en;
+
   const socialLinks = [
-    { title: 'note (ブログ記事など)', url: 'https://note.com/junmurakami/', icon: <NoteLogoIcon fontSize='large' /> },
-    { title: 'X (Twitter)', url: 'https://twitter.com/jun_murakami', icon: <XIcon fontSize='medium' /> },
-    { title: 'Instagram', url: 'https://www.instagram.com/jun9989/', icon: <InstagramIcon fontSize='medium' /> },
-    { title: 'GitHub', url: 'https://github.com/Jun-Murakami', icon: <GitHubIcon fontSize='medium' /> },
-    { title: 'IMDb (映画関連)', url: 'https://www.imdb.com/name/nm2687359', icon: <IMDbLogoIcon fontSize='large' /> },
+    { title: t.social.note, url: 'https://note.com/junmurakami/', icon: <NoteLogoIcon fontSize='large' /> },
+    { title: t.social.twitter, url: 'https://twitter.com/jun_murakami', icon: <XIcon fontSize='medium' /> },
+    { title: t.social.instagram, url: 'https://www.instagram.com/jun9989/', icon: <InstagramIcon fontSize='medium' /> },
+    { title: t.social.github, url: 'https://github.com/Jun-Murakami', icon: <GitHubIcon fontSize='medium' /> },
+    { title: t.social.imdb, url: 'https://www.imdb.com/name/nm2687359', icon: <IMDbLogoIcon fontSize='large' /> },
     {
-      title: 'VGMdb (ゲーム/アニメ音楽関連)',
+      title: t.social.vgmdb,
       url: 'https://vgmdb.net/artist/3937',
       icon: <VGMdbLogoIcon fontSize='large' />,
     },
     {
-      title: 'Wikipedia',
+      title: t.social.wikipedia,
       url: 'https://ja.wikipedia.org/wiki/%E6%9D%91%E4%B8%8A%E7%B4%94_(%E9%9F%B3%E6%A5%BD%E5%AE%B6)',
       icon: <WikiLogoIcon fontSize='medium' />,
     },
@@ -32,51 +40,51 @@ export default function HomePage() {
 
   const appGridItems = [
     {
-      title: 'レンズ何持ってく？',
+      title: t.apps.wlsib.title,
       screenshot: screenshots.wlsib_s,
-      description: '撮影や旅行・イベントの際に、どのレンズを持っていくかを決める時に役立つアプリです。',
+      description: t.apps.wlsib.description,
       sectionId: 'wlsib',
     },
     {
-      title: 'AI-Browser',
+      title: t.apps.aiBrowser.title,
       screenshot: screenshots.aiBrowser_s,
-      description: 'ChatGPT、Google Gemini、Claude等に対応したチャットAI専用ブラウザです。',
+      description: t.apps.aiBrowser.description,
       sectionId: 'aiBrowser',
     },
     {
-      title: 'Monaco Notepad',
+      title: t.apps.monacoNotepad.title,
       screenshot: screenshots.monacoNotepad_s,
-      description: 'Evernoteと、VSCodeと、メモ帳を、足して10くらいで割ったアプリです。',
+      description: t.apps.monacoNotepad.description,
       sectionId: 'monacoNotepad',
     },
     {
-      title: 'よみがなコンバーター',
+      title: t.apps.yomigana.title,
       screenshot: screenshots.yomigana_s,
-      description: 'ボーカリスト用メロディ譜面(所謂「メロ譜」)の歌詞入力支援ツールです。',
+      description: t.apps.yomigana.description,
       sectionId: 'yomigana',
     },
     {
-      title: 'Dropbox Sync Skipper',
+      title: t.apps.dropboxSkipper.title,
       screenshot: screenshots.dropboxSkipper_s,
-      description: 'DropBoxの条件を指定して一括で除外設定できるアプリです。',
+      description: t.apps.dropboxSkipper.description,
       sectionId: 'dropbox-skipper',
     },
     {
-      title: 'TaskTrees',
+      title: t.apps.taskTrees.title,
       screenshot: screenshots.taskTrees_s,
-      description: 'ツリー形式でタスクやメモを自由に作成し、整理できるアプリです。',
+      description: t.apps.taskTrees.description,
       sectionId: 'tasktrees',
     },
     {
-      title: 'Cubase DrumMap Editor',
+      title: t.apps.cubaseDMEditor.title,
       screenshot: screenshots.cubaseDMEditor_s,
-      description: 'Cubase用のシンプルなドラムマップエディターです。',
+      description: t.apps.cubaseDMEditor.description,
       sectionId: 'cubaseDMEditor',
     },
     {
-      title: 'Famitone 2A03',
+      title: t.apps.famitone.title,
       screenshot: screenshots.famitone_s,
-      description: 'ファミコン実機をサンプリングしたKONTAKT音源ライブラリです。',
+      description: t.apps.famitone.description,
       sectionId: 'famitone',
     },
   ];
@@ -84,8 +92,7 @@ export default function HomePage() {
   return (
     <>
       <Typography variant='body2' sx={{ p: { xs: 1, sm: 0 } }}>
-        音楽ディレクター / プロデューサーの村上純 (高橋純)
-        です。業務の合間に開発したアプリケーションや、音楽制作用のライブラリなどを配布しています。
+        {t.intro.text}
       </Typography>
 
       <Box sx={{ mt: 1, mb: 5, textAlign: { xs: 'center', sm: 'left' } }}>
@@ -109,16 +116,10 @@ export default function HomePage() {
       </Grid2>
 
       <StaticAppCard
-        appName='レンズ何持ってく？'
+        appName={t.apps.wlsib.title}
         sectionId='wlsib'
         screenshot={screenshots.wlsib}
-        description={
-          <>
-            撮影や旅行・イベントの際に、どのレンズを持っていくかを決める時に役立つアプリです。
-            <br />
-            各種撮影条件を設定すると、撮影結果がどのように変わるかを視覚的にシミュレーションできます。iOS版、Android版もあります。
-          </>
-        }
+        description={t.apps.wlsib.longDescription}
         noteUrl='https://note.com/junmurakami/n/n36b1e198f287'
         gitHubUrl='https://github.com/Jun-Murakami/wlsib'
         policyUrl='/privacy-policy-wlsib'
@@ -128,96 +129,62 @@ export default function HomePage() {
       />
 
       <StaticAppCard
-        appName='AI-Browser'
+        appName={t.apps.aiBrowser.title}
         sectionId='aiBrowser'
         screenshot={screenshots.aiBrowser}
-        description={
-          <>
-            ChatGPT、Gemini、Google AI Studio、Claude、DeepSeek、Grok、Phind、Perplexity、Genspark、Felo、JENOVA、Codyに対応したチャットAI専用ブラウザです。縦に5つまで分割できる広いエディタで文章を切り貼りして、各サービスに直接プロンプトを送信できます。
-            送信履歴から同じプロンプトを何度も呼び出したり、一括送信もできます。Monaco
-            Editorを統合しているのでプログラマーの方もどうぞ。
-          </>
-        }
+        description={t.apps.aiBrowser.longDescription}
         gitHubRepo='Jun-Murakami/AI-Browser'
         noteUrl='https://note.com/junmurakami/n/n5d674f5977e6'
         gitHubUrl='https://github.com/Jun-Murakami/AI-Browser'
-        windowsAppUrl={`https://github.com/Jun-Murakami/AI-Browser/releases/download/v{{version}}/AI-Browser-{{version}}-setup_win_x64.exe`}
-        macUniversalAppUrl={`https://github.com/Jun-Murakami/AI-Browser/releases/download/v{{version}}/AI-Browser-{{version}}_mac_universal.dmg`}
+        windowsAppUrl='https://github.com/Jun-Murakami/AI-Browser/releases/download/v{{version}}/AI-Browser-{{version}}-setup_win_x64.exe'
+        macUniversalAppUrl='https://github.com/Jun-Murakami/AI-Browser/releases/download/v{{version}}/AI-Browser-{{version}}_mac_universal.dmg'
       />
 
       <StaticAppCard
-        appName='Monaco Notepad'
+        appName={t.apps.monacoNotepad.title}
         sectionId='monacoNotepad'
         screenshot={screenshots.monacoNotepad}
         policyUrl='/privacy-policy-monaco-notepad'
-        description={
-          <>
-            Evernoteと、VSCodeと、メモ帳を、足して10くらいで割ったアプリです。プログラマー向け。 エディタ部分はMonacoEditor
-            (VSCodeと同じエディタエンジン)。 ファイルを開いて直接編集することもできますし、Google
-            Driveでクラウド同期できるメモ帳に変換して保持することができます。Google
-            DriveはユーザーのGoogleアカウントの専用フォルダを使用します。（このアプリは専用フォルダにしかアクセスしません）
-          </>
-        }
+        description={t.apps.monacoNotepad.longDescription}
         gitHubRepo='Jun-Murakami/monaco-notepad'
         zennUrl='https://zenn.dev/jun_murakami/articles/e80016061b4df5'
         gitHubUrl='https://github.com/Jun-Murakami/monaco-notepad'
-        windowsAppUrl={`https://github.com/Jun-Murakami/monaco-notepad/releases/download/v{{version}}/MonacoNotepad-win64-installer-{{version}}.exe`}
-        macUniversalAppUrl={`https://github.com/Jun-Murakami/monaco-notepad/releases/download/v{{version}}/MonacoNotepad-mac-universal-{{version}}.dmg`}
+        windowsAppUrl='https://github.com/Jun-Murakami/monaco-notepad/releases/download/v{{version}}/MonacoNotepad-win64-installer-{{version}}.exe'
+        macUniversalAppUrl='https://github.com/Jun-Murakami/monaco-notepad/releases/download/v{{version}}/MonacoNotepad-mac-universal-{{version}}.dmg'
       />
 
       <StaticAppCard
-        appName='よみがなコンバーター'
+        appName={t.apps.yomigana.title}
         sectionId='yomigana'
         screenshot={screenshots.yomigana}
-        description={
-          <>
-            丁寧に作ると意外に時間が掛かる、ボーカリスト用メロディ譜面(所謂「メロ譜」)の歌詞入力支援ツールです。
-            <br />
-            既に出来上がっている漢字交じりの歌詞カードを、メロ譜に適したひらがな＆カタカナに再変換し、
-            SibeliusやFinale、MuseScoreといった譜面作成ソフトに流し込む使い方を想定しています。
-            特にスペース区切りで歌詞を連続入力できる機能を持ったソフトで便利に使えると思います。
-            ボーカロイドやAIシンガーの制作にも便利な「は」←→「わ」変換機能などを追加しています。
-          </>
-        }
+        description={t.apps.yomigana.longDescription}
         gitHubRepo='Jun-Murakami/YomiganaConverter'
         noteUrl='https://note.com/junmurakami/n/n35cd70b8dc12'
         gitHubUrl='https://github.com/Jun-Murakami/YomiganaConverter'
         webAppUrl='https://yomiganaconverterreact.web.app/'
-        windowsAppUrl={`https://github.com/Jun-Murakami/YomiganaConverter/releases/download/v{{version}}/YomiganaConverter_v{{version}}_win.zip`}
-        macAppleSiliconAppUrl={`https://github.com/Jun-Murakami/YomiganaConverter/releases/download/v{{version}}/YomiganaConverter_v{{version}}_mac_arm64.zip`}
-        macIntelAppUrl={`https://github.com/Jun-Murakami/YomiganaConverter/releases/download/v{{version}}/YomiganaConverter_v{{version}}_mac_x64.zip`}
+        windowsAppUrl='https://github.com/Jun-Murakami/YomiganaConverter/releases/download/v{{version}}/YomiganaConverter_v{{version}}_win.zip'
+        macAppleSiliconAppUrl='https://github.com/Jun-Murakami/YomiganaConverter/releases/download/v{{version}}/YomiganaConverter_v{{version}}_mac_arm64.zip'
+        macIntelAppUrl='https://github.com/Jun-Murakami/YomiganaConverter/releases/download/v{{version}}/YomiganaConverter_v{{version}}_mac_x64.zip'
       />
 
       <StaticAppCard
-        appName='Dropbox Sync Skipper'
+        appName={t.apps.dropboxSkipper.title}
         sectionId='dropbox-skipper'
         screenshot={screenshots.dropboxSkipper}
-        description={
-          <>
-            ソースコードなどをDropboxで同期したいけど、特定のファイルやフォルダ（node_modules、distフォルダとか）は除外したい時に、条件を指定して一括で除外設定できるアプリです。
-            <br />
-            動作原理はDropboxの仕様に準じて、WindowsではNTFSの代替ファイルストリーム、MacOS/Linuxでは拡張属性を書き換えます。ファイルの内容自体は変更されませんが、自己責任でどうぞ。
-            <br />
-            また、ソースコードとしてはLinuxも対応していますが、Dropboxのテストがほとんどできていないので、Linuxをお使いの方はご自分でビルドしてお使いください。（非常にシンプルなWailsアプリです）
-          </>
-        }
+        description={t.apps.dropboxSkipper.longDescription}
         zennUrl='https://zenn.dev/jun_murakami/articles/1dc9d0a2ffa3d6'
         noteUrl='https://note.com/junmurakami/n/n0911c5853082'
         gitHubUrl='https://github.com/Jun-Murakami/dropboxskipper'
         gitHubRepo='Jun-Murakami/dropboxskipper'
-        windowsAppUrl={`https://github.com/Jun-Murakami/dropboxskipper/releases/download/v{{version}}/DropboxSkipper-win64-installer-{{version}}.exe`}
-        macUniversalAppUrl={`https://github.com/Jun-Murakami/dropboxskipper/releases/download/v{{version}}/DropboxSkipper-macOS-universal-{{version}}.dmg`}
+        windowsAppUrl='https://github.com/Jun-Murakami/dropboxskipper/releases/download/v{{version}}/DropboxSkipper-win64-installer-{{version}}.exe'
+        macUniversalAppUrl='https://github.com/Jun-Murakami/dropboxskipper/releases/download/v{{version}}/DropboxSkipper-macOS-universal-{{version}}.dmg'
       />
 
       <StaticAppCard
-        appName='TaskTrees'
+        appName={t.apps.taskTrees.title}
         sectionId='tasktrees'
         screenshot={screenshots.taskTrees}
-        description={
-          <>
-            ツリー形式でタスクやメモを自由に作成し、整理できるアプリです。他の人とツリーを共有することもできます。iOS版、Android版もリリースしました。
-          </>
-        }
+        description={t.apps.taskTrees.longDescription}
         gitHubRepo='Jun-Murakami/TaskTrees-Electron'
         noteUrl='https://note.com/junmurakami/n/n651efffaf343'
         gitHubUrl='https://github.com/Jun-Murakami/TaskTrees'
@@ -225,47 +192,48 @@ export default function HomePage() {
         webAppUrl='https://tasktree-s.web.app/'
         appStoreUrl='https://apps.apple.com/jp/app/tasktrees/id6482979857'
         googlePlayUrl='https://play.google.com/store/apps/details?id=com.tasktrees.app'
-        windowsAppUrl={`https://github.com/Jun-Murakami/TaskTrees-Electron/releases/download/v{{version}}/TaskTrees-{{version}}-setup_win_x64.exe`}
-        macUniversalAppUrl={`https://github.com/Jun-Murakami/TaskTrees-Electron/releases/download/v{{version}}/TaskTrees-{{version}}_mac_universal.dmg`}
+        windowsAppUrl='https://github.com/Jun-Murakami/TaskTrees-Electron/releases/download/v{{version}}/TaskTrees-{{version}}-setup_win_x64.exe'
+        macUniversalAppUrl='https://github.com/Jun-Murakami/TaskTrees-Electron/releases/download/v{{version}}/TaskTrees-{{version}}_mac_universal.dmg'
       />
 
       <StaticAppCard
-        appName='Cubase DrumMap Editor'
+        appName={t.apps.cubaseDMEditor.title}
         sectionId='cubaseDMEditor'
         screenshot={screenshots.cubaseDMEditor}
         description={
           <>
-            Cubase用のシンプルなドラムマップエディターです。.csvのインポートとエクスポートに対応し、ほかのソフトウェア(エクセルなど)で編集可能です。音源を制作されている方にも向いていると思います。
+            {t.apps.cubaseDMEditor.longDescription}
             <br />
-            おまけで、１つのマップで複数の音源を切り替えて使用できる各種音源の自作マップを
+            {t.common.downloadText}{' '}
             <a
               href='https://github.com/Jun-Murakami/CubaseDrumMapEditor/releases/download/v1.0/DrumMaps20230810.zip'
               target='_blank'
+              rel="noreferrer"
             >
-              こちら
-            </a>
-            からダウンロードできます。
+              {t.common.download}
+            </a>.
           </>
         }
         gitHubRepo='Jun-Murakami/CubaseDrumMapEditor'
         noteUrl='https://note.com/junmurakami/n/n13650982fc7f'
         gitHubUrl='https://github.com/Jun-Murakami/CubaseDrumMapEditor'
-        windowsAppUrl={`https://github.com/Jun-Murakami/CubaseDrumMapEditor/releases/download/v{{version}}/CubaseDrumMapEditor_v{{version}}_win.zip`}
-        macAppleSiliconAppUrl={`https://github.com/Jun-Murakami/CubaseDrumMapEditor/releases/download/v{{version}}/CubaseDrumMapEditor_v{{version}}_mac_arm64.zip`}
-        macIntelAppUrl={`https://github.com/Jun-Murakami/CubaseDrumMapEditor/releases/download/v{{version}}/CubaseDrumMapEditor_v{{version}}_mac_x64.zip`}
+        windowsAppUrl='https://github.com/Jun-Murakami/CubaseDrumMapEditor/releases/download/v{{version}}/CubaseDrumMapEditor_v{{version}}_win.zip'
+        macAppleSiliconAppUrl='https://github.com/Jun-Murakami/CubaseDrumMapEditor/releases/download/v{{version}}/CubaseDrumMapEditor_v{{version}}_mac_arm64.zip'
+        macIntelAppUrl='https://github.com/Jun-Murakami/CubaseDrumMapEditor/releases/download/v{{version}}/CubaseDrumMapEditor_v{{version}}_mac_x64.zip'
       />
 
       <StaticAppCard
-        appName='Famitone 2A03'
+        appName={t.apps.famitone.title}
         sectionId='famitone'
         screenshot={screenshots.famitone}
         description={
           <>
-            ファミコン実機をサンプリングしたKONTAKT音源ライブラリです。
-            <a href='https://github.com/Jun-Murakami/Famitone/releases/download/v1.0/Famitone2A03_v1.0.zip' target='_blank'>
-              こちら
-            </a>
-            からダウンロードできます。
+            {t.apps.famitone.longDescription}
+            <br />
+            {t.common.downloadText}{' '}
+            <a href='https://github.com/Jun-Murakami/Famitone/releases/download/v1.0/Famitone2A03_v1.0.zip' target='_blank' rel="noreferrer">
+              {t.common.download}
+            </a>.
           </>
         }
         noteUrl='https://note.com/junmurakami/n/n1e525af59ada'
@@ -279,7 +247,7 @@ export default function HomePage() {
           href='/contact'
           sx={{ mb: 10, backgroundColor: 'rgba(50, 50, 50, 0.5)', backdropFilter: 'blur(10px)' }}
         >
-          お問い合わせ
+          {t.common.contact}
         </Button>
       </Box>
     </>

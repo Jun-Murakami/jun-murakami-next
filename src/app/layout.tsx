@@ -2,6 +2,11 @@ import type { Metadata } from 'next';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
 import ClientLayout from './ClientLayout';
 import { GoogleAnalytics } from '@next/third-parties/google';
+import { ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import theme from '@/hooks/useCustomTheme';
+import { LanguageProvider } from '@/contexts/LanguageContext';
+import { LanguageToggle } from '@/components/LanguageToggle';
 
 export const metadata: Metadata = {
   title: 'Jun Murakami App Factory',
@@ -44,10 +49,16 @@ export default function RootLayout({
   return (
     <html lang='ja'>
       <body>
-        <AppRouterCacheProvider>
-          <GoogleAnalytics gaId={googleAnalyticsId} />
-          <ClientLayout>{children}</ClientLayout>
-        </AppRouterCacheProvider>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <LanguageProvider>
+            <LanguageToggle />
+            <AppRouterCacheProvider>
+              <GoogleAnalytics gaId={googleAnalyticsId} />
+              <ClientLayout>{children}</ClientLayout>
+            </AppRouterCacheProvider>
+          </LanguageProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

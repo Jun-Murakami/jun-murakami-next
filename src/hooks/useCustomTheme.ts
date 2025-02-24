@@ -1,5 +1,5 @@
 'use client';
-import { createTheme, Theme } from '@mui/material/styles';
+import { createTheme, type Theme } from '@mui/material/styles';
 import '@fontsource/m-plus-1p/300.css';
 import '@fontsource/m-plus-1p/400.css';
 import '@fontsource-variable/urbanist';

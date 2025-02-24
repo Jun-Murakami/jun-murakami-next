@@ -12,7 +12,7 @@ export function LanguageToggle() {
   };
 
   return (
-    <Tooltip title={language === 'ja' ? 'English' : '日本語'}>
+    <Tooltip title={language === 'ja' ? 'English' : '日本語'} sx={{ zIndex: 1000 }}>
       <Button
         onClick={toggleLanguage}
         startIcon={<TranslateIcon />}

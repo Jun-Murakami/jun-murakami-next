@@ -7,9 +7,10 @@ interface AppGridCardProps {
   screenshot: StaticImageData;
   description: string;
   sectionId: string;
+  onClick: () => void;
 }
 
-export function AppGridCard({ title, screenshot, description, sectionId }: AppGridCardProps) {
+export function AppGridCard({ title, screenshot, description, sectionId, onClick }: AppGridCardProps) {
   return (
     <Card
       component={Link}
@@ -24,6 +25,7 @@ export function AppGridCard({ title, screenshot, description, sectionId }: AppGr
         },
         textDecoration: 'none',
       }}
+      onClick={onClick}
     >
       <div style={{ position: 'relative', width: '100%', height: '140px' }}>
         <Image

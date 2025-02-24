@@ -8,6 +8,7 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import * as screenshots from '@/assets/screenshots';
+import { sendGAEvent } from '@next/third-parties/google';
 import { StaticAppCard } from '@/components/StaticAppCard';
 import { AppGridCard } from '@/components/AppGridCard';
 import { ScrollToTopButton } from '@/components/ScrollToTop';
@@ -91,6 +92,22 @@ export default function HomePage() {
     },
   ];
 
+  const handleSNSClick = (snsName: string) => {
+    if (typeof window !== 'undefined' && window.location.hostname !== 'localhost') {
+      sendGAEvent('event', 'sns_click', { sns_name: snsName });
+    } else {
+      console.log('Event:', 'sns_click', { sns_name: snsName });
+    }
+  };
+
+  const handleAppClick = (appName: string) => {
+    if (typeof window !== 'undefined' && window.location.hostname !== 'localhost') {
+      sendGAEvent('event', 'app_card_click', { app_name: appName });
+    } else {
+      console.log('Event:', 'app_card_click', { app_name: appName });
+    }
+  };
+
   return (
     <>
       <Typography variant='body2' sx={{ p: { xs: 1, sm: 0 } }}>
@@ -100,7 +117,7 @@ export default function HomePage() {
       <Box sx={{ mt: 1, mb: 5, textAlign: { xs: 'center', sm: 'left' } }}>
         {socialLinks.map((link) => (
           <Tooltip title={link.title} key={link.title}>
-            <IconButton sx={{ height: { xs: 45, sm: 50 }, width: { xs: 45, sm: 50 } }} component='a' target='_blank' href={link.url}>
+            <IconButton sx={{ height: { xs: 45, sm: 50 }, width: { xs: 45, sm: 50 } }} component='a' target='_blank' href={link.url} onClick={() => handleSNSClick(link.title)}>
               {link.icon}
             </IconButton>
           </Tooltip>
@@ -112,7 +129,7 @@ export default function HomePage() {
       <Grid2 container spacing={2} sx={{ mb: 10 }} className='digest-grid'>
         {appGridItems.map((app) => (
           <Grid2 size={{ xs: 6, md: 3 }} key={app.sectionId}>
-            <AppGridCard {...app} />
+            <AppGridCard {...app} onClick={() => handleAppClick(app.title)} />
           </Grid2>
         ))}
       </Grid2>

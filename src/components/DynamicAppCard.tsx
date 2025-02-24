@@ -21,8 +21,6 @@ interface DynamicAppCardProps {
   macUniversalAppUrl?: string | null;
 }
 
-type EventParams = Record<string, string>;
-
 const DynamicAppCard = ({
   gitHubRepo,
   appStoreUrl,
@@ -91,11 +89,11 @@ const DynamicAppCard = ({
     setOpenNotice((previousOpen) => !previousOpen);
   };
 
-  const sendLogEvent = (eventName: string, eventParams?: EventParams) => {
+  const sendLogEvent = (eventName: string, eventParams?: string) => {
     if (typeof window !== 'undefined' && window.location.hostname !== 'localhost') {
-      sendGAEvent('event', eventName, eventParams ?? {});
+      sendGAEvent('event', eventName, { url: eventParams });
     } else {
-      console.log('Event:', eventName, eventParams);
+      console.log('Event:', eventName, { url: eventParams });
     }
   };
 
@@ -151,7 +149,7 @@ const DynamicAppCard = ({
                     component='a'
                     href={appStoreUrl}
                     target='_blank'
-                    onClick={() => sendLogEvent('app_store_click', { url: appStoreUrl })}
+                    onClick={() => sendLogEvent('app_store_click', appStoreUrl)}
                   >
                     <Image src={badges.appleStore} alt='Apple App Store' height={45} />
                   </Button>
@@ -164,7 +162,7 @@ const DynamicAppCard = ({
                     component='a'
                     href={googlePlayUrl}
                     target='_blank'
-                    onClick={() => sendLogEvent('google_play_click', { url: googlePlayUrl })}
+                    onClick={() => sendLogEvent('google_play_click', googlePlayUrl)}
                   >
                     <Image src={badges.googlePlay} alt='Google Play' height={45} />
                   </Button>
@@ -177,7 +175,7 @@ const DynamicAppCard = ({
                     component='a'
                     href={webAppUrl}
                     target='_blank'
-                    onClick={() => sendLogEvent('web_app_click', { url: webAppUrl })}
+                    onClick={() => sendLogEvent('web_app_click', webAppUrl)}
                   >
                     <Image src={badges.webApp} alt='Web App' height={45} />
                   </Button>
@@ -190,7 +188,7 @@ const DynamicAppCard = ({
                     component='a'
                     href={replacedUrls.windowsAppUrl}
                     download
-                    onClick={() => sendLogEvent('windows_app_click', { url: replacedUrls.windowsAppUrl ?? '' })}
+                    onClick={() => sendLogEvent('windows_app_click', replacedUrls.windowsAppUrl)}
                   >
                     <Image src={badges.windows} alt='Windows' height={45} />
                   </Button>
@@ -203,7 +201,7 @@ const DynamicAppCard = ({
                     component='a'
                     href={replacedUrls.macAppleSiliconAppUrl}
                     download
-                    onClick={() => sendLogEvent('mac_apple_silicon_app_click', { url: replacedUrls.macAppleSiliconAppUrl ?? '' })}
+                    onClick={() => sendLogEvent('mac_apple_silicon_app_click', replacedUrls.macAppleSiliconAppUrl)}
                   >
                     <Image src={badges.macAppleSilicon} alt='Apple Silicon Mac' height={45} />
                   </Button>
@@ -216,7 +214,7 @@ const DynamicAppCard = ({
                     component='a'
                     href={replacedUrls.macIntelAppUrl}
                     download
-                    onClick={() => sendLogEvent('mac_intel_app_click', { url: replacedUrls.macIntelAppUrl ?? '' })}
+                    onClick={() => sendLogEvent('mac_intel_app_click', replacedUrls.macIntelAppUrl)}
                   >
                     <Image src={badges.macIntel} alt='Intel Mac' height={45} />
                   </Button>
@@ -229,7 +227,7 @@ const DynamicAppCard = ({
                     component='a'
                     href={replacedUrls.macUniversalAppUrl}
                     download
-                    onClick={() => sendLogEvent('mac_universal_app_click', { url: replacedUrls.macUniversalAppUrl ?? '' })}
+                    onClick={() => sendLogEvent('mac_universal_app_click', replacedUrls.macUniversalAppUrl)}
                   >
                     <Image src={badges.macUniversal} alt='Universal Mac' height={45} />
                   </Button>

@@ -158,6 +158,8 @@ export default function HomePage() {
 		<>
 			<Typography variant="body2" sx={{ p: { xs: 1, sm: 0 } }}>
 				{t.intro.text}
+				<br />
+				{t.introPortfolio.text}
 				<Link href={t.introLink.url} target="_blank" rel="noopener noreferrer">
 					{t.introLink.text}
 				</Link>

@@ -4,7 +4,10 @@ export const en = {
 			"Jun Murakami (Jun Takahashi) is a music director/producer. This site distributes applications and music production libraries I have developed.",
 	},
 	intro: {
-		text: "Jun Murakami (Jun Takahashi) is a music director/producer. This site distributes applications and music production libraries I have developed. My portfolio site is",
+		text: "Jun Murakami (Jun Takahashi) is a music director/producer. This site distributes applications and music production libraries I have developed.",
+	},
+	introPortfolio: {
+		text: "My portfolio site is",
 	},
 	introLink: {
 		text: "here",

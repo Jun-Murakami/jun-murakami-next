@@ -8,7 +8,7 @@ import {
 	IconButton,
 	Typography,
 	Tooltip,
-	Grid2,
+	Grid,
 } from "@mui/material";
 import {
 	NoteLogoIcon,
@@ -183,13 +183,13 @@ export default function HomePage() {
 
 			<DynamicMobileScrollButton />
 
-			<Grid2 container spacing={2} sx={{ mb: 10 }} className="digest-grid">
+			<Grid container spacing={2} sx={{ mb: 10 }} className="digest-grid">
 				{appGridItems.map((app) => (
-					<Grid2 size={{ xs: 6, md: 3 }} key={app.sectionId}>
+					<Grid size={{ xs: 6, md: 3 }} key={app.sectionId}>
 						<AppGridCard {...app} onClick={() => handleAppClick(app.title)} />
-					</Grid2>
+					</Grid>
 				))}
-			</Grid2>
+			</Grid>
 
 			<StaticAppCard
 				appName={t.apps.wlsib.title}

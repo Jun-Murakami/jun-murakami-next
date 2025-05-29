@@ -38,6 +38,13 @@ export const ja = {
 			longDescription:
 				"ChatGPT、Gemini、Google AI Studio、Claude、DeepSeek、Grok、Phind、Perplexity、Genspark、Felo、JENOVA、Codyに対応したチャットAI専用ブラウザです。縦に5つまで分割できる広いエディタで文章を切り貼りして、各サービスに直接プロンプトを送信できます。送信履歴から同じプロンプトを何度も呼び出したり、一括送信もできます。Monaco Editorを統合しているのでプログラマーの方もどうぞ。",
 		},
+		keyfit: {
+			title: "KeyFit",
+			description:
+				"キーボードのよく使うキーを可視化し、キーボード選択やカスタマイズをサポートをします。",
+			longDescription:
+				"キーボードのよく使うキーを可視化し、45%/60%/75%などのキーボード選択やカスタマイズをサポートをします。日付やアプリごとによく使うキーのランキングや分布を分かりやすく表示します。日付は１日単位の記録なのでパスワードの復元などは困難だと思いますが、キーロガーではあるので、取り扱いにはご注意ください。",
+		},
 		monacoNotepad: {
 			title: "Monaco Notepad",
 			description:

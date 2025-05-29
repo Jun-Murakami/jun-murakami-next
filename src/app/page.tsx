@@ -95,6 +95,12 @@ export default function HomePage() {
 			sectionId: "aiBrowser",
 		},
 		{
+			title: t.apps.keyfit.title,
+			screenshot: screenshots.keyfit_s,
+			description: t.apps.keyfit.description,
+			sectionId: "keyfit",
+		},
+		{
 			title: t.apps.monacoNotepad.title,
 			screenshot: screenshots.monacoNotepad_s,
 			description: t.apps.monacoNotepad.description,
@@ -214,6 +220,18 @@ export default function HomePage() {
 				gitHubUrl="https://github.com/Jun-Murakami/AI-Browser"
 				windowsAppUrl="https://github.com/Jun-Murakami/AI-Browser/releases/download/v{{version}}/AI-Browser-{{version}}-setup_win_x64.exe"
 				macUniversalAppUrl="https://github.com/Jun-Murakami/AI-Browser/releases/download/v{{version}}/AI-Browser-{{version}}_mac_universal.dmg"
+			/>
+
+			<StaticAppCard
+				appName={t.apps.keyfit.title}
+				sectionId="keyfit"
+				screenshot={screenshots.keyfit}
+				description={t.apps.keyfit.longDescription}
+				gitHubRepo="Jun-Murakami/KeyFit"
+				zennUrl="https://zenn.dev/jun_murakami/articles/b7502bd19a97db"
+				gitHubUrl="https://github.com/Jun-Murakami/KeyFit"
+				windowsAppUrl="https://github.com/Jun-Murakami/KeyFit/releases/download/v{{version}}/KeyFit_{{version}}_x64_en-US.msi"
+				macUniversalAppUrl="https://github.com/Jun-Murakami/KeyFit/releases/download/v{{version}}/KeyFit_{{version}}_universal.dmg"
 			/>
 
 			<StaticAppCard

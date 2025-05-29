@@ -38,6 +38,13 @@ export const en = {
 			longDescription:
 				"A dedicated chat AI browser supporting ChatGPT, Gemini, Google AI Studio, Claude, DeepSeek, Grok, Phind, Perplexity, Genspark, Felo, JENOVA, and Cody. You can cut and paste text in a wide editor that can be split up to 5 vertically and send prompts directly to each service. You can recall the same prompts from the sending history and send them in bulk. It integrates Monaco Editor, so it's also suitable for programmers.",
 		},
+		keyfit: {
+			title: "KeyFit",
+			description:
+				"A keyboard logger that visualizes frequently used keys and supports keyboard selection and customization.",
+			longDescription:
+				"A keyboard logger that visualizes frequently used keys and supports keyboard selection and customization. The date is recorded in one day units, so it's difficult to restore passwords, but it's a keyboard logger, so please handle it with care.",
+		},
 		monacoNotepad: {
 			title: "Monaco Notepad",
 			description:

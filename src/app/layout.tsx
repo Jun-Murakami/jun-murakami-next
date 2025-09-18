@@ -62,6 +62,8 @@ const mplus1p = M_PLUS_1p({
   variable: "--font-mplus1p",
 });
 
+export const dynamic = 'force-dynamic';
+
 export default async function RootLayout({
   children,
 }: Readonly<{
@@ -73,8 +75,8 @@ export default async function RootLayout({
   const lang = cookieStore.get("language")?.value === "en" ? "en" : "ja";
 
   return (
-    <html lang={lang} className={`${urbanist.variable} ${mplus1p.variable}`}>
-      <body>
+    <html lang={lang} className={`${urbanist.variable} ${mplus1p.variable}`} suppressHydrationWarning>
+      <body suppressHydrationWarning>
         {/* MUI推奨: body直下で全体をAppRouterCacheProviderでラップ */}
         <AppRouterCacheProvider>
           <ThemeProvider theme={theme}>

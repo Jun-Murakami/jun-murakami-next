@@ -36,6 +36,9 @@ export function middleware(req: NextRequest) {
     });
   }
 
+  // キャッシュとバリアント制御（CDNがcookie差を認識するように）
+  res.headers.set('Vary', 'Cookie');
+  res.headers.set('Cache-Control', 'private, no-store, must-revalidate');
   // デバッグ/ロギング用途（任意）
   res.headers.set('x-app-language', lang || 'ja');
 

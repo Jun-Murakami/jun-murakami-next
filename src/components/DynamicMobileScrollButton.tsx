@@ -1,6 +1,6 @@
 'use client';
-import { useMediaQuery, Box, IconButton, useTheme } from '@mui/material';
 import KeyboardDoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrowDown';
+import { Box, IconButton, useMediaQuery, useTheme } from '@mui/material';
 
 export default function DynamicMobileScrollButton() {
   const theme = useTheme();

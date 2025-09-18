@@ -1,40 +1,40 @@
 "use client";
 
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 type FontLoadingContextType = {
-	isFontLoading: boolean;
+  isFontLoading: boolean;
 };
 
 const FontLoadingContext = createContext<FontLoadingContextType>({
-	isFontLoading: true,
+  isFontLoading: true,
 });
 
 export function FontLoadingProvider({
-	children,
+  children,
 }: { children: React.ReactNode }) {
-	const [isFontLoading, setIsFontLoading] = useState(true);
+  const [isFontLoading, setIsFontLoading] = useState(true);
 
-	useEffect(() => {
-		const checkFonts = async () => {
-			try {
-				// フォントの読み込みを待機
-				await document.fonts.ready;
-				setIsFontLoading(false);
-			} catch (error) {
-				console.error("Font loading error:", error);
-				setIsFontLoading(false);
-			}
-		};
+  useEffect(() => {
+    const checkFonts = async () => {
+      try {
+        // フォントの読み込みを待機
+        await document.fonts.ready;
+        setIsFontLoading(false);
+      } catch (error) {
+        console.error("Font loading error:", error);
+        setIsFontLoading(false);
+      }
+    };
 
-		checkFonts();
-	}, []);
+    checkFonts();
+  }, []);
 
-	return (
-		<FontLoadingContext.Provider value={{ isFontLoading }}>
-			{children}
-		</FontLoadingContext.Provider>
-	);
+  return (
+    <FontLoadingContext.Provider value={{ isFontLoading }}>
+      {children}
+    </FontLoadingContext.Provider>
+  );
 }
 
 export const useFontLoading = () => useContext(FontLoadingContext);

@@ -1,11 +1,12 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { sendGAEvent } from '@next/third-parties/google';
-import { Box, Button, Tooltip, Divider, Typography, Popper, Fade, CircularProgress } from '@mui/material';
-import Image from 'next/image';
-import * as badges from '@/assets/badges';
+import { useEffect, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
+import { Box, Button, CircularProgress, Divider, Fade, Popper, Tooltip, Typography } from '@mui/material';
+import { sendGAEvent } from '@next/third-parties/google';
+import Image from 'next/image';
+
+import * as badges from '@/assets/badges';
 
 const clientId = process.env.NEXT_PUBLIC_GIT_HUB_APP_CLIENT_ID;
 const clientSecret = process.env.NEXT_PUBLIC_GIT_HUB_APP_CLIENT_SECRET;

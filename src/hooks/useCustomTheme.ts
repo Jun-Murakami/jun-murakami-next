@@ -5,7 +5,6 @@ import '@fontsource/m-plus-1p/400.css';
 import '@fontsource-variable/urbanist';
 
 const createCustomTheme = (): Theme => {
-
   const fontFamilySet = [
     '"Urbanist Variable"',
     '"M PLUS 1p"',
@@ -97,7 +96,6 @@ const createCustomTheme = (): Theme => {
       },
     },
   });
-
 };
 
 const theme = createCustomTheme();

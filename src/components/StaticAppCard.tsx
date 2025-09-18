@@ -1,9 +1,10 @@
-import Image, { type StaticImageData } from 'next/image';
-import dynamic from 'next/dynamic';
-import { Box, Typography, Card, Divider, Button } from '@mui/material';
-import { NoteSmallLogoIcon, ZennLogoIcon } from '@/components/Icons';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import PolicyIcon from '@mui/icons-material/Policy';
+import { Box, Button, Card, Divider, Typography } from '@mui/material';
+import dynamic from 'next/dynamic';
+import Image, { type StaticImageData } from 'next/image';
+
+import { NoteSmallLogoIcon, ZennLogoIcon } from '@/components/Icons';
 
 interface DynamicAppCardProps {
   gitHubRepo?: string;

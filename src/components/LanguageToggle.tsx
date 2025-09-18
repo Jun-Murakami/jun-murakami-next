@@ -1,7 +1,8 @@
 'use client';
 
-import { Button, Typography } from '@mui/material';
 import TranslateIcon from '@mui/icons-material/Translate';
+import { Button, Typography } from '@mui/material';
+
 import { useLanguage } from '@/contexts/LanguageContext';
 
 export function LanguageToggle() {

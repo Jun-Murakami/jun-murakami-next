@@ -1,8 +1,8 @@
 'use client';
 
-import { Fab, Zoom } from '@mui/material';
-import { KeyboardArrowUp } from '@mui/icons-material';
 import { useEffect, useState } from 'react';
+import { KeyboardArrowUp } from '@mui/icons-material';
+import { Fab, Zoom } from '@mui/material';
 
 export const ScrollToTopButton = () => {
   const [isVisible, setIsVisible] = useState(false);

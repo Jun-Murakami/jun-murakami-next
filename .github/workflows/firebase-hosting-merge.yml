@@ -2,7 +2,7 @@
 # https://github.com/firebase/firebase-tools
 
 name: Deploy to Firebase Hosting on merge
-'on':
+on:
   push:
     branches:
       - main
@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: npm ci && npm run build
+      - run: npm ci
         env:
           NEXT_PUBLIC_MAIL_PUBLIC_ID: ${{ secrets.NEXT_PUBLIC_MAIL_PUBLIC_ID }}
           NEXT_PUBLIC_MAIL_SERVICE_ID: ${{ secrets.NEXT_PUBLIC_MAIL_SERVICE_ID }}
@@ -21,7 +21,9 @@ jobs:
           NEXT_PUBLIC_GIT_HUB_APP_CLIENT_SECRET: ${{ secrets.NEXT_PUBLIC_GIT_HUB_APP_CLIENT_SECRET }}
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_JUN_MURAKAMI }}'
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JUN_MURAKAMI }}
           channelId: live
           projectId: jun-murakami
+        env:
+          FIREBASE_CLI_EXPERIMENTS: webframeworks

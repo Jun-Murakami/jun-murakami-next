@@ -1,7 +1,7 @@
-import { Typography, Box, Button, Card, Divider } from '@mui/material';
-import ReplyIcon from '@mui/icons-material/Reply';
-import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import ReactMarkdown from 'react-markdown';
+import MailOutlineIcon from '@mui/icons-material/MailOutline';
+import ReplyIcon from '@mui/icons-material/Reply';
+import { Box, Button, Card, Divider, Typography } from '@mui/material';
 
 const ppMarkdown = `
 当アプリは、利用者の個人情報を一切収集しません。

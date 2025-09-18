@@ -1,12 +1,13 @@
 'use client';
 import { type ReactNode, useState } from 'react';
-import Image, { type StaticImageData } from 'next/image';
-import { Button, Box, Card, Divider, Typography, Tooltip, Popper, Fade } from '@mui/material';
-import { NoteSmallLogoIcon, ZennLogoIcon } from '@/components/Icons';
+import ReactMarkdown from 'react-markdown';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import PolicyIcon from '@mui/icons-material/Policy';
+import { Box, Button, Card, Divider, Fade, Popper, Tooltip, Typography } from '@mui/material';
+import Image, { type StaticImageData } from 'next/image';
+
 import * as badges from '@/assets/badges';
-import ReactMarkdown from 'react-markdown';
+import { NoteSmallLogoIcon, ZennLogoIcon } from '@/components/Icons';
 
 interface AppCardProps {
   appName: string;

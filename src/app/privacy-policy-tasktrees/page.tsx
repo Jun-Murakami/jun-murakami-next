@@ -1,7 +1,7 @@
-import { Typography, Box, Button, Card, Divider } from '@mui/material';
-import ReplyIcon from '@mui/icons-material/Reply';
-import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import ReactMarkdown from 'react-markdown';
+import MailOutlineIcon from '@mui/icons-material/MailOutline';
+import ReplyIcon from '@mui/icons-material/Reply';
+import { Box, Button, Card, Divider, Typography } from '@mui/material';
 
 const ppMarkdown = `
 高橋純（以下、「管理者」といいます。）は、本アプリにおけるユーザーの個人情報の取扱いについて、以下のとおりプライバシーポリシー（以下、「本ポリシー」といいます。）を定めます。  

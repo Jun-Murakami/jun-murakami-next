@@ -1,6 +1,7 @@
 'use client';
 
-import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
+import { createContext, type ReactNode, useContext, useEffect, useState } from 'react';
+import Cookies from 'js-cookie';
 
 type Language = 'ja' | 'en';
 
@@ -11,25 +12,48 @@ interface LanguageContextType {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
-export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguage] = useState<Language>('ja');
+// 初期言語を同期的に決定する関数
+// 優先度: cookie > localStorage > navigator.language > 'ja'
+function getInitialLanguage(): Language {
+  if (typeof window === 'undefined') return 'ja';
 
+  // cookie から取得（language=...）
+  const cookiePair = document.cookie
+    .split('; ')
+    .find((row) => row.startsWith('language='));
+  const cookieLang = (cookiePair?.split('=')[1] as Language | undefined) || undefined;
+  if (cookieLang === 'ja' || cookieLang === 'en') return cookieLang;
+
+  // localStorage から取得
+  const ls = localStorage.getItem('language') as Language | null;
+  if (ls === 'ja' || ls === 'en') return ls;
+
+  // navigator から推定
+  const nav = navigator.language?.toLowerCase().startsWith('ja') ? 'ja' : 'en';
+  return nav || 'ja';
+}
+
+export function LanguageProvider({ children }: { children: ReactNode }) {
+  const [language, setLanguage] = useState<Language>(getInitialLanguage());
+
+  // 言語変更時の副作用: <html lang> と cookie, localStorage を更新
   useEffect(() => {
-    // ローカルストレージから言語設定を読み込む
-    const savedLanguage = localStorage.getItem('language') as Language;
-    if (savedLanguage) {
-      setLanguage(savedLanguage);
-    } else {
-      // ブラウザの言語設定を確認
-      const userLanguage = navigator.language.toLowerCase().startsWith('ja') ? 'ja' : 'en';
-      setLanguage(userLanguage);
-      localStorage.setItem('language', userLanguage);
+    if (typeof document !== 'undefined') {
+      document.documentElement.lang = language;
+      // cookie を 1 年で設定（js-cookie経由で安全に設定）
+      // secure は https 環境で自動的に true を推奨
+      Cookies.set('language', language, {
+        path: '/',
+        sameSite: 'lax',
+        expires: 365, // 365日
+        secure: typeof window !== 'undefined' && window.location.protocol === 'https:'
+      });
+      localStorage.setItem('language', language);
     }
-  }, []);
+  }, [language]);
 
   const handleSetLanguage = (lang: Language) => {
     setLanguage(lang);
-    localStorage.setItem('language', lang);
   };
 
   return (

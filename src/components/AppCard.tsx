@@ -93,7 +93,7 @@ export const AppCard = ({
               href={noteUrl}
               target='_blank'
               startIcon={<NoteSmallLogoIcon />}
-              sx={{ textTransform: 'none', mr: 2 }}
+              sx={{ mr: 2 }}
             >
               noteの紹介記事
             </Button>
@@ -104,7 +104,7 @@ export const AppCard = ({
               href={zennUrl}
               target='_blank'
               startIcon={<ZennLogoIcon />}
-              sx={{ textTransform: 'none', mr: 2 }}
+              sx={{ mr: 2 }}
             >
               Zennの記事
             </Button>
@@ -130,7 +130,7 @@ export const AppCard = ({
                 <Typography variant='caption'>
                   {' '}
                   v{latestRelease.version} :{' '}
-                  <Button onClick={handleReleaseLog} sx={{ textTransform: 'none' }}>
+                  <Button onClick={handleReleaseLog}>
                     Release Notes
                   </Button>
                 </Typography>
@@ -205,7 +205,7 @@ export const AppCard = ({
               </Tooltip>
             )}
             {windowsAppUrl && handleNotice && (
-              <Button variant='text' size='small' sx={{ mt: 2, textTransform: 'none' }} onClick={handleNotice}>
+              <Button variant='text' size='small' sx={{ mt: 2 }} onClick={handleNotice}>
                 ※Windows版のセキュリティ警告について
               </Button>
             )}

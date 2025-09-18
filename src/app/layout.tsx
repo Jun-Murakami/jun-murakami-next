@@ -1,13 +1,17 @@
+import { Box, Typography } from "@mui/material";
+import CssBaseline from "@mui/material/CssBaseline";
+import { ThemeProvider } from "@mui/material/styles";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import { M_PLUS_1p, Urbanist } from "next/font/google";
 import { cookies } from "next/headers";
-
-import ClientLayout from "./ClientLayout";
 
 import { FontLoadingScreen } from "@/components/FontLoadingScreen";
 import { LanguageToggle } from "@/components/LanguageToggle";
+import { ScrollHandler } from "@/components/ScrollHandler";
 import { FontLoadingProvider } from "@/contexts/FontLoadingContext";
 import { LanguageProvider } from "@/contexts/LanguageContext";
+import theme from "@/hooks/useCustomTheme";
 
 // ThemeProvider/CssBaseline は ClientLayout 側で適用
 
@@ -44,6 +48,20 @@ export const metadata: Metadata = {
   },
 };
 
+// next/font: 欧文 Urbanist、日本語 M PLUS 1p を読み込み、CSS変数として公開
+const urbanist = Urbanist({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-urbanist",
+});
+
+const mplus1p = M_PLUS_1p({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "700"],
+  display: "swap",
+  variable: "--font-mplus1p",
+});
+
 export default async function RootLayout({
   children,
 }: Readonly<{
@@ -55,18 +73,67 @@ export default async function RootLayout({
   const lang = cookieStore.get("language")?.value === "en" ? "en" : "ja";
 
   return (
-    <html lang={lang}>
+    <html lang={lang} className={`${urbanist.variable} ${mplus1p.variable}`}>
       <body>
-        <FontLoadingProvider>
-          <LanguageProvider>
-            <FontLoadingScreen />
-            <LanguageToggle />
-            <AppRouterCacheProvider>
-              <GoogleAnalytics gaId={googleAnalyticsId} />
-              <ClientLayout>{children}</ClientLayout>
-            </AppRouterCacheProvider>
-          </LanguageProvider>
-        </FontLoadingProvider>
+        {/* MUI推奨: body直下で全体をAppRouterCacheProviderでラップ */}
+        <AppRouterCacheProvider>
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <FontLoadingProvider>
+              <LanguageProvider>
+                <FontLoadingScreen />
+                <LanguageToggle />
+                <GoogleAnalytics gaId={googleAnalyticsId} />
+                <ScrollHandler />
+                <Box
+                  sx={{
+                    position: "fixed",
+                    top: 0,
+                    left: 0,
+                    width: "100%",
+                    height: "100vh",
+                    zIndex: -1,
+                    backgroundImage: `url('/images/workspace.jpg')`,
+                    backgroundSize: { xs: "cover", sm: "contain" },
+                    backgroundRepeat: "no-repeat",
+                    backgroundPosition: { xs: "center bottom", sm: "8% center" },
+                  }}
+                />
+                <Box
+                  sx={{
+                    p: 1,
+                    width: "100%",
+                    minHeight: "100vh",
+                  }}
+                >
+                  <Box
+                    sx={{
+                      position: "relative",
+                      maxWidth: "980px",
+                      marginX: { xs: "auto", sm: 0 },
+                      left: { xs: "auto", sm: "30%" },
+                      width: { xs: "100%", sm: "70%" },
+                    }}
+                  >
+                    <Typography
+                      sx={{
+                        mt: { xs: 5, sm: 10 },
+                        mb: 5,
+                        fontWeight: 300,
+                        fontSize: { xs: 25, sm: 63 },
+                        textAlign: { xs: "center", sm: "left" },
+                      }}
+                      component='h1'
+                    >
+                      Jun Murakami App Factory
+                    </Typography>
+                    {children}
+                  </Box>
+                </Box>
+              </LanguageProvider>
+            </FontLoadingProvider>
+          </ThemeProvider>
+        </AppRouterCacheProvider>
       </body>
     </html>
   );

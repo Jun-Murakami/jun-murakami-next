@@ -1,5 +1,3 @@
-"use client";
-
 import GitHubIcon from "@mui/icons-material/GitHub";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
@@ -12,12 +10,12 @@ import {
   Tooltip,
   Typography,
 } from "@mui/material";
-import { sendGAEvent } from "@next/third-parties/google";
-import dynamic from "next/dynamic";
+import { cookies } from "next/headers";
 import Link from "next/link";
 
 import * as screenshots from "@/assets/screenshots";
 import { AppGridCard } from "@/components/AppGridCard";
+import { GaEventBinder } from "@/components/GaEventBinder";
 import {
   IMDbLogoIcon,
   NoteLogoIcon,
@@ -27,16 +25,12 @@ import {
 } from "@/components/Icons";
 import { ScrollToTopButton } from "@/components/ScrollToTop";
 import { StaticAppCard } from "@/components/StaticAppCard";
-import { useLanguage } from "@/contexts/LanguageContext";
 import { en } from "@/locales/en";
 import { ja } from "@/locales/ja";
 
-const DynamicMobileScrollButton = dynamic(
-  () => import("@/components/DynamicMobileScrollButton"),
-);
-
-export default function HomePage() {
-  const { language } = useLanguage();
+export default async function HomePage() {
+  const cookieStore = await cookies();
+  const language = cookieStore.get('language')?.value === 'en' ? 'en' : 'ja';
   const t = language === "ja" ? ja : en;
 
   const socialLinks = [
@@ -139,30 +133,10 @@ export default function HomePage() {
     },
   ];
 
-  const handleSNSClick = (snsName: string) => {
-    if (
-      typeof window !== "undefined" &&
-      window.location.hostname !== "localhost"
-    ) {
-      sendGAEvent("event", "sns_click", { sns_name: snsName, language });
-    } else {
-      console.log("Event:", "sns_click", { sns_name: snsName, language });
-    }
-  };
-
-  const handleAppClick = (appName: string) => {
-    if (
-      typeof window !== "undefined" &&
-      window.location.hostname !== "localhost"
-    ) {
-      sendGAEvent("event", "app_card_click", { app_name: appName, language });
-    } else {
-      console.log("Event:", "app_card_click", { app_name: appName, language });
-    }
-  };
-
   return (
     <>
+      <GaEventBinder language={language} />
+
       <Typography variant="body2" sx={{ p: { xs: 1, sm: 0 } }}>
         {t.intro.text}
         <br />
@@ -180,7 +154,7 @@ export default function HomePage() {
               component="a"
               target="_blank"
               href={link.url}
-              onClick={() => handleSNSClick(link.title)}
+              data-ga-sns={link.title}
             >
               {link.icon}
             </IconButton>
@@ -188,16 +162,15 @@ export default function HomePage() {
         ))}
       </Box>
 
-      <DynamicMobileScrollButton />
-
       <Grid container spacing={2} sx={{ mb: 10 }} className="digest-grid">
         {appGridItems.map((app) => (
           <Grid size={{ xs: 6, md: 3 }} key={app.sectionId}>
-            <AppGridCard {...app} onClick={() => handleAppClick(app.title)} />
+            <AppGridCard {...app} data-ga-app={app.title} />
           </Grid>
         ))}
       </Grid>
 
+      {/* 以下はそのままサーバで描画 */}
       <StaticAppCard
         appName={t.apps.wlsib.title}
         sectionId="wlsib"
@@ -209,6 +182,12 @@ export default function HomePage() {
         appStoreUrl="https://apps.apple.com/jp/app/%E3%83%AC%E3%83%B3%E3%82%BA%E4%BD%95%E6%8C%81%E3%81%A3%E3%81%A6%E3%81%8F/id6480391376"
         googlePlayUrl="https://play.google.com/store/apps/details?id=com.wlsib.app"
         webAppUrl="https://lensdore-c55ce.web.app/"
+        labels={{
+          noteArticle: t.common.noteArticle,
+          zennArticle: t.common.zennArticle,
+          sourceCode: t.common.sourceCode,
+          privacyPolicy: t.common.privacyPolicy,
+        }}
       />
 
       <StaticAppCard
@@ -221,6 +200,12 @@ export default function HomePage() {
         gitHubUrl="https://github.com/Jun-Murakami/AI-Browser"
         windowsAppUrl="https://github.com/Jun-Murakami/AI-Browser/releases/download/v{{version}}/AI-Browser-{{version}}-setup_win_x64.exe"
         macUniversalAppUrl="https://github.com/Jun-Murakami/AI-Browser/releases/download/v{{version}}/AI-Browser-{{version}}_mac_universal.dmg"
+        labels={{
+          noteArticle: t.common.noteArticle,
+          zennArticle: t.common.zennArticle,
+          sourceCode: t.common.sourceCode,
+          privacyPolicy: t.common.privacyPolicy,
+        }}
       />
 
       <StaticAppCard
@@ -233,6 +218,12 @@ export default function HomePage() {
         gitHubUrl="https://github.com/Jun-Murakami/KeyFit"
         windowsAppUrl="https://github.com/Jun-Murakami/KeyFit/releases/download/v{{version}}/KeyFit_{{version}}_x64_en-US.msi"
         macUniversalAppUrl="https://github.com/Jun-Murakami/KeyFit/releases/download/v{{version}}/KeyFit_{{version}}_universal.dmg"
+        labels={{
+          noteArticle: t.common.noteArticle,
+          zennArticle: t.common.zennArticle,
+          sourceCode: t.common.sourceCode,
+          privacyPolicy: t.common.privacyPolicy,
+        }}
       />
 
       <StaticAppCard
@@ -246,6 +237,12 @@ export default function HomePage() {
         gitHubUrl="https://github.com/Jun-Murakami/monaco-notepad"
         windowsAppUrl="https://github.com/Jun-Murakami/monaco-notepad/releases/download/v{{version}}/MonacoNotepad-win64-installer-{{version}}.exe"
         macUniversalAppUrl="https://github.com/Jun-Murakami/monaco-notepad/releases/download/v{{version}}/MonacoNotepad-mac-universal-{{version}}.dmg"
+        labels={{
+          noteArticle: t.common.noteArticle,
+          zennArticle: t.common.zennArticle,
+          sourceCode: t.common.sourceCode,
+          privacyPolicy: t.common.privacyPolicy,
+        }}
       />
 
       <StaticAppCard
@@ -260,6 +257,12 @@ export default function HomePage() {
         windowsAppUrl="https://github.com/Jun-Murakami/YomiganaConverter/releases/download/v{{version}}/YomiganaConverter_v{{version}}_win.zip"
         macAppleSiliconAppUrl="https://github.com/Jun-Murakami/YomiganaConverter/releases/download/v{{version}}/YomiganaConverter_v{{version}}_mac_arm64.zip"
         macIntelAppUrl="https://github.com/Jun-Murakami/YomiganaConverter/releases/download/v{{version}}/YomiganaConverter_v{{version}}_mac_x64.zip"
+        labels={{
+          noteArticle: t.common.noteArticle,
+          zennArticle: t.common.zennArticle,
+          sourceCode: t.common.sourceCode,
+          privacyPolicy: t.common.privacyPolicy,
+        }}
       />
 
       <StaticAppCard
@@ -273,6 +276,12 @@ export default function HomePage() {
         gitHubRepo="Jun-Murakami/dropboxskipper"
         windowsAppUrl="https://github.com/Jun-Murakami/dropboxskipper/releases/download/v{{version}}/DropboxSkipper-win64-installer-{{version}}.exe"
         macUniversalAppUrl="https://github.com/Jun-Murakami/dropboxskipper/releases/download/v{{version}}/DropboxSkipper-macOS-universal-{{version}}.dmg"
+        labels={{
+          noteArticle: t.common.noteArticle,
+          zennArticle: t.common.zennArticle,
+          sourceCode: t.common.sourceCode,
+          privacyPolicy: t.common.privacyPolicy,
+        }}
       />
 
       <StaticAppCard
@@ -289,6 +298,12 @@ export default function HomePage() {
         googlePlayUrl="https://play.google.com/store/apps/details?id=com.tasktrees.app"
         windowsAppUrl="https://github.com/Jun-Murakami/TaskTrees-Electron/releases/download/v{{version}}/TaskTrees-{{version}}-setup_win_x64.exe"
         macUniversalAppUrl="https://github.com/Jun-Murakami/TaskTrees-Electron/releases/download/v{{version}}/TaskTrees-{{version}}_mac_universal.dmg"
+        labels={{
+          noteArticle: t.common.noteArticle,
+          zennArticle: t.common.zennArticle,
+          sourceCode: t.common.sourceCode,
+          privacyPolicy: t.common.privacyPolicy,
+        }}
       />
 
       <StaticAppCard
@@ -316,6 +331,12 @@ export default function HomePage() {
         windowsAppUrl="https://github.com/Jun-Murakami/CubaseDrumMapEditor/releases/download/v{{version}}/CubaseDrumMapEditor_v{{version}}_win.zip"
         macAppleSiliconAppUrl="https://github.com/Jun-Murakami/CubaseDrumMapEditor/releases/download/v{{version}}/CubaseDrumMapEditor_v{{version}}_mac_arm64.zip"
         macIntelAppUrl="https://github.com/Jun-Murakami/CubaseDrumMapEditor/releases/download/v{{version}}/CubaseDrumMapEditor_v{{version}}_mac_x64.zip"
+        labels={{
+          noteArticle: t.common.noteArticle,
+          zennArticle: t.common.zennArticle,
+          sourceCode: t.common.sourceCode,
+          privacyPolicy: t.common.privacyPolicy,
+        }}
       />
 
       <StaticAppCard
@@ -338,6 +359,12 @@ export default function HomePage() {
           </>
         }
         noteUrl="https://note.com/junmurakami/n/n1e525af59ada"
+        labels={{
+          noteArticle: t.common.noteArticle,
+          zennArticle: t.common.zennArticle,
+          sourceCode: t.common.sourceCode,
+          privacyPolicy: t.common.privacyPolicy,
+        }}
       />
 
       <Box sx={{ display: "flex", justifyContent: "center", mb: 0 }}>

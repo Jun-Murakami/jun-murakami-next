@@ -91,5 +91,9 @@ export const en = {
     download: 'here',
     downloadText: 'You can download it from',
     contact: 'Contact',
+    noteArticle: 'Article on note',
+    zennArticle: 'Article on Zenn',
+    sourceCode: 'Source code',
+    privacyPolicy: 'Privacy policy',
   },
 };

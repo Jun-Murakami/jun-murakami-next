@@ -120,7 +120,7 @@ const DynamicAppCard = ({
                   <Typography variant='caption'>
                     {' '}
                     v{latestRelease.version} :{' '}
-                    <Button onClick={handleReleaseLog} sx={{ textTransform: 'none' }}>
+                    <Button onClick={handleReleaseLog}>
                       Release Notes
                     </Button>
                   </Typography>
@@ -240,7 +240,7 @@ const DynamicAppCard = ({
                 <Button
                   variant='text'
                   size='small'
-                  sx={{ mt: 2, textTransform: 'none' }}
+                  sx={{ mt: 2 }}
                   onClick={(e) => {
                     sendLogEvent('windows_app_notice_click');
                     handleNotice(e);

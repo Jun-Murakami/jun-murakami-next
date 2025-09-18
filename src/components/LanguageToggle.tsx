@@ -2,14 +2,30 @@
 
 import TranslateIcon from '@mui/icons-material/Translate';
 import { Button, Typography } from '@mui/material';
+import Cookies from 'js-cookie';
+import { useRouter } from 'next/navigation';
 
 import { useLanguage } from '@/contexts/LanguageContext';
 
 export function LanguageToggle() {
   const { language, setLanguage } = useLanguage();
+  const router = useRouter();
 
   const toggleLanguage = () => {
-    setLanguage(language === 'ja' ? 'en' : 'ja');
+    const nextLang = language === 'ja' ? 'en' : 'ja';
+    // クッキー/HTML言語を即時更新してから状態更新
+    Cookies.set('language', nextLang, {
+      path: '/',
+      sameSite: 'lax',
+      expires: 365,
+      secure: typeof window !== 'undefined' && window.location.protocol === 'https:'
+    });
+    if (typeof document !== 'undefined') {
+      document.documentElement.lang = nextLang;
+    }
+    setLanguage(nextLang);
+    // サーバーコンポーネントを再フェッチして文言を更新
+    router.refresh();
   };
 
   return (
@@ -17,7 +33,6 @@ export function LanguageToggle() {
       onClick={toggleLanguage}
       startIcon={<TranslateIcon />}
       sx={{
-        textTransform: 'none',
         position: 'fixed',
         top: 10,
         right: 10,

@@ -1,13 +1,14 @@
 'use client';
+// 注意: このファイルはクライアント/サーバー両方からインポートされる可能性があります。
+// MUIのテーマオブジェクト作成は副作用のない関数のみで構成し、
+// フォントは next/font 側（app/layout.tsx）で読み込み、CSS変数で参照します。
 import { createTheme, type Theme } from '@mui/material/styles';
-import '@fontsource/m-plus-1p/300.css';
-import '@fontsource/m-plus-1p/400.css';
-import '@fontsource-variable/urbanist';
 
 const createCustomTheme = (): Theme => {
+  // フォントは next/font で読み込み、CSS変数（--font-urbanist / --font-mplus1p）経由で参照する
   const fontFamilySet = [
-    '"Urbanist Variable"',
-    '"M PLUS 1p"',
+    'var(--font-urbanist)',
+    'var(--font-mplus1p)',
     '-apple-system',
     'BlinkMacSystemFont',
     '"Segoe UI"',
@@ -44,6 +45,7 @@ const createCustomTheme = (): Theme => {
   };
 
   return createTheme({
+    // MUI v7: CSSテーマ変数を有効化（SSR時のフリッカー防止にも有効）
     cssVariables: true,
     breakpoints: {
       values: breakpointsValues,
@@ -91,6 +93,13 @@ const createCustomTheme = (): Theme => {
         styleOverrides: {
           root: {
             transform: 'rotate(0.05deg)',
+          },
+        },
+      },
+      MuiButton: {
+        styleOverrides: {
+          root: {
+            textTransform: 'none',
           },
         },
       },

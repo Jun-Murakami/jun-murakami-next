@@ -90,5 +90,9 @@ export const ja = {
     download: 'こちら',
     downloadText: 'ダウンロードは',
     contact: 'お問い合わせ',
+    noteArticle: 'noteの紹介記事',
+    zennArticle: 'Zennの記事',
+    sourceCode: 'ソースコード',
+    privacyPolicy: 'プライバシーポリシー',
   },
 };

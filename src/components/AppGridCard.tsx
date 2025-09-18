@@ -7,10 +7,14 @@ interface AppGridCardProps {
   screenshot: StaticImageData;
   description: string;
   sectionId: string;
-  onClick: () => void;
+  // data 属性など、任意の追加プロップを許容（例: data-ga-app）
+  // コメント: サーバーコンポーネントからクライアントコンポーネントへ
+  // 関数プロップ（onClick等）を渡すのは不可のため、
+  // 計測は data 属性 + クライアント補助で行う方針に変更。
+  [key: string]: unknown;
 }
 
-export function AppGridCard({ title, screenshot, description, sectionId, onClick }: AppGridCardProps) {
+export function AppGridCard({ title, screenshot, description, sectionId, ...rest }: AppGridCardProps) {
   return (
     <Card
       component={Link}
@@ -25,7 +29,8 @@ export function AppGridCard({ title, screenshot, description, sectionId, onClick
         },
         textDecoration: 'none',
       }}
-      onClick={onClick}
+      // コメント: data 属性（例: data-ga-app）等を受け取りたいのでスプレッド
+      {...rest}
     >
       <div style={{ position: 'relative', width: '100%', height: '140px' }}>
         <Image

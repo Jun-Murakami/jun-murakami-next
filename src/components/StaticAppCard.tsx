@@ -36,6 +36,12 @@ interface StaticAppCardProps {
   macAppleSiliconAppUrl?: string | null;
   macIntelAppUrl?: string | null;
   macUniversalAppUrl?: string | null;
+  labels: {
+    noteArticle: string;
+    zennArticle: string;
+    sourceCode: string;
+    privacyPolicy: string;
+  };
 }
 
 export const StaticAppCard = ({
@@ -55,6 +61,7 @@ export const StaticAppCard = ({
   macAppleSiliconAppUrl,
   macIntelAppUrl,
   macUniversalAppUrl,
+  labels,
 }: StaticAppCardProps) => {
   return (
     <Card sx={{ p: 2, marginY: 4, backgroundColor: 'rgba(50, 50, 50, 0.5)', backdropFilter: 'blur(10px)' }}>
@@ -82,9 +89,9 @@ export const StaticAppCard = ({
               href={noteUrl}
               target='_blank'
               startIcon={<NoteSmallLogoIcon />}
-              sx={{ textTransform: 'none', mr: 2 }}
+              sx={{ mr: 2 }}
             >
-              noteの紹介記事
+              {labels.noteArticle}
             </Button>
           )}
           {zennUrl && (
@@ -93,19 +100,19 @@ export const StaticAppCard = ({
               href={zennUrl}
               target='_blank'
               startIcon={<ZennLogoIcon />}
-              sx={{ textTransform: 'none', mr: 2 }}
+              sx={{ mr: 2 }}
             >
-              Zennの記事
+              {labels.zennArticle}
             </Button>
           )}
           {gitHubUrl && (
             <Button component='a' href={gitHubUrl} target='_blank' startIcon={<GitHubIcon />} sx={{ mr: 2 }}>
-              ソースコード
+              {labels.sourceCode}
             </Button>
           )}
           {policyUrl && (
             <Button component='a' href={policyUrl} startIcon={<PolicyIcon />}>
-              プライバシーポリシー
+              {labels.privacyPolicy}
             </Button>
           )}
         </Box>

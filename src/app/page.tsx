@@ -1,4 +1,3 @@
-export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
 import GitHubIcon from "@mui/icons-material/GitHub";
@@ -13,6 +12,7 @@ import {
   Tooltip,
   Typography,
 } from "@mui/material";
+import dynamic from "next/dynamic";
 import { cookies } from "next/headers";
 import Link from "next/link";
 
@@ -30,6 +30,10 @@ import { ScrollToTopButton } from "@/components/ScrollToTop";
 import { StaticAppCard } from "@/components/StaticAppCard";
 import { en } from "@/locales/en";
 import { ja } from "@/locales/ja";
+
+const DynamicMobileScrollButton = dynamic(
+  () => import("@/components/DynamicMobileScrollButton"),
+);
 
 export default async function HomePage() {
   const cookieStore = await cookies();
@@ -143,7 +147,7 @@ export default async function HomePage() {
       <Typography variant="body2" sx={{ p: { xs: 1, sm: 0 } }}>
         {t.intro.text}
         <br />
-        {t.introPortfolio.text}
+        {t.introPortfolio.text}{" "}
         <Link href={t.introLink.url} target="_blank" rel="noopener noreferrer">
           {t.introLink.text}
         </Link>
@@ -164,6 +168,8 @@ export default async function HomePage() {
           </Tooltip>
         ))}
       </Box>
+
+      <DynamicMobileScrollButton />
 
       <Grid container spacing={2} sx={{ mb: 10 }} className="digest-grid">
         {appGridItems.map((app) => (

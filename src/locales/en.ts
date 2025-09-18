@@ -10,7 +10,7 @@ export const en = {
     text: 'My portfolio site is',
   },
   introLink: {
-    text: 'here',
+    text: 'here.',
     url: 'https://jun-murakami.com',
   },
   social: {

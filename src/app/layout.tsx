@@ -80,7 +80,7 @@ export default async function RootLayout({
           <ThemeProvider theme={theme}>
             <CssBaseline />
             <FontLoadingProvider>
-              <LanguageProvider>
+              <LanguageProvider initialLanguage={lang as 'ja' | 'en'}>
                 <FontLoadingScreen />
                 <LanguageToggle />
                 <GoogleAnalytics gaId={googleAnalyticsId} />

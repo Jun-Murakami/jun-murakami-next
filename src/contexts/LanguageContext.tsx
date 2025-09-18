@@ -33,8 +33,14 @@ function getInitialLanguage(): Language {
   return nav || 'ja';
 }
 
-export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguage] = useState<Language>(getInitialLanguage());
+export function LanguageProvider({ children, initialLanguage }: { children: ReactNode; initialLanguage?: Language }) {
+  // SSRとCSRの初期値を一致させるため、サーバで検出した初期言語(initialLanguage)を優先
+  const [language, setLanguage] = useState<Language>(() => {
+    if (typeof window === 'undefined') {
+      return initialLanguage ?? 'ja';
+    }
+    return getInitialLanguage();
+  });
 
   // 言語変更時の副作用: <html lang> と cookie, localStorage を更新
   useEffect(() => {

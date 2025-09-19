@@ -13,24 +13,25 @@ export function LanguageToggle() {
 
   const toggleLanguage = () => {
     const nextLang = language === 'ja' ? 'en' : 'ja';
-    // クッキー/HTML言語を即時更新してから状態更新
+    
+    // 既存のクッキーを明示的に削除
+    Cookies.remove('language', { path: '/' });
+    
+    // 新しいクッキーを設定（ドメインは指定しない）
     Cookies.set('language', nextLang, {
       path: '/',
       sameSite: 'lax',
       expires: 365,
       secure: typeof window !== 'undefined' && window.location.protocol === 'https:'
     });
+    
     if (typeof document !== 'undefined') {
       document.documentElement.lang = nextLang;
     }
     setLanguage(nextLang);
-    // Firebase Hosting環境では完全なリロードが必要
-    if (typeof window !== 'undefined') {
-      // 少し遅延を入れてクッキーが確実に保存されるようにする
-      setTimeout(() => {
-        window.location.reload();
-      }, 100);
-    }
+    
+    // サーバーコンポーネントを再フェッチして文言を更新
+    router.refresh();
   };
 
   return (

@@ -46,8 +46,8 @@ export function LanguageProvider({ children, initialLanguage }: { children: Reac
   useEffect(() => {
     if (typeof document !== 'undefined') {
       document.documentElement.lang = language;
-      // cookie を 1 年で設定（js-cookie経由で安全に設定）
-      // secure は https 環境で自動的に true を推奨
+      // 既存のクッキーを削除してから新しく設定
+      Cookies.remove('language', { path: '/' });
       Cookies.set('language', language, {
         path: '/',
         sameSite: 'lax',

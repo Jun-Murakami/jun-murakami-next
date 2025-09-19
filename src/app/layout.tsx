@@ -12,6 +12,9 @@ import { ScrollHandler } from "@/components/ScrollHandler";
 import { FontLoadingProvider } from "@/contexts/FontLoadingContext";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import theme from "@/hooks/useCustomTheme";
+import { extractLanguage, SESSION_COOKIE_NAME } from "@/utils/languageSessionCookie";
+
+import type { Language } from "@/utils/languageSessionCookie";
 
 // ThemeProvider/CssBaseline は ClientLayout 側で適用
 
@@ -72,7 +75,11 @@ export default async function RootLayout({
   const googleAnalyticsId = "G-JK7QMBRBPV";
   // SSR時点で cookie から言語を取得し、<html lang> を正しく設定する
   const cookieStore = await cookies();
-  const lang = cookieStore.get("language")?.value === "en" ? "en" : "ja";
+  const sessionValue = cookieStore.get(SESSION_COOKIE_NAME)?.value;
+  const sessionLanguage = extractLanguage(sessionValue);
+  const legacyValue = cookieStore.get("language")?.value;
+  const legacyLanguage = legacyValue === "ja" || legacyValue === "en" ? legacyValue : undefined;
+  const lang: Language = sessionLanguage ?? legacyLanguage ?? "ja";
 
   return (
     <html lang={lang} className={`${urbanist.variable} ${mplus1p.variable}`} suppressHydrationWarning>
@@ -82,7 +89,7 @@ export default async function RootLayout({
           <ThemeProvider theme={theme}>
             <CssBaseline />
             <FontLoadingProvider>
-              <LanguageProvider initialLanguage={lang as 'ja' | 'en'}>
+              <LanguageProvider initialLanguage={lang}>
                 <FontLoadingScreen />
                 <LanguageToggle />
                 <GoogleAnalytics gaId={googleAnalyticsId} />
@@ -140,3 +147,7 @@ export default async function RootLayout({
     </html>
   );
 }
+
+
+
+

@@ -6,7 +6,14 @@
     "useIgnoreFile": false
   },
   "files": {
-    "ignoreUnknown": false
+    "ignoreUnknown": false,
+    "includes": [
+      "src/**/*.{ts,tsx,js,jsx}",
+      "next.config.mjs",
+      "next-env.d.ts",
+      "firebase.json",
+      "package.json"
+    ]
   },
   "formatter": {
     "enabled": true,
@@ -32,15 +39,31 @@
           "level": "on",
           "options": {
             "groups": [
-              { "type": false, "source": ["react*", "react/**"] },
-              { "type": false, "source": ":PACKAGE:" },
+              {
+                "type": false,
+                "source": ["react*", "react/**"]
+              },
+              {
+                "type": false,
+                "source": ":PACKAGE:"
+              },
               ":BLANK_LINE:",
-              { "type": false, "source": "./lib/**" },
-              { "type": false, "source": ":PATH:" },
+              {
+                "type": false,
+                "source": "./lib/**"
+              },
+              {
+                "type": false,
+                "source": ":PATH:"
+              },
               ":BLANK_LINE:",
-              { "type": false },
+              {
+                "type": false
+              },
               ":BLANK_LINE:",
-              { "type": true }
+              {
+                "type": true
+              }
             ]
           }
         }

@@ -6,6 +6,7 @@ import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation';
 
 import { useLanguage } from '@/contexts/LanguageContext';
+import { SESSION_COOKIE_NAME, stringifySessionCookie } from '@/utils/languageSessionCookie';
 
 export function LanguageToggle() {
   const { language, setLanguage } = useLanguage();
@@ -13,24 +14,23 @@ export function LanguageToggle() {
 
   const toggleLanguage = () => {
     const nextLang = language === 'ja' ? 'en' : 'ja';
-    
-    // 既存のクッキーを明示的に削除
+
     Cookies.remove('language', { path: '/' });
-    
-    // 新しいクッキーを設定（ドメインは指定しない）
-    Cookies.set('language', nextLang, {
+
+    const existingSession = Cookies.get(SESSION_COOKIE_NAME);
+    const sessionPayload = stringifySessionCookie(nextLang, existingSession);
+    Cookies.set(SESSION_COOKIE_NAME, sessionPayload, {
       path: '/',
       sameSite: 'lax',
       expires: 365,
       secure: typeof window !== 'undefined' && window.location.protocol === 'https:'
     });
-    
+
     if (typeof document !== 'undefined') {
       document.documentElement.lang = nextLang;
     }
     setLanguage(nextLang);
-    
-    // サーバーコンポーネントを再フェッチして文言を更新
+
     router.refresh();
   };
 
@@ -51,9 +51,9 @@ export function LanguageToggle() {
         zIndex: 1000,
       }}
     >
-      <Typography >
+      <Typography>
         {language === 'ja' ? 'to English' : 'to 日本語'}
       </Typography>
     </Button>
   );
-} 
+}

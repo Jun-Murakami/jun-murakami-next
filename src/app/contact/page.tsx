@@ -46,7 +46,7 @@ export default function ContactForm() {
       },
       (error) => {
         // 送信失敗時の処理
-        setErrorMessage('メッセージの送信に失敗しました。' + error.text);
+        setErrorMessage(`メッセージの送信に失敗しました。${error.text}`);
         setIsProcessing(false);
       }
     );
@@ -125,3 +125,4 @@ export default function ContactForm() {
     </>
   );
 }
+

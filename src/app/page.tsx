@@ -31,10 +31,17 @@ import { ScrollToTopButton } from "@/components/ScrollToTop";
 import { StaticAppCard } from "@/components/StaticAppCard";
 import { en } from "@/locales/en";
 import { ja } from "@/locales/ja";
+import { extractLanguage, SESSION_COOKIE_NAME } from "@/utils/languageSessionCookie";
+
+import type { Language } from "@/utils/languageSessionCookie";
 
 export default async function HomePage() {
   const cookieStore = await cookies();
-  const language = cookieStore.get('language')?.value === 'en' ? 'en' : 'ja';
+  const sessionValue = cookieStore.get(SESSION_COOKIE_NAME)?.value;
+  const sessionLanguage = extractLanguage(sessionValue);
+  const legacyValue = cookieStore.get('language')?.value;
+  const legacyLanguage = legacyValue === 'ja' || legacyValue === 'en' ? legacyValue : undefined;
+  const language: Language = sessionLanguage ?? legacyLanguage ?? 'ja';
   const t = language === "ja" ? ja : en;
 
   const socialLinks = [
@@ -392,3 +399,7 @@ export default async function HomePage() {
     </>
   );
 }
+
+
+
+

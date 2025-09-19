@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
 import GitHubIcon from "@mui/icons-material/GitHub";
@@ -12,12 +13,12 @@ import {
   Tooltip,
   Typography,
 } from "@mui/material";
-import dynamic from "next/dynamic";
 import { cookies } from "next/headers";
 import Link from "next/link";
 
 import * as screenshots from "@/assets/screenshots";
 import { AppGridCard } from "@/components/AppGridCard";
+import DynamicMobileScrollButton from "@/components/DynamicMobileScrollButton";
 import { GaEventBinder } from "@/components/GaEventBinder";
 import {
   IMDbLogoIcon,
@@ -30,10 +31,6 @@ import { ScrollToTopButton } from "@/components/ScrollToTop";
 import { StaticAppCard } from "@/components/StaticAppCard";
 import { en } from "@/locales/en";
 import { ja } from "@/locales/ja";
-
-const DynamicMobileScrollButton = dynamic(
-  () => import("@/components/DynamicMobileScrollButton"),
-);
 
 export default async function HomePage() {
   const cookieStore = await cookies();

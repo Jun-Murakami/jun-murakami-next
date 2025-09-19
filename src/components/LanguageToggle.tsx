@@ -24,8 +24,13 @@ export function LanguageToggle() {
       document.documentElement.lang = nextLang;
     }
     setLanguage(nextLang);
-    // サーバーコンポーネントを再フェッチして文言を更新
-    router.refresh();
+    // Firebase Hosting環境では完全なリロードが必要
+    if (typeof window !== 'undefined') {
+      // 少し遅延を入れてクッキーが確実に保存されるようにする
+      setTimeout(() => {
+        window.location.reload();
+      }, 100);
+    }
   };
 
   return (

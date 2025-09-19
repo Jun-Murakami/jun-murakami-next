@@ -27,12 +27,13 @@ export function middleware(req: NextRequest) {
 
   // cookie 未設定の場合のみセット
   if (!cookieLang && lang) {
-    // SameSite/Lax で 1 年間保持。https 環境では secure を付与するのが望ましい。
+    // SameSite/Lax で 1 年間保持。https 環境では secure を付与
+    const isProduction = process.env.NODE_ENV === 'production';
     res.cookies.set('language', lang, {
       path: '/',
       maxAge: 60 * 60 * 24 * 365, // 1年
       sameSite: 'lax',
-      // secure: true, // 本番で https の場合は有効化推奨
+      secure: isProduction, // 本番環境では自動的にsecureを有効化
     });
   }
 

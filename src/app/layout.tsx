@@ -83,7 +83,7 @@ export default async function RootLayout({
   const sessionLanguage = extractLanguage(sessionValue);
   const legacyValue = cookieStore.get("language")?.value;
   const legacyLanguage = legacyValue === "ja" || legacyValue === "en" ? legacyValue : undefined;
-  const headerStore = headers();
+  const headerStore = await headers();
   const forwardedLanguage = headerStore.get("x-app-language");
   const acceptLanguageHeader = headerStore.get("accept-language")?.toLowerCase() ?? "";
   const detectedLanguage = isLanguage(forwardedLanguage)

@@ -18,7 +18,8 @@ interface LanguageContextType {
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 function getInitialLanguage(): Language {
-  if (typeof window === 'undefined') return 'ja';
+  // This function should only run on client side, but fallback to 'en' for consistency
+  if (typeof window === 'undefined') return 'en';
 
   const sessionValue = Cookies.get(SESSION_COOKIE_NAME);
   const sessionLanguage = extractLanguage(sessionValue);
@@ -31,7 +32,7 @@ function getInitialLanguage(): Language {
   if (ls === 'ja' || ls === 'en') return ls;
 
   const nav = navigator.language?.toLowerCase().startsWith('ja') ? 'ja' : 'en';
-  return nav || 'ja';
+  return nav || 'en';
 }
 
 export function LanguageProvider({
@@ -43,7 +44,8 @@ export function LanguageProvider({
 }) {
   const [language, setLanguage] = useState<Language>(() => {
     if (typeof window === 'undefined') {
-      return initialLanguage ?? 'ja';
+      // Default to 'en' instead of 'ja' when no initial language provided
+      return initialLanguage ?? 'en';
     }
     return getInitialLanguage();
   });

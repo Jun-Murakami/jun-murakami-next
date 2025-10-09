@@ -94,5 +94,9 @@ export const ja = {
     zennArticle: 'Zennの記事',
     sourceCode: 'ソースコード',
     privacyPolicy: 'プライバシーポリシー',
+    windowsSecurityWarning: '※Windows版のセキュリティ警告について',
+    windowsSecurityWarningTitle: 'Windows版のセキュリティ警告について',
+    windowsSecurityWarningDescription: 'Windowsの場合、インストール時にセキュリティ警告が表示されます。その際は「詳細情報」をクリックし、「実行」を選択してください。',
+    windowsSecurityWarningNote: '※プログラムが未署名であることによる警告です。ソースコードを公開しているので、不安のある方はご自身でコードを確認の上ビルドしてください。(MacOS版は署名済み)',
   },
 };

@@ -95,5 +95,9 @@ export const en = {
     zennArticle: 'Article on Zenn',
     sourceCode: 'Source code',
     privacyPolicy: 'Privacy policy',
+    windowsSecurityWarning: 'About Windows Security Warning',
+    windowsSecurityWarningTitle: 'Windows Security Warning',
+    windowsSecurityWarningDescription: 'For Windows, a security warning will appear during installation. In that case, click "More info" and select "Run anyway".',
+    windowsSecurityWarningNote: 'This is a warning because the program is unsigned. Since the source code is public, if you have concerns, please check the code yourself and build it. (The macOS version is signed)',
   },
 };

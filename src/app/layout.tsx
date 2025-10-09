@@ -79,7 +79,8 @@ export default async function RootLayout({
   const sessionLanguage = extractLanguage(sessionValue);
   const legacyValue = cookieStore.get("language")?.value;
   const legacyLanguage = legacyValue === "ja" || legacyValue === "en" ? legacyValue : undefined;
-  const lang: Language = sessionLanguage ?? legacyLanguage ?? "ja";
+  // Default to 'en' instead of 'ja' when no cookie exists
+  const lang: Language = sessionLanguage ?? legacyLanguage ?? "en";
 
   return (
     <html lang={lang} className={`${urbanist.variable} ${mplus1p.variable}`} suppressHydrationWarning>

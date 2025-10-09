@@ -45,7 +45,8 @@ export default async function HomePage() {
   const legacyValue = cookieStore.get('language')?.value;
   const legacyLanguage =
     legacyValue === 'ja' || legacyValue === 'en' ? legacyValue : undefined;
-  const language: Language = sessionLanguage ?? legacyLanguage ?? 'ja';
+  // Default to 'en' instead of 'ja' when no cookie exists
+  const language: Language = sessionLanguage ?? legacyLanguage ?? 'en';
   const t = language === 'ja' ? ja : en;
 
   const socialLinks = [

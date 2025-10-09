@@ -1,7 +1,7 @@
 // Next.js Middleware: 言語自動判定とcookie設定
 // 目的:
 // - 初回アクセス時に Accept-Language を用いて 'ja' または 'en' を推定
-// - '__session' cookie が未設定であれば 1 年間の cookie を発行
+// - 'language' cookie が未設定であれば 1 年間の cookie を発行
 // - 以降は cookie を優先し、安定したロケール選択を維持
 // - レスポンスヘッダ 'x-app-language' にも反映（デバッグ/ログ用途）
 // 注意:
@@ -11,45 +11,10 @@ import { NextResponse } from 'next/server';
 
 import type { NextRequest } from 'next/server';
 
-const SESSION_COOKIE_NAME = '__session';
-
-// Simple language extraction from session cookie
-function extractLanguageFromCookie(cookieValue: string | undefined): 'ja' | 'en' | undefined {
-  if (!cookieValue) return undefined;
-  
-  try {
-    const decoded = decodeURIComponent(cookieValue);
-    
-    // Check if it's just 'ja' or 'en'
-    if (decoded === 'ja' || decoded === 'en') {
-      return decoded;
-    }
-    
-    // Check if it's JSON with language property
-    const parsed = JSON.parse(decoded);
-    if (parsed && typeof parsed === 'object' && (parsed.language === 'ja' || parsed.language === 'en')) {
-      return parsed.language;
-    }
-    
-    // Check if it's key=value format
-    const [key, value] = decoded.split('=');
-    if (key === 'language' && (value === 'ja' || value === 'en')) {
-      return value;
-    }
-  } catch (_error) {
-    // Fall through
-  }
-  
-  return undefined;
-}
-
 export function middleware(req: NextRequest) {
-  // Check __session cookie first, then legacy language cookie
-  const sessionValue = req.cookies.get(SESSION_COOKIE_NAME)?.value;
-  const sessionLang = extractLanguageFromCookie(sessionValue);
-  const legacyLang = req.cookies.get('language')?.value;
-  
-  let lang = sessionLang ?? (legacyLang === 'ja' || legacyLang === 'en' ? legacyLang : undefined);
+  // 既に 'language' cookie がある場合はそれを優先
+  const cookieLang = req.cookies.get('language')?.value;
+  let lang = cookieLang;
 
   // cookie が無い場合は Accept-Language を簡易的に判定
   if (!lang) {
@@ -60,11 +25,11 @@ export function middleware(req: NextRequest) {
 
   const res = NextResponse.next();
 
-  // Set __session cookie if not already set with detected language
-  if (!sessionLang && lang) {
+  // cookie 未設定の場合のみセット
+  if (!cookieLang && lang) {
+    // SameSite/Lax で 1 年間保持。https 環境では secure を付与
     const isProduction = process.env.NODE_ENV === 'production';
-    const sessionPayload = JSON.stringify({ language: lang });
-    res.cookies.set(SESSION_COOKIE_NAME, sessionPayload, {
+    res.cookies.set('language', lang, {
       path: '/',
       maxAge: 60 * 60 * 24 * 365, // 1年
       sameSite: 'lax',
@@ -76,7 +41,7 @@ export function middleware(req: NextRequest) {
   res.headers.set('Vary', 'Cookie');
   res.headers.set('Cache-Control', 'private, no-store, must-revalidate');
   // デバッグ/ロギング用途（任意）
-  res.headers.set('x-app-language', lang || 'en');
+  res.headers.set('x-app-language', lang || 'ja');
 
   return res;
 }

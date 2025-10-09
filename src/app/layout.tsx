@@ -4,7 +4,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { M_PLUS_1p, Urbanist } from "next/font/google";
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 
 import { FontLoadingScreen } from "@/components/FontLoadingScreen";
 import { LanguageToggle } from "@/components/LanguageToggle";
@@ -19,6 +19,10 @@ import type { Language } from "@/utils/languageSessionCookie";
 // ThemeProvider/CssBaseline は ClientLayout 側で適用
 
 import type { Metadata } from "next";
+
+function isLanguage(value: string | null | undefined): value is Language {
+  return value === "ja" || value === "en";
+}
 
 export const metadata: Metadata = {
   title: "Jun Murakami App Factory",
@@ -51,7 +55,7 @@ export const metadata: Metadata = {
   },
 };
 
-// next/font: 欧文 Urbanist、日本語 M PLUS 1p を読み込み、CSS変数として公開
+// next/font: 欧文 Urbanist、日本語 M PLUS 1p を読み込み、CSS 変数として公開
 const urbanist = Urbanist({
   subsets: ["latin"],
   display: "swap",
@@ -73,18 +77,28 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const googleAnalyticsId = "G-JK7QMBRBPV";
-  // SSR時点で cookie から言語を取得し、<html lang> を正しく設定する
+  // SSR 時点で cookie から言語を取得し、<html lang> を正しく設定する
   const cookieStore = await cookies();
   const sessionValue = cookieStore.get(SESSION_COOKIE_NAME)?.value;
   const sessionLanguage = extractLanguage(sessionValue);
   const legacyValue = cookieStore.get("language")?.value;
   const legacyLanguage = legacyValue === "ja" || legacyValue === "en" ? legacyValue : undefined;
-  const lang: Language = sessionLanguage ?? legacyLanguage ?? "ja";
+  const headerStore = headers();
+  const forwardedLanguage = headerStore.get("x-app-language");
+  const acceptLanguageHeader = headerStore.get("accept-language")?.toLowerCase() ?? "";
+  const detectedLanguage = isLanguage(forwardedLanguage)
+    ? forwardedLanguage
+    : acceptLanguageHeader.startsWith("ja")
+      ? "ja"
+      : acceptLanguageHeader
+        ? "en"
+        : undefined;
+  const lang: Language = sessionLanguage ?? legacyLanguage ?? detectedLanguage ?? "ja";
 
   return (
     <html lang={lang} className={`${urbanist.variable} ${mplus1p.variable}`} suppressHydrationWarning>
       <body suppressHydrationWarning>
-        {/* MUI推奨: body直下で全体をAppRouterCacheProviderでラップ */}
+        {/* MUI 推奨: body 直下で全体を AppRouterCacheProvider でラップ */}
         <AppRouterCacheProvider>
           <ThemeProvider theme={theme}>
             <CssBaseline />

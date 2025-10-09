@@ -5,15 +5,8 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import XIcon from '@mui/icons-material/X';
-import {
-  Box,
-  Button,
-  Grid,
-  IconButton,
-  Tooltip,
-  Typography,
-} from '@mui/material';
-import { cookies } from 'next/headers';
+import { Box, Button, Grid, IconButton, Tooltip, Typography } from '@mui/material';
+import { cookies, headers } from 'next/headers';
 import Link from 'next/link';
 
 import * as screenshots from '@/assets/screenshots';
@@ -38,6 +31,10 @@ import {
 
 import type { Language } from '@/utils/languageSessionCookie';
 
+function isLanguage(value: string | null | undefined): value is Language {
+  return value === 'ja' || value === 'en';
+}
+
 export default async function HomePage() {
   const cookieStore = await cookies();
   const sessionValue = cookieStore.get(SESSION_COOKIE_NAME)?.value;
@@ -45,7 +42,18 @@ export default async function HomePage() {
   const legacyValue = cookieStore.get('language')?.value;
   const legacyLanguage =
     legacyValue === 'ja' || legacyValue === 'en' ? legacyValue : undefined;
-  const language: Language = sessionLanguage ?? legacyLanguage ?? 'ja';
+  const headerStore = headers();
+  const forwardedLanguage = headerStore.get('x-app-language');
+  const acceptLanguageHeader = headerStore.get('accept-language')?.toLowerCase() ?? '';
+  const detectedLanguage = isLanguage(forwardedLanguage)
+    ? forwardedLanguage
+    : acceptLanguageHeader.startsWith('ja')
+      ? 'ja'
+      : acceptLanguageHeader
+        ? 'en'
+        : undefined;
+  const language: Language =
+    sessionLanguage ?? legacyLanguage ?? detectedLanguage ?? 'ja';
   const t = language === 'ja' ? ja : en;
 
   const socialLinks = [

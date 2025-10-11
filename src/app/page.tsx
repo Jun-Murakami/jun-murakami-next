@@ -471,8 +471,7 @@ export default async function HomePage() {
         noteUrl="https://note.com/junmurakami/n/n13650982fc7f"
         gitHubUrl="https://github.com/Jun-Murakami/CubaseDrumMapEditor"
         windowsAppUrl="https://github.com/Jun-Murakami/CubaseDrumMapEditor/releases/download/v{{version}}/CubaseDrumMapEditor_v{{version}}_win.zip"
-        macAppleSiliconAppUrl="https://github.com/Jun-Murakami/CubaseDrumMapEditor/releases/download/v{{version}}/CubaseDrumMapEditor_v{{version}}_mac_arm64.zip"
-        macIntelAppUrl="https://github.com/Jun-Murakami/CubaseDrumMapEditor/releases/download/v{{version}}/CubaseDrumMapEditor_v{{version}}_mac_x64.zip"
+        macUniversalAppUrl="https://github.com/Jun-Murakami/CubaseDrumMapEditor/releases/download/v{{version}}/CubaseDrumMapEditor_v{{version}}_mac.dmg"
         labels={{
           noteArticle: t.common.noteArticle,
           zennArticle: t.common.zennArticle,

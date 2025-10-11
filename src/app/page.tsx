@@ -360,6 +360,7 @@ export default async function HomePage() {
         screenshot={screenshots.mixCompare}
         description={t.apps.mixCompare.longDescription}
         gitHubRepo="Jun-Murakami/MixCompare"
+        zennUrl="https://zenn.dev/jun_murakami/articles/f9b3227fadfe7e"
         gitHubUrl="https://github.com/Jun-Murakami/MixCompare"
         windowsAppUrl="https://github.com/Jun-Murakami/MixCompare/releases/download/v3.0.0/MixCompare_3.0.0_Windows_Setup.exe"
         macUniversalAppUrl="https://github.com/Jun-Murakami/MixCompare/releases/download/v3.0.0/MixCompare_3.0.0_macOS.pkg"

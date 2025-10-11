@@ -7,7 +7,7 @@ import { createTheme, type Theme } from '@mui/material/styles';
 const createCustomTheme = (): Theme => {
   // フォントは next/font で読み込み、CSS変数（--font-urbanist / --font-mplus1p）経由で参照する
   const fontFamilySet = [
-    'var(--font-urbanist)',
+    'var(--font-silka)',
     'var(--font-mplus1p)',
     '-apple-system',
     'BlinkMacSystemFont',

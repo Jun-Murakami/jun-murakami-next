@@ -4,6 +4,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import { M_PLUS_1p, Urbanist } from 'next/font/google';
+import { silka } from '@/assets/fonts';
 import { cookies, headers } from 'next/headers';
 
 import { FontLoadingScreen } from '@/components/FontLoadingScreen';
@@ -104,7 +105,7 @@ export default async function RootLayout({
   return (
     <html
       lang={lang}
-      className={`${urbanist.variable} ${mplus1p.variable}`}
+      className={`${silka.variable} ${urbanist.variable} ${mplus1p.variable}`}
       suppressHydrationWarning
     >
       <body suppressHydrationWarning>
@@ -158,6 +159,7 @@ export default async function RootLayout({
                         fontWeight: 300,
                         fontSize: { xs: 25, sm: 63 },
                         textAlign: { xs: 'center', sm: 'left' },
+                        fontFamily: 'var(--font-urbanist)',
                       }}
                       component="h1"
                     >

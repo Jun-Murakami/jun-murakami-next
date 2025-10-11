@@ -5,7 +5,14 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import XIcon from '@mui/icons-material/X';
-import { Box, Button, Grid, IconButton, Tooltip, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  Grid,
+  IconButton,
+  Tooltip,
+  Typography,
+} from '@mui/material';
 import { cookies, headers } from 'next/headers';
 import Link from 'next/link';
 
@@ -44,7 +51,8 @@ export default async function HomePage() {
     legacyValue === 'ja' || legacyValue === 'en' ? legacyValue : undefined;
   const headerStore = await headers();
   const forwardedLanguage = headerStore.get('x-app-language');
-  const acceptLanguageHeader = headerStore.get('accept-language')?.toLowerCase() ?? '';
+  const acceptLanguageHeader =
+    headerStore.get('accept-language')?.toLowerCase() ?? '';
   const detectedLanguage = isLanguage(forwardedLanguage)
     ? forwardedLanguage
     : acceptLanguageHeader.startsWith('ja')
@@ -99,62 +107,77 @@ export default async function HomePage() {
     },
   ];
 
-  const appGridItems = [
-    {
-      title: t.apps.wlsib.title,
-      screenshot: screenshots.wlsib_s,
-      description: t.apps.wlsib.description,
-      sectionId: 'wlsib',
-    },
-    {
-      title: t.apps.aiBrowser.title,
-      screenshot: screenshots.aiBrowser_s,
-      description: t.apps.aiBrowser.description,
-      sectionId: 'aiBrowser',
-    },
-    {
-      title: t.apps.keyfit.title,
-      screenshot: screenshots.keyfit_s,
-      description: t.apps.keyfit.description,
-      sectionId: 'keyfit',
-    },
-    {
-      title: t.apps.monacoNotepad.title,
-      screenshot: screenshots.monacoNotepad_s,
-      description: t.apps.monacoNotepad.description,
-      sectionId: 'monacoNotepad',
-    },
-    {
-      title: t.apps.yomigana.title,
-      screenshot: screenshots.yomigana_s,
-      description: t.apps.yomigana.description,
-      sectionId: 'yomigana',
-    },
-    {
-      title: t.apps.dropboxSkipper.title,
-      screenshot: screenshots.dropboxSkipper_s,
-      description: t.apps.dropboxSkipper.description,
-      sectionId: 'dropbox-skipper',
-    },
-    {
-      title: t.apps.taskTrees.title,
-      screenshot: screenshots.taskTrees_s,
-      description: t.apps.taskTrees.description,
-      sectionId: 'tasktrees',
-    },
-    {
-      title: t.apps.cubaseDMEditor.title,
-      screenshot: screenshots.cubaseDMEditor_s,
-      description: t.apps.cubaseDMEditor.description,
-      sectionId: 'cubaseDMEditor',
-    },
-    {
-      title: t.apps.famitone.title,
-      screenshot: screenshots.famitone_s,
-      description: t.apps.famitone.description,
-      sectionId: 'famitone',
-    },
-  ];
+  const appGridItems = {
+    tools: [
+      {
+        title: t.apps.wlsib.title,
+        screenshot: screenshots.wlsib_s,
+        description: t.apps.wlsib.description,
+        sectionId: 'wlsib',
+      },
+      {
+        title: t.apps.aiBrowser.title,
+        screenshot: screenshots.aiBrowser_s,
+        description: t.apps.aiBrowser.description,
+        sectionId: 'aiBrowser',
+      },
+      {
+        title: t.apps.keyfit.title,
+        screenshot: screenshots.keyfit_s,
+        description: t.apps.keyfit.description,
+        sectionId: 'keyfit',
+      },
+      {
+        title: t.apps.taskTrees.title,
+        screenshot: screenshots.taskTrees_s,
+        description: t.apps.taskTrees.description,
+        sectionId: 'tasktrees',
+      },
+      {
+        title: t.apps.monacoNotepad.title,
+        screenshot: screenshots.monacoNotepad_s,
+        description: t.apps.monacoNotepad.description,
+        sectionId: 'monacoNotepad',
+      },
+      {
+        title: t.apps.dropboxSkipper.title,
+        screenshot: screenshots.dropboxSkipper_s,
+        description: t.apps.dropboxSkipper.description,
+        sectionId: 'dropbox-skipper',
+      },
+    ],
+    music: [
+      {
+        title: t.apps.mixCompare.title,
+        screenshot: screenshots.mixCompare_s,
+        description: t.apps.mixCompare.description,
+        sectionId: 'mixCompare',
+      },
+      {
+        title: t.apps.yomigana.title,
+        screenshot: screenshots.yomigana_s,
+        description: t.apps.yomigana.description,
+        sectionId: 'yomigana',
+      },
+      {
+        title: t.apps.cubaseDMEditor.title,
+        screenshot: screenshots.cubaseDMEditor_s,
+        description: t.apps.cubaseDMEditor.description,
+        sectionId: 'cubaseDMEditor',
+      },
+      {
+        title: t.apps.famitone.title,
+        screenshot: screenshots.famitone_s,
+        description: t.apps.famitone.description,
+        sectionId: 'famitone',
+      },
+    ],
+  } as const;
+
+  const appCategories = [
+    { key: 'tools', label: t.appCategories.tools, items: appGridItems.tools },
+    { key: 'music', label: t.appCategories.music, items: appGridItems.music },
+  ] as const;
 
   return (
     <>
@@ -187,10 +210,90 @@ export default async function HomePage() {
 
       <DynamicMobileScrollButton />
 
-      <Grid container spacing={2} sx={{ mb: 10 }} className="digest-grid">
-        {appGridItems.map((app) => (
-          <Grid size={{ xs: 6, md: 3 }} key={app.sectionId}>
-            <AppGridCard {...app} data-ga-app={app.title} />
+      <Grid
+        container
+        spacing={2}
+        sx={{
+          mb: 10,
+          alignItems: 'stretch',
+          position: 'relative',
+        }}
+        className="digest-grid"
+      >
+        {appCategories.map((category) => (
+          <Grid
+            key={category.key}
+            size={{ xs: 12, md: 6 }}
+            sx={{ display: 'flex' }}
+          >
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: { xs: 1.5, md: 2 },
+                p: { xs: 1.5, md: 2 },
+                borderRadius: 3,
+                border: '1px solid',
+                borderColor:
+                  category.key === 'tools'
+                    ? 'rgba(130, 177, 255, 0.45)'
+                    : 'rgba(244, 143, 177, 0.4)',
+                background:
+                  category.key === 'tools'
+                    ? 'linear-gradient(150deg, rgba(41, 98, 255, 0.28) 0%, rgba(13, 28, 64, 0.75) 55%, rgba(10, 19, 41, 0.0) 100%)'
+                    : 'linear-gradient(150deg, rgba(236, 64, 122, 0.28) 0%, rgba(79, 20, 53, 0.75) 55%, rgba(24, 8, 26, 0.0) 100%)',
+                backdropFilter: 'blur(10px)',
+                boxShadow: '0 8px 30px rgba(0,0,0,0.35)',
+                width: '100%',
+                position: 'relative',
+                overflow: 'hidden',
+              }}
+            >
+              <Box
+                sx={{
+                  position: 'absolute',
+                  inset: 0,
+                  background:
+                    'radial-gradient(circle at top left, rgba(255,255,255,0.12), transparent 65%)',
+                  pointerEvents: 'none',
+                  borderRadius: 'inherit',
+                  zIndex: 0,
+                }}
+              />
+              <Typography
+                variant="subtitle1"
+                component="h2"
+                sx={{
+                  fontWeight: 600,
+                  letterSpacing: '0.08em',
+                  textTransform: 'uppercase',
+                  textAlign: { xs: 'center', md: 'left' },
+                  position: 'relative',
+                  zIndex: 1,
+                }}
+              >
+                {category.label}
+              </Typography>
+              <Grid
+                container
+                spacing={2}
+                sx={{ position: 'relative', zIndex: 1 }}
+              >
+                {category.items.map((app) => (
+                  <Grid
+                    key={app.sectionId}
+                    size={{ xs: 6, md: 6 }}
+                    sx={{ display: 'flex' }}
+                  >
+                    <AppGridCard
+                      {...app}
+                      data-ga-app={app.title}
+                      sx={{ flexGrow: 1 }}
+                    />
+                  </Grid>
+                ))}
+              </Grid>
+            </Box>
           </Grid>
         ))}
       </Grid>
@@ -252,16 +355,14 @@ export default async function HomePage() {
       />
 
       <StaticAppCard
-        appName={t.apps.monacoNotepad.title}
-        sectionId="monacoNotepad"
-        screenshot={screenshots.monacoNotepad}
-        policyUrl="/privacy-policy-monaco-notepad"
-        description={t.apps.monacoNotepad.longDescription}
-        gitHubRepo="Jun-Murakami/monaco-notepad"
-        zennUrl="https://zenn.dev/jun_murakami/articles/e80016061b4df5"
-        gitHubUrl="https://github.com/Jun-Murakami/monaco-notepad"
-        windowsAppUrl="https://github.com/Jun-Murakami/monaco-notepad/releases/download/v{{version}}/MonacoNotepad-win64-installer-{{version}}.exe"
-        macUniversalAppUrl="https://github.com/Jun-Murakami/monaco-notepad/releases/download/v{{version}}/MonacoNotepad-mac-universal-{{version}}.dmg"
+        appName={t.apps.mixCompare.title}
+        sectionId="mixCompare"
+        screenshot={screenshots.mixCompare}
+        description={t.apps.mixCompare.longDescription}
+        gitHubRepo="Jun-Murakami/MixCompare"
+        gitHubUrl="https://github.com/Jun-Murakami/MixCompare"
+        windowsAppUrl="https://github.com/Jun-Murakami/MixCompare/releases/download/v3.0.0/MixCompare_3.0.0_Windows_Setup.exe"
+        macUniversalAppUrl="https://github.com/Jun-Murakami/MixCompare/releases/download/v3.0.0/MixCompare_3.0.0_macOS.pkg"
         labels={{
           noteArticle: t.common.noteArticle,
           zennArticle: t.common.zennArticle,
@@ -278,6 +379,28 @@ export default async function HomePage() {
         noteUrl="https://note.com/junmurakami/n/n35cd70b8dc12"
         gitHubUrl="https://github.com/Jun-Murakami/yomigana3"
         webAppUrl="https://yomiganaconverterreact.web.app/"
+        labels={{
+          noteArticle: t.common.noteArticle,
+          zennArticle: t.common.zennArticle,
+          sourceCode: t.common.sourceCode,
+          privacyPolicy: t.common.privacyPolicy,
+        }}
+      />
+
+      <StaticAppCard
+        appName={t.apps.taskTrees.title}
+        sectionId="tasktrees"
+        screenshot={screenshots.taskTrees}
+        description={t.apps.taskTrees.longDescription}
+        gitHubRepo="Jun-Murakami/TaskTrees-Electron"
+        noteUrl="https://note.com/junmurakami/n/n651efffaf343"
+        gitHubUrl="https://github.com/Jun-Murakami/TaskTrees"
+        policyUrl="/privacy-policy-tasktrees"
+        webAppUrl="https://tasktree-s.web.app/"
+        appStoreUrl="https://apps.apple.com/jp/app/tasktrees/id6482979857"
+        googlePlayUrl="https://play.google.com/store/apps/details?id=com.tasktrees.app"
+        windowsAppUrl="https://github.com/Jun-Murakami/TaskTrees-Electron/releases/download/v{{version}}/TaskTrees-{{version}}-setup_win_x64.exe"
+        macUniversalAppUrl="https://github.com/Jun-Murakami/TaskTrees-Electron/releases/download/v{{version}}/TaskTrees-{{version}}_mac_universal.dmg"
         labels={{
           noteArticle: t.common.noteArticle,
           zennArticle: t.common.zennArticle,
@@ -306,19 +429,16 @@ export default async function HomePage() {
       />
 
       <StaticAppCard
-        appName={t.apps.taskTrees.title}
-        sectionId="tasktrees"
-        screenshot={screenshots.taskTrees}
-        description={t.apps.taskTrees.longDescription}
-        gitHubRepo="Jun-Murakami/TaskTrees-Electron"
-        noteUrl="https://note.com/junmurakami/n/n651efffaf343"
-        gitHubUrl="https://github.com/Jun-Murakami/TaskTrees"
-        policyUrl="/privacy-policy-tasktrees"
-        webAppUrl="https://tasktree-s.web.app/"
-        appStoreUrl="https://apps.apple.com/jp/app/tasktrees/id6482979857"
-        googlePlayUrl="https://play.google.com/store/apps/details?id=com.tasktrees.app"
-        windowsAppUrl="https://github.com/Jun-Murakami/TaskTrees-Electron/releases/download/v{{version}}/TaskTrees-{{version}}-setup_win_x64.exe"
-        macUniversalAppUrl="https://github.com/Jun-Murakami/TaskTrees-Electron/releases/download/v{{version}}/TaskTrees-{{version}}_mac_universal.dmg"
+        appName={t.apps.monacoNotepad.title}
+        sectionId="monacoNotepad"
+        screenshot={screenshots.monacoNotepad}
+        policyUrl="/privacy-policy-monaco-notepad"
+        description={t.apps.monacoNotepad.longDescription}
+        gitHubRepo="Jun-Murakami/monaco-notepad"
+        zennUrl="https://zenn.dev/jun_murakami/articles/e80016061b4df5"
+        gitHubUrl="https://github.com/Jun-Murakami/monaco-notepad"
+        windowsAppUrl="https://github.com/Jun-Murakami/monaco-notepad/releases/download/v{{version}}/MonacoNotepad-win64-installer-{{version}}.exe"
+        macUniversalAppUrl="https://github.com/Jun-Murakami/monaco-notepad/releases/download/v{{version}}/MonacoNotepad-mac-universal-{{version}}.dmg"
         labels={{
           noteArticle: t.common.noteArticle,
           zennArticle: t.common.zennArticle,

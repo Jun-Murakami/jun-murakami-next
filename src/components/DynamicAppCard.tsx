@@ -140,7 +140,7 @@ const DynamicAppCard = ({
       typeof window !== 'undefined' &&
       window.location.hostname !== 'localhost'
     ) {
-      sendGAEvent('event', eventName, eventParams ?? {});
+      sendGAEvent('event', `${eventName}_${eventParams?.toString()}`);
     } else {
       console.log('Event:', eventName, eventParams);
     }

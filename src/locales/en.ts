@@ -1,7 +1,7 @@
 export const en = {
   meta: {
     description:
-      'Jun Murakami (Jun Takahashi) is a music director/producer. This site distributes applications and music production libraries I have developed.',
+      'Jun Murakami (Jun Takahashi) is a music director/producer. This site distributes applications and music production  libraries I have developed.',
   },
   intro: {
     text: 'Jun Murakami (Jun Takahashi) is a music director/producer. This site distributes applications and music production libraries I have developed.',
@@ -12,6 +12,10 @@ export const en = {
   introLink: {
     text: 'here.',
     url: 'https://jun-murakami.com',
+  },
+  appCategories: {
+    tools: 'Tools',
+    music: 'Music Production',
   },
   social: {
     note: 'note (Blog posts)',
@@ -45,6 +49,13 @@ export const en = {
       longDescription:
         "A keyboard logger that visualizes frequently used keys and supports keyboard selection and customization. The date is recorded in one day units, so it's difficult to restore passwords, but it's a keyboard logger, so please handle it with care.",
     },
+    taskTrees: {
+      title: 'TaskTrees',
+      description:
+        'An app where you can freely create and organize tasks and memos in a tree format.',
+      longDescription:
+        'An app where you can freely create and organize tasks and memos in a tree format. You can also share trees with others. iOS and Android versions have been released.',
+    },
     monacoNotepad: {
       title: 'Monaco Notepad',
       description:
@@ -66,18 +77,18 @@ export const en = {
       longDescription:
         "An app that allows you to set bulk exclusions when you want to sync source code etc. with Dropbox but want to exclude specific files and folders (like node_modules, dist folder, etc.). Following Dropbox specifications, it modifies NTFS alternate file streams on Windows and extended attributes on MacOS/Linux. The file contents themselves are not changed, but please use at your own risk. Also, while the source code supports Linux, Dropbox testing has been minimal, so Linux users should build it themselves. (It's a very simple Wails app)",
     },
-    taskTrees: {
-      title: 'TaskTrees',
-      description:
-        'An app where you can freely create and organize tasks and memos in a tree format.',
-      longDescription:
-        'An app where you can freely create and organize tasks and memos in a tree format. You can also share trees with others. iOS and Android versions have been released.',
-    },
     cubaseDMEditor: {
       title: 'Cubase DrumMap Editor',
       description: 'A simple drum map editor for Cubase.',
       longDescription:
         "A simple drum map editor for Cubase. It supports .csv import and export, allowing editing in other software (like Excel). It's also suitable for sound source developers. As a bonus, I've created a variety of sound source drum maps that can be used by switching between multiple sound sources in one map.",
+    },
+    mixCompare: {
+      title: 'MixCompare',
+      description:
+        'A VST3/AU/AAX plugin that lets you compare your DAW mix with reference tracks.',
+      longDescription:
+        "A VST3/AU/AAX plugin that loads audio files so you can compare them against the mix you're working on in your DAW. With host-synced playback you can perform precise A/B checks between different mix versions. It's useful for recording engineers and music directors, and especially for composers who manage many tracks, such as scoring, game soundtrack, and competition writers.",
     },
     famitone: {
       title: 'Famitone 2A03',
@@ -97,7 +108,9 @@ export const en = {
     privacyPolicy: 'Privacy policy',
     windowsSecurityWarning: 'About Windows Security Warning',
     windowsSecurityWarningTitle: 'Windows Security Warning',
-    windowsSecurityWarningDescription: 'For Windows, a security warning will appear during installation. In that case, click "More info" and select "Run anyway".',
-    windowsSecurityWarningNote: 'This is a warning because the program is unsigned. Since the source code is public, if you have concerns, please check the code yourself and build it. (The macOS version is signed)',
+    windowsSecurityWarningDescription:
+      'For Windows, a security warning will appear during installation. In that case, click "More info" and select "Run anyway".',
+    windowsSecurityWarningNote:
+      'This is a warning because the program is unsigned. Since the source code is public, if you have concerns, please check the code yourself and build it. (The macOS version is signed)',
   },
 };

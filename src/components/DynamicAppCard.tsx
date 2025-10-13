@@ -140,7 +140,13 @@ const DynamicAppCard = ({
       typeof window !== 'undefined' &&
       window.location.hostname !== 'localhost'
     ) {
-      sendGAEvent('event', `${eventName}_${eventParams?.toString()}`);
+      // eventParamsがオブジェクトの場合、適切に文字列化する
+      const paramsString = eventParams
+        ? Object.entries(eventParams)
+            .map(([key, value]) => `${key}:${value}`)
+            .join(',')
+        : '';
+      sendGAEvent('event', `${eventName}_${paramsString}`);
     } else {
       console.log('Event:', eventName, eventParams);
     }

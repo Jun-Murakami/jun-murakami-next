@@ -1,11 +1,10 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import {
   Box,
   Button,
-  CircularProgress,
   Divider,
   Fade,
   Popper,
@@ -19,11 +18,9 @@ import * as badges from '@/assets/badges';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { en } from '@/locales/en';
 import { ja } from '@/locales/ja';
-
-const clientId = process.env.NEXT_PUBLIC_GIT_HUB_APP_CLIENT_ID;
-const clientSecret = process.env.NEXT_PUBLIC_GIT_HUB_APP_CLIENT_SECRET;
-
 interface DynamicAppCardProps {
+  latestVersion?: string;
+  latestBody?: string;
   gitHubRepo?: string;
   appStoreUrl?: string;
   googlePlayUrl?: string;
@@ -32,12 +29,14 @@ interface DynamicAppCardProps {
   macAppleSiliconAppUrl?: string | null;
   macIntelAppUrl?: string | null;
   macUniversalAppUrl?: string | null;
+  error?: string; // GitHub APIエラー情報を追加
 }
 
 type EventParams = Record<string, string>;
 
 const DynamicAppCard = ({
-  gitHubRepo,
+  latestVersion,
+  latestBody,
   appStoreUrl,
   googlePlayUrl,
   webAppUrl,
@@ -45,76 +44,15 @@ const DynamicAppCard = ({
   macAppleSiliconAppUrl,
   macIntelAppUrl,
   macUniversalAppUrl,
+  error, // エラー情報を受け取る
 }: DynamicAppCardProps) => {
   const { language } = useLanguage();
-  const [isLoading, setIsLoading] = useState(false);
-  const [latestRelease, setLatestRelease] = useState<{
-    version: string;
-    body: string;
-  } | null>(null);
-  const [replacedUrls, setReplacedUrls] = useState<{
-    [key: string]: string | undefined;
-  }>({});
   const [openReleaseLog, setOpenReleaseLog] = useState(false);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [openNotice, setOpenNotice] = useState(false);
   const [anchorElPopper, setAnchorElPopper] = useState<null | HTMLElement>(
     null,
   );
-
-  useEffect(() => {
-    if (!gitHubRepo) return;
-    const fetchLatestRelease = async () => {
-      setIsLoading(true);
-      try {
-        const response = await fetch(
-          `https://api.github.com/repos/${gitHubRepo}/releases/latest?client_id=${clientId}&client_secret=${clientSecret}`,
-        );
-        const data = await response.json();
-        setLatestRelease({
-          version: data.tag_name.replace('v', ''),
-          body: data.body,
-        });
-        if (
-          windowsAppUrl ||
-          macAppleSiliconAppUrl ||
-          macIntelAppUrl ||
-          macUniversalAppUrl
-        ) {
-          setReplacedUrls({
-            windowsAppUrl: windowsAppUrl?.replace(
-              /{{version}}/g,
-              data.tag_name.replace('v', ''),
-            ),
-            macAppleSiliconAppUrl: macAppleSiliconAppUrl?.replace(
-              /{{version}}/g,
-              data.tag_name.replace('v', ''),
-            ),
-            macIntelAppUrl: macIntelAppUrl?.replace(
-              /{{version}}/g,
-              data.tag_name.replace('v', ''),
-            ),
-            macUniversalAppUrl: macUniversalAppUrl?.replace(
-              /{{version}}/g,
-              data.tag_name.replace('v', ''),
-            ),
-          });
-        }
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchLatestRelease();
-  }, [
-    gitHubRepo,
-    windowsAppUrl,
-    macAppleSiliconAppUrl,
-    macIntelAppUrl,
-    macUniversalAppUrl,
-  ]);
 
   const openAppStyle = {
     p: 0,
@@ -157,23 +95,44 @@ const DynamicAppCard = ({
 
   return (
     <>
+      {/* エラーが発生した場合の表示 */}
+      {error && (
+        <Box
+          sx={{ 
+            mt: 1,
+            p: 1,
+            borderRadius: 1,
+            bgcolor: 'rgba(255, 0, 0, 0.1)',
+            border: '1px solid rgba(255, 0, 0, 0.3)'
+          }}
+        >
+          <Typography variant="caption" color="error">
+            ⚠️ {language === 'ja' 
+              ? '最新バージョン情報の取得に失敗しました。しばらく時間をおいてから再度お試しください。' 
+              : 'Failed to fetch latest version information. Please try again later.'}
+          </Typography>
+        </Box>
+      )}
       {(appStoreUrl ||
         googlePlayUrl ||
         webAppUrl ||
-        replacedUrls.windowsAppUrl ||
-        replacedUrls.macAppleSiliconAppUrl ||
-        replacedUrls.macIntelAppUrl ||
-        replacedUrls.macUniversalAppUrl) && (
+        windowsAppUrl ||
+        macAppleSiliconAppUrl ||
+        macIntelAppUrl ||
+        macUniversalAppUrl) && (
         <>
           <Divider sx={{ mb: 2 }} />
           <Box sx={{ marginY: 2 }}>
-            {latestRelease && (
+
+            
+            {/* 正常にバージョン情報が取得できた場合の表示 */}
+            {latestVersion && latestBody && !error && (
               <Box
                 sx={{ mt: { xs: 0, sm: -2 }, mb: { xs: 0, sm: -2 }, ml: 0.5 }}
               >
                 <Typography variant="caption">
                   {' '}
-                  v{latestRelease.version} :{' '}
+                  v{latestVersion} :{' '}
                   <Button onClick={handleReleaseLog}>Release Notes</Button>
                 </Typography>
                 <Popper
@@ -196,7 +155,7 @@ const DynamicAppCard = ({
                           marginX: 2,
                         }}
                       >
-                        <ReactMarkdown>{latestRelease.body}</ReactMarkdown>
+                        <ReactMarkdown>{latestBody}</ReactMarkdown>
                       </Box>
                     </Fade>
                   )}
@@ -256,16 +215,16 @@ const DynamicAppCard = ({
                 </Button>
               </Tooltip>
             )}
-            {replacedUrls.windowsAppUrl && (
+            {windowsAppUrl && (
               <Tooltip title="Windowsアプリをダウンロード">
                 <Button
                   sx={openAppStyle}
                   component="a"
-                  href={replacedUrls.windowsAppUrl}
+                  href={windowsAppUrl}
                   download
                   onClick={() =>
                     sendLogEvent('windows_app_click', {
-                      url: replacedUrls.windowsAppUrl ?? '',
+                      url: windowsAppUrl ?? '',
                     })
                   }
                 >
@@ -273,16 +232,16 @@ const DynamicAppCard = ({
                 </Button>
               </Tooltip>
             )}
-            {replacedUrls.macAppleSiliconAppUrl && (
+            {macAppleSiliconAppUrl && (
               <Tooltip title="macOSアプリ(Apple Silicon/M1, M2, M3...)をダウンロード">
                 <Button
                   sx={openAppStyle}
                   component="a"
-                  href={replacedUrls.macAppleSiliconAppUrl}
+                  href={macAppleSiliconAppUrl}
                   download
                   onClick={() =>
                     sendLogEvent('mac_apple_silicon_app_click', {
-                      url: replacedUrls.macAppleSiliconAppUrl ?? '',
+                      url: macAppleSiliconAppUrl ?? '',
                     })
                   }
                 >
@@ -294,16 +253,16 @@ const DynamicAppCard = ({
                 </Button>
               </Tooltip>
             )}
-            {replacedUrls.macIntelAppUrl && (
+            {macIntelAppUrl && (
               <Tooltip title="macOSアプリ(Intel Mac)をダウンロード">
                 <Button
                   sx={openAppStyle}
                   component="a"
-                  href={replacedUrls.macIntelAppUrl}
+                  href={macIntelAppUrl}
                   download
                   onClick={() =>
                     sendLogEvent('mac_intel_app_click', {
-                      url: replacedUrls.macIntelAppUrl ?? '',
+                      url: macIntelAppUrl ?? '',
                     })
                   }
                 >
@@ -311,16 +270,16 @@ const DynamicAppCard = ({
                 </Button>
               </Tooltip>
             )}
-            {replacedUrls.macUniversalAppUrl && (
+            {macUniversalAppUrl && (
               <Tooltip title="macOSアプリ(Universal)をダウンロード">
                 <Button
                   sx={openAppStyle}
                   component="a"
-                  href={replacedUrls.macUniversalAppUrl}
+                  href={macUniversalAppUrl}
                   download
                   onClick={() =>
                     sendLogEvent('mac_universal_app_click', {
-                      url: replacedUrls.macUniversalAppUrl ?? '',
+                      url: macUniversalAppUrl ?? '',
                     })
                   }
                 >
@@ -332,7 +291,7 @@ const DynamicAppCard = ({
                 </Button>
               </Tooltip>
             )}
-            {replacedUrls.windowsAppUrl && (
+            {windowsAppUrl && (
               <Button
                 variant="text"
                 size="small"
@@ -350,7 +309,6 @@ const DynamicAppCard = ({
           </Box>
         </>
       )}
-      {isLoading && <CircularProgress />}
       <Popper
         id={id}
         open={openNotice}

@@ -1,23 +1,21 @@
+import 'server-only';
+import { Suspense } from 'react';
+
 import GitHubIcon from '@mui/icons-material/GitHub';
 import PolicyIcon from '@mui/icons-material/Policy';
-import { Box, Button, Card, Divider, Typography } from '@mui/material';
-import dynamic from 'next/dynamic';
+import {
+  Box,
+  Button,
+  Card,
+  Divider,
+  Typography,
+  CircularProgress,
+} from '@mui/material';
 import Image, { type StaticImageData } from 'next/image';
 
 import { NoteSmallLogoIcon, ZennLogoIcon } from '@/components/Icons';
 
-interface DynamicAppCardProps {
-  gitHubRepo?: string;
-  appStoreUrl?: string;
-  googlePlayUrl?: string;
-  webAppUrl?: string;
-  windowsAppUrl?: string | null;
-  macAppleSiliconAppUrl?: string | null;
-  macIntelAppUrl?: string | null;
-  macUniversalAppUrl?: string | null;
-}
-
-const DynamicAppCard = dynamic<DynamicAppCardProps>(() => import('@/components/DynamicAppCard'));
+import { AppCardLoader } from '@/components/AppCardLoader';
 
 interface StaticAppCardProps {
   appName: string;
@@ -64,8 +62,15 @@ export const StaticAppCard = ({
   labels,
 }: StaticAppCardProps) => {
   return (
-    <Card sx={{ p: 2, marginY: 4, backgroundColor: 'rgba(50, 50, 50, 0.5)', backdropFilter: 'blur(10px)' }}>
-      <Typography variant='h5' id={sectionId}>
+    <Card
+      sx={{
+        p: 2,
+        marginY: 4,
+        backgroundColor: 'rgba(50, 50, 50, 0.5)',
+        backdropFilter: 'blur(10px)',
+      }}
+    >
+      <Typography variant="h5" id={sectionId}>
         {appName}
       </Typography>
       <Divider sx={{ mb: 2 }} />
@@ -80,14 +85,14 @@ export const StaticAppCard = ({
           }}
         />
       </Box>
-      <Typography variant='body1'>{description}</Typography>
+      <Typography variant="body1">{description}</Typography>
       {(noteUrl || zennUrl || gitHubUrl || policyUrl) && (
         <Box sx={{ marginY: 2 }}>
           {noteUrl && (
             <Button
-              component='a'
+              component="a"
               href={noteUrl}
-              target='_blank'
+              target="_blank"
               startIcon={<NoteSmallLogoIcon />}
               sx={{ mr: 2 }}
             >
@@ -96,9 +101,9 @@ export const StaticAppCard = ({
           )}
           {zennUrl && (
             <Button
-              component='a'
+              component="a"
               href={zennUrl}
-              target='_blank'
+              target="_blank"
               startIcon={<ZennLogoIcon />}
               sx={{ mr: 2 }}
             >
@@ -106,27 +111,35 @@ export const StaticAppCard = ({
             </Button>
           )}
           {gitHubUrl && (
-            <Button component='a' href={gitHubUrl} target='_blank' startIcon={<GitHubIcon />} sx={{ mr: 2 }}>
+            <Button
+              component="a"
+              href={gitHubUrl}
+              target="_blank"
+              startIcon={<GitHubIcon />}
+              sx={{ mr: 2 }}
+            >
               {labels.sourceCode}
             </Button>
           )}
           {policyUrl && (
-            <Button component='a' href={policyUrl} startIcon={<PolicyIcon />}>
+            <Button component="a" href={policyUrl} startIcon={<PolicyIcon />}>
               {labels.privacyPolicy}
             </Button>
           )}
         </Box>
       )}
-      <DynamicAppCard
-        gitHubRepo={gitHubRepo}
-        appStoreUrl={appStoreUrl}
-        googlePlayUrl={googlePlayUrl}
-        webAppUrl={webAppUrl}
-        windowsAppUrl={windowsAppUrl}
-        macAppleSiliconAppUrl={macAppleSiliconAppUrl}
-        macIntelAppUrl={macIntelAppUrl}
-        macUniversalAppUrl={macUniversalAppUrl}
-      />
+      <Suspense fallback={<CircularProgress />}>
+        <AppCardLoader
+          gitHubRepo={gitHubRepo}
+          appStoreUrl={appStoreUrl}
+          googlePlayUrl={googlePlayUrl}
+          webAppUrl={webAppUrl}
+          windowsAppUrl={windowsAppUrl}
+          macAppleSiliconAppUrl={macAppleSiliconAppUrl}
+          macIntelAppUrl={macIntelAppUrl}
+          macUniversalAppUrl={macUniversalAppUrl}
+        />
+      </Suspense>
     </Card>
   );
 };

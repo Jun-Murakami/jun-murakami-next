@@ -1,4 +1,18 @@
 {
+  "hosting": {
+    "public": "public",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "https://jun-murakami-app-hosting--jun-murakami.asia-southeast1.hosted.app"
+      }
+    ]
+  },
   "apphosting": {
     "backendId": "jun-murakami-app-hosting",
     "rootDir": "/",

@@ -3,7 +3,8 @@
     "source": ".",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "frameworksBackend": {
-      "region": "asia-east1"
+      "region": "asia-east1",
+      "memory": "512MiB"
     }
   }
 }

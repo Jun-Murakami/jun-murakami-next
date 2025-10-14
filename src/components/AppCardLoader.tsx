@@ -38,13 +38,30 @@ async function fetchGitHubReleaseWithRetry(
     return { error: 'GitHub App configuration is missing' };
   }
 
-  console.log('privateKey', privateKey);
-  console.log('clientId', clientId);
-  console.log('payload', payload);
+  // Firebase App Hosting環境では、環境変数の改行文字が適切に処理されない場合があるため
+  // 秘密鍵の改行文字を明示的に処理する
+  const formattedPrivateKey = privateKey.replace(/\\n/g, '\n');
 
-  const resultJwt = jwt.sign(payload, privateKey, {
-    algorithm: 'RS256',
-  });
+  // 秘密鍵の形式を検証
+  if (
+    !formattedPrivateKey.includes('BEGIN RSA PRIVATE KEY') ||
+    !formattedPrivateKey.includes('END RSA PRIVATE KEY')
+  ) {
+    console.error('Invalid private key format');
+    return { error: 'Invalid private key format' };
+  }
+
+  let resultJwt: string;
+  try {
+    resultJwt = jwt.sign(payload, formattedPrivateKey, {
+      algorithm: 'RS256',
+    });
+  } catch (jwtError) {
+    console.error('JWT signing error:', jwtError);
+    return {
+      error: `JWT signing failed: ${jwtError instanceof Error ? jwtError.message : 'Unknown error'}`,
+    };
+  }
 
   const uri = `https://api.github.com/app/installations`;
   const resultInstallation = await fetch(uri, {

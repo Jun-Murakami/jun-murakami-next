@@ -1,18 +1,6 @@
 {
-  "hosting": {
-    "source": ".",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
-    "frameworksBackend": {
-      "region": "asia-east1",
-      "memory": "512MiB"
-    }
-  },
   "apphosting": {
-    "backendId": "my-web-app",
+    "backendId": "jun-murakami-app-hosting",
     "rootDir": "/",
     "ignore": [
       "node_modules",

@@ -3,8 +3,10 @@ import jwt from 'jsonwebtoken';
 
 import dynamic from 'next/dynamic';
 
-const clientId = process.env.NEXT_PUBLIC_GIT_HUB_APP_CLIENT_ID;
-const privateKey = process.env.NEXT_PUBLIC_GIT_HUB_APP_PRIVATE_KEY;
+// Firebase Functions環境では、NEXT_PUBLIC_プレフィックスが期待通りに動作しない場合があるため
+// サーバーサイド専用の環境変数名を使用
+const clientId = process.env.GIT_HUB_APP_CLIENT_ID || process.env.NEXT_PUBLIC_GIT_HUB_APP_CLIENT_ID;
+const privateKey = process.env.GIT_HUB_APP_PRIVATE_KEY || process.env.NEXT_PUBLIC_GIT_HUB_APP_PRIVATE_KEY;
 
 
 // GitHub APIのレートリミットエラーをハンドリングするための型定義
@@ -26,7 +28,18 @@ async function fetchGitHubReleaseWithRetry(
     iss: clientId,
   };
 
-  const resultJwt = jwt.sign(payload, privateKey ?? '', {
+  // 環境変数が設定されていない場合のエラーハンドリング
+  if (!privateKey) {
+    console.error('GitHub App Private Key is not configured');
+    return { error: 'GitHub App configuration is missing' };
+  }
+
+  if (!clientId) {
+    console.error('GitHub App Client ID is not configured');
+    return { error: 'GitHub App configuration is missing' };
+  }
+
+  const resultJwt = jwt.sign(payload, privateKey, {
     algorithm: 'RS256',
   });
 

@@ -9,7 +9,7 @@ runConfig:
 
 env:
   - variable: NEXT_PUBLIC_GIT_HUB_APP_PRIVATE_KEY
-    secret: projects/1031618879673/secrets/NEXT_PUBLIC_GIT_HUB_APP_PRIVATE_KEY/versions/2
+    secret: projects/1031618879673/secrets/NEXT_PUBLIC_GIT_HUB_APP_PRIVATE_KEY/versions/3
   - variable: NEXT_PUBLIC_GIT_HUB_APP_CLIENT_ID
     secret: projects/1031618879673/secrets/NEXT_PUBLIC_GIT_HUB_APP_CLIENT_ID/versions/1
 

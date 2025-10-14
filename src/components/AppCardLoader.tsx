@@ -38,6 +38,10 @@ async function fetchGitHubReleaseWithRetry(
     return { error: 'GitHub App configuration is missing' };
   }
 
+  console.log('privateKey', privateKey);
+  console.log('clientId', clientId);
+  console.log('payload', payload);
+
   const resultJwt = jwt.sign(payload, privateKey, {
     algorithm: 'RS256',
   });

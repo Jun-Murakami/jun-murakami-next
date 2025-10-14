@@ -1,27 +1,27 @@
 {
   "hosting": {
-    "public": "public",
+    "source": ".",
     "ignore": [
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
     ],
-    "rewrites": [
-      {
-        "source": "**",
-        "destination": "https://jun-murakami-app-hosting--jun-murakami.asia-southeast1.hosted.app"
-      }
-    ]
+    "frameworksBackend": {
+      "region": "asia-east1"
+    }
   },
-  "apphosting": {
-    "backendId": "jun-murakami-app-hosting",
-    "rootDir": "/",
-    "ignore": [
-      "node_modules",
-      ".git",
-      "firebase-debug.log",
-      "firebase-debug.*.log",
-      "functions"
-    ]
-  }
+  "apphosting": [
+    {
+      "backendId": "jun-murakami-app-hosting",
+      "rootDir": "/",
+      "ignore": [
+        "node_modules",
+        ".git",
+        "firebase-debug.log",
+        "firebase-debug.*.log",
+        "functions"
+      ],
+      "alwaysDeployFromSource": true
+    }
+  ]
 }

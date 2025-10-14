@@ -26,8 +26,8 @@ jobs:
           NEXT_PUBLIC_GIT_HUB_APP_CLIENT_SECRET: ${{ secrets.NEXT_PUBLIC_GIT_HUB_APP_CLIENT_SECRET }}
       - name: create env file
         run: |
-          echo "GIT_HUB_APP_PRIVATE_KEY=${{secrets.GIT_HUB_APP_PRIVATE_KEY}}" >> .env
-          echo "GIT_HUB_APP_CLIENT_ID=${{secrets.GIT_HUB_APP_CLIENT_ID}}" >> .env
+          echo "GIT_HUB_APP_PRIVATE_KEY=${{secrets.NEXT_PUBLIC_GIT_HUB_APP_PRIVATE_KEY}}" >> .env
+          echo "GIT_HUB_APP_CLIENT_ID=${{secrets.NEXT_PUBLIC_GIT_HUB_APP_CLIENT_ID}}" >> .env
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}

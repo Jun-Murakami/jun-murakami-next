@@ -201,23 +201,23 @@ export const AppCardLoader = async ({
       // 成功した場合
       version = result.version;
       body = result.body;
+      // バージョン置換用のヘルパー関数
+      const replaceVersion = (
+        url: string | null | undefined,
+      ): string | undefined => {
+        if (!url) return undefined;
+
+        // 通常のプレイスホルダーとURLエンコードされたプレイスホルダーの両方を処理
+        return url
+          .replace(/\{\{version\}\}/g, version ?? 'latest')
+          .replace(/%7B%7Bversion%7D%7D/g, version ?? 'latest');
+      };
+
       replacedUrls = {
-        windowsAppUrl: windowsAppUrl?.replace(
-          '{{version}}',
-          version ?? 'latest',
-        ),
-        macAppleSiliconAppUrl: macAppleSiliconAppUrl?.replace(
-          '{{version}}',
-          version ?? 'latest',
-        ),
-        macIntelAppUrl: macIntelAppUrl?.replace(
-          '{{version}}',
-          version ?? 'latest',
-        ),
-        macUniversalAppUrl: macUniversalAppUrl?.replace(
-          '{{version}}',
-          version ?? 'latest',
-        ),
+        windowsAppUrl: replaceVersion(windowsAppUrl),
+        macAppleSiliconAppUrl: replaceVersion(macAppleSiliconAppUrl),
+        macIntelAppUrl: replaceVersion(macIntelAppUrl),
+        macUniversalAppUrl: replaceVersion(macUniversalAppUrl),
       };
     }
   }

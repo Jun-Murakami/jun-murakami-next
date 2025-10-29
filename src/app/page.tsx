@@ -325,6 +325,7 @@ export default async function HomePage() {
         description={t.apps.aiBrowser.longDescription}
         gitHubRepo="Jun-Murakami/AI-Browser"
         noteUrl="https://note.com/junmurakami/n/n5d674f5977e6"
+        zennUrl="https://zenn.dev/jun_murakami/articles/3a885d936e8937"
         gitHubUrl="https://github.com/Jun-Murakami/AI-Browser"
         windowsAppUrl="https://github.com/Jun-Murakami/AI-Browser/releases/download/v{{version}}/AI-Browser-{{version}}-setup_win_x64.exe"
         macUniversalAppUrl="https://github.com/Jun-Murakami/AI-Browser/releases/download/v{{version}}/AI-Browser-{{version}}_mac_universal.dmg"

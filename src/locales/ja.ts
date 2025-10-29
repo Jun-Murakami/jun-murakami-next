@@ -40,7 +40,7 @@ export const ja = {
       description:
         'ChatGPT、Gemini、Claude等に対応したチャットAI専用ブラウザ。',
       longDescription:
-        'ChatGPT、Gemini、Google AI Studio、Claude、DeepSeek、Grok、Phind、Perplexity、Genspark、Felo、JENOVA、Codyに対応したチャットAI専用ブラウザです。縦に5つまで分割できる広いエディタで文章を切り貼りして、各サービスに直接プロンプトを送信できます。送信履歴から同じプロンプトを何度も呼び出したり、一括送信もできます。ターミナルとMonaco Editorを統合しているのでプログラマーの方もどうぞ。',
+        'ChatGPT、Gemini、Google AI Studio、Claude、DeepSeek、Grok、Nani !?、Phind、Perplexity、Genspark、Felo、JENOVA、Codyに対応したチャットAI専用ブラウザです。縦に5つまで分割できる広いエディタで文章を切り貼りして、各サービスに直接プロンプトを送信できます。送信履歴から同じプロンプトを何度も呼び出したり、一括送信もできます。ターミナルとMonaco Editorを統合しているのでプログラマーの方もどうぞ。',
     },
     keyfit: {
       title: 'KeyFit',

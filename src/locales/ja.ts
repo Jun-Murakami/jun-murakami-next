@@ -42,6 +42,13 @@ export const ja = {
       longDescription:
         'ChatGPT、Gemini、Google AI Studio、Claude、DeepSeek、Grok、Nani !?、Phind、Perplexity、Genspark、Felo、JENOVA、Codyに対応したチャットAI専用ブラウザです。縦に5つまで分割できる広いエディタで文章を切り貼りして、各サービスに直接プロンプトを送信できます。送信履歴から同じプロンプトを何度も呼び出したり、一括送信もできます。ターミナルとMonaco Editorを統合しているのでプログラマーの方もどうぞ。',
     },
+    lightroom2Resolve: {
+      title: 'Lightroom To Resolve',
+      description:
+        'Lightroomの写真をDaVinci Resolveに転送します。',
+      longDescription:
+        'Lightroom Classic で選んだ写真を、ワンクリックで DaVinci Resolve に送り込み、解像度に合わせたタイムラインを自動作成するLightroomプラグインとResolve用スクリプトのセットです。縦位置 / RAW / TIFF をサポートします。 ',
+    },
     keyfit: {
       title: 'KeyFit',
       description:

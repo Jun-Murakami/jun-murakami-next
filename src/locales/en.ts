@@ -42,6 +42,13 @@ export const en = {
       longDescription:
         "A dedicated chat AI browser supporting ChatGPT, Gemini, Google AI Studio, Claude, DeepSeek, Grok, Nani !?, Phind, Perplexity, Genspark, Felo, JENOVA, and Cody. You can cut and paste text in a wide editor that can be split up to 5 vertically and send prompts directly to each service. You can recall the same prompts from the sending history and send them in bulk. It integrates Terminal and Monaco Editor, so it's also suitable for programmers.",
     },
+    lightroom2Resolve: {
+      title: 'Lightroom To Resolve',
+      description:
+        'A one-click app that sends selected photos from Lightroom to DaVinci Resolve',
+      longDescription:
+        'A one-click app that sends selected photos from Lightroom to DaVinci Resolve and automatically creates a timeline with the correct resolution. It supports vertical orientation, RAW, and TIFF.',
+    },
     keyfit: {
       title: 'KeyFit',
       description:

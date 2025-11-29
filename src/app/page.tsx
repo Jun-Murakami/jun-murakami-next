@@ -122,6 +122,12 @@ export default async function HomePage() {
         sectionId: 'aiBrowser',
       },
       {
+        title: t.apps.lightroom2Resolve.title,
+        screenshot: screenshots.lightroom2Resolve_s,
+        description: t.apps.lightroom2Resolve.description,
+        sectionId: 'lightroom2Resolve',
+      },
+      {
         title: t.apps.keyfit.title,
         screenshot: screenshots.keyfit_s,
         description: t.apps.keyfit.description,
@@ -329,6 +335,24 @@ export default async function HomePage() {
         gitHubUrl="https://github.com/Jun-Murakami/AI-Browser"
         windowsAppUrl="https://github.com/Jun-Murakami/AI-Browser/releases/download/v{{version}}/AI-Browser-{{version}}-setup_win_x64.exe"
         macUniversalAppUrl="https://github.com/Jun-Murakami/AI-Browser/releases/download/v{{version}}/AI-Browser-{{version}}_mac_universal.dmg"
+        labels={{
+          noteArticle: t.common.noteArticle,
+          zennArticle: t.common.zennArticle,
+          sourceCode: t.common.sourceCode,
+          privacyPolicy: t.common.privacyPolicy,
+        }}
+      />
+
+      <StaticAppCard
+        appName={t.apps.lightroom2Resolve.title}
+        sectionId="lightroom2Resolve"
+        screenshot={screenshots.lightroom2Resolve}
+        description={t.apps.lightroom2Resolve.longDescription}
+        gitHubRepo="Jun-Murakami/LightroomToResolve"
+        noteUrl="https://note.com/junmurakami/n/n2737001eaf88"
+        gitHubUrl="https://github.com/Jun-Murakami/LightroomToResolve"
+        windowsAppUrl="https://github.com/Jun-Murakami/LightroomToResolve/releases/download/v{{version}}/LightroomToResolve_{{version}}_windows.zip"
+        macUniversalAppUrl="https://github.com/Jun-Murakami/LightroomToResolve/releases/download/v{{version}}/LightroomToResolve_{{version}}_macOS.pkg"
         labels={{
           noteArticle: t.common.noteArticle,
           zennArticle: t.common.zennArticle,

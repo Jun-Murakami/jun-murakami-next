@@ -18,6 +18,8 @@ import wlsib from '@/assets/screenshots/sc_wlsib.jpg';
 import wlsib_s from '@/assets/screenshots/sc_wlsib_s.webp';
 import yomigana from '@/assets/screenshots/sc_yomigana.jpg';
 import yomigana_s from '@/assets/screenshots/sc_yomigana_s.webp';
+import lightroom2Resolve from '@/assets/screenshots/sc_lightroom2resolve.jpg';
+import lightroom2Resolve_s from '@/assets/screenshots/sc_lightroom2resolve_s.webp';
 
 export {
   aiBrowser,
@@ -38,6 +40,8 @@ export {
   dropboxSkipper_s,
   keyfit,
   keyfit_s,
+  lightroom2Resolve,
+  lightroom2Resolve_s,
   mixCompare,
   mixCompare_s,
 };

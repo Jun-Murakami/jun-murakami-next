@@ -47,7 +47,7 @@ export const ja = {
       description:
         'Lightroomの写真をDaVinci Resolveに転送します。',
       longDescription:
-        'Lightroom Classic で選んだ写真を、ワンクリックで DaVinci Resolve に送り込み、解像度に合わせたタイムラインを自動作成するLightroomプラグインとResolve用スクリプトのセットです。縦位置 / RAW / TIFF をサポートします。 ',
+        'Lightroom Classic で選んだ写真を、ワンクリックで DaVinci Resolve に送り込み、解像度に合わせたタイムラインを自動作成するLightroomプラグインとResolve用スクリプトのセットです。縦位置 / 複数解像度 / RAW / TIFF をサポートします。Adobe DNG Converterがインストールされている必要があります。）',
     },
     keyfit: {
       title: 'KeyFit',

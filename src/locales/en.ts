@@ -47,7 +47,7 @@ export const en = {
       description:
         'A one-click app that sends selected photos from Lightroom to DaVinci Resolve',
       longDescription:
-        'A one-click app that sends selected photos from Lightroom to DaVinci Resolve and automatically creates a timeline with the correct resolution. It supports vertical orientation, RAW, and TIFF.',
+        'A one-click app that sends selected photos from Lightroom to DaVinci Resolve and automatically creates a timeline with the correct resolution. It supports vertical orientation, multiple resolutions, RAW, and TIFF. Adobe DNG Converter is required.',
     },
     keyfit: {
       title: 'KeyFit',

@@ -47,7 +47,7 @@ export const en = {
       description:
         'A one-click app that sends selected photos from Lightroom to DaVinci Resolve',
       longDescription:
-        'A one-click app that sends selected photos from Lightroom to DaVinci Resolve and automatically creates a timeline with the correct resolution. It supports vertical orientation, multiple resolutions, RAW, and TIFF. Adobe DNG Converter is required.',
+        'A one-click app that sends selected photos from Lightroom to DaVinci Resolve and automatically creates a timeline with the correct resolution. It supports vertical orientation, multiple resolutions, RAW, and TIFF. Adobe DNG Converter is required.*When running install_windows.bat, you may see a security warning, but it simply copies the script to the designated location. If you are concerned, you can open the .bat file with Notepad or another text editor and copy it manually yourself. The macOS version is an app with Apple\'s certificate and signature.',
     },
     keyfit: {
       title: 'KeyFit',

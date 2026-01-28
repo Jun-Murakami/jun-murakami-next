@@ -97,6 +97,13 @@ export const en = {
       longDescription:
         "A VST3/AU/AAX plugin that loads audio files so you can compare them against the mix you're working on in your DAW. With host-synced playback you can perform precise A/B checks between different mix versions. It's useful for recording engineers and music directors, and especially for composers who manage many tracks, such as scoring, game soundtrack, and competition writers.",
     },
+    vtm: {
+      title: 'Vocal Take Manager',
+      description:
+        'A client-complete tool for managing vocal takes for vocal recording direction.',
+      longDescription:
+        "A client-complete tool for managing vocal takes for vocal recording direction. It records evaluation scores for each lyric phrase and determines the final adopted take (compiling) to decide on the final take.",
+    },
     famitone: {
       title: 'Famitone 2A03',
       description:

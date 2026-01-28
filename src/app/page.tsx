@@ -160,6 +160,12 @@ export default async function HomePage() {
         sectionId: 'mixCompare',
       },
       {
+        title: t.apps.vtm.title,
+        screenshot: screenshots.vtm_s,
+        description: t.apps.vtm.description,
+        sectionId: 'vocal-take-manager',
+      },
+      {
         title: t.apps.yomigana.title,
         screenshot: screenshots.yomigana_s,
         description: t.apps.yomigana.description,
@@ -389,6 +395,23 @@ export default async function HomePage() {
         gitHubUrl="https://github.com/Jun-Murakami/MixCompare"
         windowsAppUrl="https://github.com/Jun-Murakami/MixCompare/releases/download/v3.0.0/MixCompare_3.0.0_Windows_Setup.exe"
         macUniversalAppUrl="https://github.com/Jun-Murakami/MixCompare/releases/download/v3.0.0/MixCompare_3.0.0_macOS.pkg"
+        labels={{
+          noteArticle: t.common.noteArticle,
+          zennArticle: t.common.zennArticle,
+          sourceCode: t.common.sourceCode,
+          privacyPolicy: t.common.privacyPolicy,
+        }}
+      />
+
+      <StaticAppCard
+        appName={t.apps.vtm.title}
+        sectionId="vocal-take-manager"
+        screenshot={screenshots.vtm}
+        description={t.apps.vtm.longDescription}
+        noteUrl="https://note.com/junmurakami/n/ndd161a2d0bd4"
+        zennUrl="https://zenn.dev/jun_murakami/articles/2f11d63cf9bf9d"
+        gitHubUrl="https://github.com/Jun-Murakami/vocal-take-manager"
+        webAppUrl="https://vocal-take-manager.web.app/"
         labels={{
           noteArticle: t.common.noteArticle,
           zennArticle: t.common.zennArticle,

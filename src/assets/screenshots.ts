@@ -20,6 +20,8 @@ import yomigana from '@/assets/screenshots/sc_yomigana.jpg';
 import yomigana_s from '@/assets/screenshots/sc_yomigana_s.webp';
 import lightroom2Resolve from '@/assets/screenshots/sc_lightroom2resolve.jpg';
 import lightroom2Resolve_s from '@/assets/screenshots/sc_lightroom2resolve_s.webp';
+import vtm from '@/assets/screenshots/sc_vtm.jpg';
+import vtm_s from '@/assets/screenshots/sc_vtm_s.webp';
 
 export {
   aiBrowser,
@@ -44,4 +46,6 @@ export {
   lightroom2Resolve_s,
   mixCompare,
   mixCompare_s,
+  vtm,
+  vtm_s,
 };

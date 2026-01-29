@@ -40,7 +40,7 @@ export const en = {
       description:
         'A dedicated chat AI browser supporting ChatGPT, Google Gemini, Claude, and more.',
       longDescription:
-        "A dedicated chat AI browser supporting ChatGPT, Gemini, Google AI Studio, Claude, DeepSeek, Moonshot Kimi, Grok, Nani !?, Phind, Perplexity, Genspark, Felo, JENOVA, and Cody. You can cut and paste text in a wide editor that can be split up to 5 vertically and send prompts directly to each service. You can recall the same prompts from the sending history and send them in bulk. It integrates Terminal and Monaco Editor, so it's also suitable for programmers.",
+        "A dedicated chat AI browser supporting ChatGPT, Gemini, Google AI Studio, Claude, DeepSeek, Kimi, Grok, Nani !?, Phind, Perplexity, Genspark, Felo, JENOVA, and Cody. You can cut and paste text in a wide editor that can be split up to 5 vertically and send prompts directly to each service. You can recall the same prompts from the sending history and send them in bulk. It integrates Terminal and Monaco Editor, so it's also suitable for programmers.",
     },
     lightroom2Resolve: {
       title: 'Lightroom To Resolve',

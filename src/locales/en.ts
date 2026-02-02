@@ -100,9 +100,9 @@ export const en = {
     vtm: {
       title: 'Vocal Take Manager',
       description:
-        'A client-complete tool for managing vocal takes for vocal recording direction.',
+        'A tool for vocal recording directors to manage vocal takes.',
       longDescription:
-        "A client-complete tool for managing vocal takes for vocal recording direction. It records evaluation scores for each lyric phrase and determines the final adopted take (compiling) to decide on the final take.",
+        "A tool for vocal recording directors to manage vocal takes. It marks evaluation scores for each lyric phrase and outputs the final OK take sheet. It's a web app, but all input data is processed on the user's device.",
     },
     famitone: {
       title: 'Famitone 2A03',

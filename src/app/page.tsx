@@ -441,15 +441,15 @@ export default async function HomePage() {
         sectionId="tasktrees"
         screenshot={screenshots.taskTrees}
         description={t.apps.taskTrees.longDescription}
-        gitHubRepo="Jun-Murakami/TaskTrees-Electron"
+        gitHubRepo="Jun-Murakami/TaskTrees"
         noteUrl="https://note.com/junmurakami/n/n651efffaf343"
         gitHubUrl="https://github.com/Jun-Murakami/TaskTrees"
         policyUrl="/privacy-policy-tasktrees"
         webAppUrl="https://tasktree-s.web.app/"
         appStoreUrl="https://apps.apple.com/jp/app/tasktrees/id6482979857"
         googlePlayUrl="https://play.google.com/store/apps/details?id=com.tasktrees.app"
-        windowsAppUrl="https://github.com/Jun-Murakami/TaskTrees-Electron/releases/download/v{{version}}/TaskTrees-{{version}}-setup_win_x64.exe"
-        macUniversalAppUrl="https://github.com/Jun-Murakami/TaskTrees-Electron/releases/download/v{{version}}/TaskTrees-{{version}}_mac_universal.dmg"
+        windowsAppUrl="https://github.com/Jun-Murakami/TaskTrees/releases/download/v{{version}}/TaskTrees-{{version}}-setup_win_x64.exe"
+        macUniversalAppUrl="https://github.com/Jun-Murakami/TaskTrees/releases/download/v{{version}}/TaskTrees-{{version}}_mac_universal.dmg"
         labels={{
           noteArticle: t.common.noteArticle,
           zennArticle: t.common.zennArticle,

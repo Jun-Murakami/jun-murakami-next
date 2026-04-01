@@ -40,14 +40,14 @@ export const en = {
       description:
         'A dedicated chat AI browser supporting ChatGPT, Google Gemini, Claude, and more.',
       longDescription:
-        "A dedicated chat AI browser supporting ChatGPT, Gemini, Google AI Studio, Claude, DeepSeek, Kimi, Grok, Nani !?, Phind, Perplexity, Genspark, Felo, JENOVA, and Cody. You can cut and paste text in a wide editor that can be split up to 5 vertically and send prompts directly to each service. You can recall the same prompts from the sending history and send them in bulk. It integrates Terminal and Monaco Editor, so it's also suitable for programmers.",
+        "A dedicated chat AI browser supporting ChatGPT, Gemini, Claude, DeepSeek, Kimi, Grok, Nani !?, Perplexity, Genspark and Sakana Chat. You can cut and paste text in a wide editor that can be split up to 5 vertically and send prompts directly to each service. You can recall the same prompts from the sending history and send them in bulk. It integrates Terminal and Monaco Editor, so it's also suitable for programmers.",
     },
     lightroom2Resolve: {
       title: 'Lightroom To Resolve',
       description:
         'A one-click app that sends selected photos from Lightroom to DaVinci Resolve',
       longDescription:
-        'A one-click app that sends selected photos from Lightroom to DaVinci Resolve and automatically creates a timeline with the correct resolution. It supports vertical orientation, multiple resolutions, RAW, and TIFF. Adobe DNG Converter is required.*When running install_windows.bat, you may see a security warning, but it simply copies the script to the designated location. If you are concerned, you can open the .bat file with Notepad or another text editor and copy it manually yourself. The macOS version is an app with Apple\'s certificate and signature.',
+        "A one-click app that sends selected photos from Lightroom to DaVinci Resolve and automatically creates a timeline with the correct resolution. It supports vertical orientation, multiple resolutions, RAW, and TIFF. Adobe DNG Converter is required.*When running install_windows.bat, you may see a security warning, but it simply copies the script to the designated location. If you are concerned, you can open the .bat file with Notepad or another text editor and copy it manually yourself. The macOS version is an app with Apple's certificate and signature.",
     },
     keyfit: {
       title: 'KeyFit',

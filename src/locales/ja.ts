@@ -40,12 +40,11 @@ export const ja = {
       description:
         'ChatGPT、Gemini、Claude等に対応したチャットAI専用ブラウザ。',
       longDescription:
-        'ChatGPT、Gemini、Google AI Studio、Claude、DeepSeek、Kimi、Grok、Nani !?、Phind、Perplexity、Genspark、Felo、JENOVA、Codyに対応したチャットAI専用ブラウザです。縦に5つまで分割できる広いエディタで文章を切り貼りして、各サービスに直接プロンプトを送信できます。送信履歴から同じプロンプトを何度も呼び出したり、一括送信もできます。ターミナルとMonaco Editorを統合しているのでプログラマーの方もどうぞ。',
+        'ChatGPT、Gemini、Claude、DeepSeek、Kimi、Grok、Nani !?、Perplexity、Genspark、Sakana Chatに対応したチャットAI専用ブラウザです。縦に5つまで分割できる広いエディタで文章を切り貼りして、各サービスに直接プロンプトを送信できます。送信履歴から同じプロンプトを何度も呼び出したり、一括送信もできます。ターミナルとMonaco Editorを統合しているのでプログラマーの方もどうぞ。',
     },
     lightroom2Resolve: {
       title: 'Lightroom To Resolve',
-      description:
-        'Lightroomの写真をDaVinci Resolveに転送します。',
+      description: 'Lightroomの写真をDaVinci Resolveに転送します。',
       longDescription:
         'Lightroom Classic で選んだ写真を、ワンクリックで DaVinci Resolve に送り込み、解像度に合わせたタイムラインを自動作成するLightroomプラグインとResolve用スクリプトのセットです。縦位置 / 複数解像度 / RAW / TIFF をサポートします。Adobe DNG Converterがインストールされている必要があります。）※install_windows.batの実行時、セキュリティの警告が出るかもしれませんが、所定の位置にスクリプトをコピーするだけです。心配な方は.batをメモ帳などで開いて、ご自分で手動コピーしてください。macOS版ははAppleの証明書・署名付きアプリです。',
     },
@@ -97,10 +96,9 @@ export const ja = {
     },
     vtm: {
       title: 'Vocal Take Manager',
-      description:
-        'ボーカルRecディレクションのテイク管理ツールです。',
+      description: 'ボーカルRecディレクションのテイク管理ツールです。',
       longDescription:
-        'ボーカルレコーディングのディレクター向けツールです。歌詞フレーズごとのテイク評価をマークし、最終的なOKテイクシートを出力します。ブラウザでアクセスするWebアプリですが、入力データは全てユーザーの端末で処理されます。'
+        'ボーカルレコーディングのディレクター向けツールです。歌詞フレーズごとのテイク評価をマークし、最終的なOKテイクシートを出力します。ブラウザでアクセスするWebアプリですが、入力データは全てユーザーの端末で処理されます。',
     },
     famitone: {
       title: 'Famitone 2A03',

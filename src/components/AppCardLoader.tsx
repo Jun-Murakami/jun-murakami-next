@@ -141,6 +141,8 @@ type ReplacedUrls = {
   macAppleSiliconAppUrl: string | undefined;
   macIntelAppUrl: string | undefined;
   macUniversalAppUrl: string | undefined;
+  windowsZipUrl: string | undefined;
+  macZipUrl: string | undefined;
 };
 
 const DynamicAppCard = dynamic(() => import('@/components/DynamicAppCard'));
@@ -179,6 +181,8 @@ export const AppCardLoader = async ({
     macAppleSiliconAppUrl: undefined,
     macIntelAppUrl: undefined,
     macUniversalAppUrl: undefined,
+    windowsZipUrl: undefined,
+    macZipUrl: undefined,
   };
 
   // GitHubリポジトリが指定されている場合のみAPIを呼び出し
@@ -201,6 +205,8 @@ export const AppCardLoader = async ({
         macAppleSiliconAppUrl: undefined,
         macIntelAppUrl: undefined,
         macUniversalAppUrl: undefined,
+        windowsZipUrl: undefined,
+        macZipUrl: undefined,
       };
     } else {
       // 成功した場合
@@ -223,6 +229,8 @@ export const AppCardLoader = async ({
         macAppleSiliconAppUrl: replaceVersion(macAppleSiliconAppUrl),
         macIntelAppUrl: replaceVersion(macIntelAppUrl),
         macUniversalAppUrl: replaceVersion(macUniversalAppUrl),
+        windowsZipUrl: replaceVersion(windowsZipUrl),
+        macZipUrl: replaceVersion(macZipUrl),
       };
     }
   }
@@ -239,8 +247,8 @@ export const AppCardLoader = async ({
       macAppleSiliconAppUrl={replacedUrls.macAppleSiliconAppUrl}
       macIntelAppUrl={replacedUrls.macIntelAppUrl}
       macUniversalAppUrl={replacedUrls.macUniversalAppUrl}
-      windowsZipUrl={windowsZipUrl}
-      macZipUrl={macZipUrl}
+      windowsZipUrl={replacedUrls.windowsZipUrl}
+      macZipUrl={replacedUrls.macZipUrl}
       // エラー情報を追加（DynamicAppCardでエラー表示が必要な場合）
       error={error}
     />

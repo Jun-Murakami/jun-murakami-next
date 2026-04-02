@@ -395,6 +395,8 @@ export default async function HomePage() {
         gitHubUrl="https://github.com/Jun-Murakami/MixCompare"
         windowsAppUrl="https://github.com/Jun-Murakami/MixCompare/releases/download/v3.0.0/MixCompare_3.0.0_Windows_Setup.exe"
         macUniversalAppUrl="https://github.com/Jun-Murakami/MixCompare/releases/download/v3.0.0/MixCompare_3.0.0_macOS.pkg"
+        windowsZipUrl="https://github.com/Jun-Murakami/MixCompare/releases/download/v3.0.0/MixCompare_3.0.0_Windows_VST3_AAX_Standalone.zip"
+        macZipUrl="https://github.com/Jun-Murakami/MixCompare/releases/download/v3.0.0/MixCompare_3.0.0_macOS_VST3_AU_AAX_Standalone.zip"
         labels={{
           noteArticle: t.common.noteArticle,
           zennArticle: t.common.zennArticle,

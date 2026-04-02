@@ -154,6 +154,9 @@ interface AppCardLoaderProps {
   macAppleSiliconAppUrl?: string | null;
   macIntelAppUrl?: string | null;
   macUniversalAppUrl?: string | null;
+  // ZIP版（手動インストール用）のダウンロードURL
+  windowsZipUrl?: string;
+  macZipUrl?: string;
 }
 
 export const AppCardLoader = async ({
@@ -165,6 +168,8 @@ export const AppCardLoader = async ({
   macAppleSiliconAppUrl,
   macIntelAppUrl,
   macUniversalAppUrl,
+  windowsZipUrl,
+  macZipUrl,
 }: AppCardLoaderProps) => {
   let version: string | undefined;
   let body: string | undefined;
@@ -234,6 +239,8 @@ export const AppCardLoader = async ({
       macAppleSiliconAppUrl={replacedUrls.macAppleSiliconAppUrl}
       macIntelAppUrl={replacedUrls.macIntelAppUrl}
       macUniversalAppUrl={replacedUrls.macUniversalAppUrl}
+      windowsZipUrl={windowsZipUrl}
+      macZipUrl={macZipUrl}
       // エラー情報を追加（DynamicAppCardでエラー表示が必要な場合）
       error={error}
     />

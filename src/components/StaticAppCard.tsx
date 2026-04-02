@@ -34,6 +34,9 @@ interface StaticAppCardProps {
   macAppleSiliconAppUrl?: string | null;
   macIntelAppUrl?: string | null;
   macUniversalAppUrl?: string | null;
+  // ZIP版（手動インストール用）のダウンロードURL
+  windowsZipUrl?: string;
+  macZipUrl?: string;
   labels: {
     noteArticle: string;
     zennArticle: string;
@@ -59,6 +62,8 @@ export const StaticAppCard = ({
   macAppleSiliconAppUrl,
   macIntelAppUrl,
   macUniversalAppUrl,
+  windowsZipUrl,
+  macZipUrl,
   labels,
 }: StaticAppCardProps) => {
   return (
@@ -138,6 +143,8 @@ export const StaticAppCard = ({
           macAppleSiliconAppUrl={macAppleSiliconAppUrl}
           macIntelAppUrl={macIntelAppUrl}
           macUniversalAppUrl={macUniversalAppUrl}
+          windowsZipUrl={windowsZipUrl}
+          macZipUrl={macZipUrl}
         />
       </Suspense>
     </Card>

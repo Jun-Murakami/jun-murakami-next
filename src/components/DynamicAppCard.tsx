@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
+import FolderZipOutlinedIcon from '@mui/icons-material/FolderZipOutlined';
 import {
   Box,
   Button,
@@ -29,6 +30,8 @@ interface DynamicAppCardProps {
   macAppleSiliconAppUrl?: string | null;
   macIntelAppUrl?: string | null;
   macUniversalAppUrl?: string | null;
+  windowsZipUrl?: string;
+  macZipUrl?: string;
   error?: string; // GitHub APIエラー情報を追加
 }
 
@@ -44,6 +47,8 @@ const DynamicAppCard = ({
   macAppleSiliconAppUrl,
   macIntelAppUrl,
   macUniversalAppUrl,
+  windowsZipUrl,
+  macZipUrl,
   error, // エラー情報を受け取る
 }: DynamicAppCardProps) => {
   const { language } = useLanguage();
@@ -98,17 +103,18 @@ const DynamicAppCard = ({
       {/* エラーが発生した場合の表示 */}
       {error && (
         <Box
-          sx={{ 
+          sx={{
             mt: 1,
             p: 1,
             borderRadius: 1,
             bgcolor: 'rgba(255, 0, 0, 0.1)',
-            border: '1px solid rgba(255, 0, 0, 0.3)'
+            border: '1px solid rgba(255, 0, 0, 0.3)',
           }}
         >
           <Typography variant="caption" color="error">
-            ⚠️ {language === 'ja' 
-              ? '最新バージョン情報の取得に失敗しました。しばらく時間をおいてから再度お試しください。' 
+            ⚠️{' '}
+            {language === 'ja'
+              ? '最新バージョン情報の取得に失敗しました。しばらく時間をおいてから再度お試しください。'
               : 'Failed to fetch latest version information. Please try again later.'}
           </Typography>
         </Box>
@@ -123,8 +129,6 @@ const DynamicAppCard = ({
         <>
           <Divider sx={{ mb: 2 }} />
           <Box sx={{ marginY: 2 }}>
-
-            
             {/* 正常にバージョン情報が取得できた場合の表示 */}
             {latestVersion && latestBody && !error && (
               <Box
@@ -305,6 +309,74 @@ const DynamicAppCard = ({
                   ? ja.common.windowsSecurityWarning
                   : en.common.windowsSecurityWarning}
               </Button>
+            )}
+            {/* ZIP版（プラグインファイル手動インストール用）のダウンロードリンク */}
+            {(windowsZipUrl || macZipUrl) && (
+              <Box
+                sx={{
+                  mt: 2,
+                  display: 'flex',
+                  flexWrap: 'wrap',
+                  gap: 1,
+                  alignItems: 'center',
+                }}
+              >
+                <Typography variant="caption" sx={{ mr: 0.5, opacity: 0.7 }}>
+                  {language === 'ja'
+                    ? 'ZIP版 (手動インストール) :'
+                    : 'ZIP (Manual Install) :'}
+                </Typography>
+                {windowsZipUrl && (
+                  <Tooltip
+                    title={
+                      language === 'ja'
+                        ? 'Windows ZIP版をダウンロード'
+                        : 'Download Windows ZIP'
+                    }
+                  >
+                    <Button
+                      variant="outlined"
+                      size="small"
+                      component="a"
+                      href={windowsZipUrl}
+                      download
+                      startIcon={<FolderZipOutlinedIcon />}
+                      sx={{ textTransform: 'none' }}
+                      onClick={() =>
+                        sendLogEvent('windows_zip_click', {
+                          url: windowsZipUrl,
+                        })
+                      }
+                    >
+                      Windows
+                    </Button>
+                  </Tooltip>
+                )}
+                {macZipUrl && (
+                  <Tooltip
+                    title={
+                      language === 'ja'
+                        ? 'macOS ZIP版をダウンロード'
+                        : 'Download macOS ZIP'
+                    }
+                  >
+                    <Button
+                      variant="outlined"
+                      size="small"
+                      component="a"
+                      href={macZipUrl}
+                      download
+                      startIcon={<FolderZipOutlinedIcon />}
+                      sx={{ textTransform: 'none' }}
+                      onClick={() =>
+                        sendLogEvent('mac_zip_click', { url: macZipUrl })
+                      }
+                    >
+                      macOS
+                    </Button>
+                  </Tooltip>
+                )}
+              </Box>
             )}
           </Box>
         </>

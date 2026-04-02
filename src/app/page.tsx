@@ -393,10 +393,10 @@ export default async function HomePage() {
         gitHubRepo="Jun-Murakami/MixCompare"
         zennUrl="https://zenn.dev/jun_murakami/articles/f9b3227fadfe7e"
         gitHubUrl="https://github.com/Jun-Murakami/MixCompare"
-        windowsAppUrl="https://github.com/Jun-Murakami/MixCompare/releases/download/v3.0.0/MixCompare_3.0.0_Windows_Setup.exe"
-        macUniversalAppUrl="https://github.com/Jun-Murakami/MixCompare/releases/download/v3.0.0/MixCompare_3.0.0_macOS.pkg"
-        windowsZipUrl="https://github.com/Jun-Murakami/MixCompare/releases/download/v3.0.0/MixCompare_3.0.0_Windows_VST3_AAX_Standalone.zip"
-        macZipUrl="https://github.com/Jun-Murakami/MixCompare/releases/download/v3.0.0/MixCompare_3.0.0_macOS_VST3_AU_AAX_Standalone.zip"
+        windowsAppUrl="https://github.com/Jun-Murakami/MixCompare/releases/download/v{{version}}/MixCompare_{{version}}_Windows_Setup.exe"
+        macUniversalAppUrl="https://github.com/Jun-Murakami/MixCompare/releases/download/v{{version}}/MixCompare_{{version}}_macOS.pkg"
+        windowsZipUrl="https://github.com/Jun-Murakami/MixCompare/releases/download/v{{version}}/MixCompare_{{version}}_Windows_VST3_AAX_Standalone.zip"
+        macZipUrl="https://github.com/Jun-Murakami/MixCompare/releases/download/v{{version}}/MixCompare_{{version}}_macOS_VST3_AU_AAX_Standalone.zip"
         labels={{
           noteArticle: t.common.noteArticle,
           zennArticle: t.common.zennArticle,

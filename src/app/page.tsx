@@ -10,6 +10,7 @@ import {
   Button,
   Grid,
   IconButton,
+  Link as MuiLink,
   Tooltip,
   Typography,
 } from '@mui/material';
@@ -389,7 +390,20 @@ export default async function HomePage() {
         appName={t.apps.mixCompare.title}
         sectionId="mixCompare"
         screenshot={screenshots.mixCompare}
-        description={t.apps.mixCompare.longDescription}
+        description={
+          <>
+            {t.apps.mixCompare.longDescription}
+            <br />
+            <MuiLink
+              href="https://mixcompare-demo.web.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              sx={{ color: 'primary.light' }}
+            >
+              {t.apps.mixCompare.demoSiteText}
+            </MuiLink>
+          </>
+        }
         gitHubRepo="Jun-Murakami/MixCompare"
         zennUrl="https://zenn.dev/jun_murakami/articles/f9b3227fadfe7e"
         gitHubUrl="https://github.com/Jun-Murakami/MixCompare"

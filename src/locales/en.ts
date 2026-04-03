@@ -96,6 +96,8 @@ export const en = {
         'A VST3/AU/AAX plugin that lets you compare your DAW mix with reference tracks.',
       longDescription:
         "A VST3/AU/AAX plugin that loads audio files so you can compare them against the mix you're working on in your DAW. With host-synced playback you can perform precise A/B checks between different mix versions. It's useful for recording engineers and music directors, and especially for composers who manage many tracks, such as scoring, game soundtrack, and competition writers.",
+      demoSiteText:
+        'A web app demo is now available — give it a try in your browser.',
     },
     vtm: {
       title: 'Vocal Take Manager',

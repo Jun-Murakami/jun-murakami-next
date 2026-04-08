@@ -1,12 +1,9 @@
 'use client';
 import { useState } from 'react';
-import emailjs from '@emailjs/browser';
 import ReplyIcon from '@mui/icons-material/Reply';
 import { Box, Button, Card, CircularProgress, Divider, TextField, Typography } from '@mui/material';
 
-const publicKey = process.env.NEXT_PUBLIC_MAIL_PUBLIC_ID;
-const serviceId = process.env.NEXT_PUBLIC_MAIL_SERVICE_ID;
-const templateId = process.env.NEXT_PUBLIC_MAIL_TEMPLATE_ID;
+const FORMSPARK_URL = 'https://submit-form.com/m3HDLM87d';
 
 export default function ContactForm() {
   const [subject, setSubject] = useState('');
@@ -17,13 +14,8 @@ export default function ContactForm() {
   const [errorMessage, setErrorMessage] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    if (!serviceId || !templateId || !publicKey) {
-      setErrorMessage('メール送信の設定が不正です。');
-      return;
-    }
 
     if (!subject || !from_name || !email || !message) {
       setErrorMessage('未入力の項目があります。');
@@ -31,25 +23,33 @@ export default function ContactForm() {
     }
 
     setIsProcessing(true);
+    setErrorMessage('');
 
-    // メール送信処理
-    emailjs.sendForm(serviceId, templateId, e.target as HTMLFormElement, publicKey).then(
-      (result) => {
-        console.log('SUCCESS!', result.text);
-        // 送信成功時の処理
-        setSubject('');
-        setFromName('');
-        setEmail('');
-        setMessage('');
-        setIsSuccess(true);
-        setIsProcessing(false);
-      },
-      (error) => {
-        // 送信失敗時の処理
-        setErrorMessage(`メッセージの送信に失敗しました。${error.text}`);
-        setIsProcessing(false);
+    try {
+      const res = await fetch(FORMSPARK_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({ subject, from_name, email, message }),
+      });
+
+      if (!res.ok) {
+        throw new Error(`HTTP error: ${res.status}`);
       }
-    );
+
+      setSubject('');
+      setFromName('');
+      setEmail('');
+      setMessage('');
+      setIsSuccess(true);
+    } catch (error) {
+      setErrorMessage(`メッセージの送信に失敗しました。時間をおいて再度お試しください。`);
+      console.error(error);
+    } finally {
+      setIsProcessing(false);
+    }
   };
 
   return (
@@ -102,7 +102,7 @@ export default function ContactForm() {
               rows={6}
               margin='normal'
             />
-            <Button type='submit' variant='contained' color='primary'>
+            <Button type='submit' variant='contained' color='primary' disabled={isProcessing}>
               {isProcessing ? <CircularProgress size={22} sx={{ color: 'white' }} /> : '送信'}
             </Button>
             {errorMessage && <Typography color='error'>{errorMessage}</Typography>}
@@ -125,4 +125,3 @@ export default function ContactForm() {
     </>
   );
 }
-

@@ -26,6 +26,7 @@ export const ja = {
     imdb: 'IMDb (映画関連)',
     vgmdb: 'VGMdb (ゲーム/アニメ音楽関連)',
     wikipedia: 'Wikipedia',
+    contact: 'お問い合わせ',
   },
   apps: {
     wlsib: {

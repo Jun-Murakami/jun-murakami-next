@@ -26,6 +26,7 @@ export const en = {
     imdb: 'IMDb (Film works)',
     vgmdb: 'VGMdb (Game/Anime music)',
     wikipedia: 'Wikipedia',
+    contact: 'Contact',
   },
   apps: {
     wlsib: {

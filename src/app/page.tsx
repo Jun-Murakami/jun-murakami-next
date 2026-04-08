@@ -106,6 +106,12 @@ export default async function HomePage() {
       url: 'https://ja.wikipedia.org/wiki/%E6%9D%91%E4%B8%8A%E7%B4%94_(%E9%9F%B3%E6%A5%BD%E5%AE%B6)',
       icon: <WikiLogoIcon fontSize="medium" />,
     },
+    {
+      title: t.social.contact,
+      url: '/contact',
+      icon: <MailOutlineIcon fontSize="medium" />,
+      internal: true,
+    },
   ];
 
   const appGridItems = {
@@ -211,7 +217,7 @@ export default async function HomePage() {
             <IconButton
               sx={{ height: { xs: 45, sm: 50 }, width: { xs: 45, sm: 50 } }}
               component="a"
-              target="_blank"
+              {...(link.internal ? {} : { target: '_blank' })}
               href={link.url}
               data-ga-sns={link.title}
             >

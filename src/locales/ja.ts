@@ -111,6 +111,18 @@ export const ja = {
         'ファミコン実機をサンプリングしたKONTAKT音源ライブラリです。',
     },
   },
+  contact: {
+    title: 'Contact Form',
+    subject: '件名',
+    name: 'お名前',
+    email: 'メールアドレス',
+    body: '本文',
+    send: '送信',
+    back: '戻る',
+    validationError: '未入力の項目があります。',
+    success: 'メッセージを送信しました。',
+    error: 'メッセージの送信に失敗しました。時間をおいて再度お試しください。',
+  },
   common: {
     download: 'こちら',
     downloadText: 'ダウンロードは',

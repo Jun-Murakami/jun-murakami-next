@@ -3,7 +3,8 @@
     "allow": [
       "Bash(gh release:*)",
       "WebFetch(domain:github.com)",
-      "WebFetch(domain:api.github.com)"
+      "WebFetch(domain:api.github.com)",
+      "Bash(npx tsc:*)"
     ]
   }
 }

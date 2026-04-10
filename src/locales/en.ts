@@ -115,6 +115,18 @@ export const en = {
         'A KONTAKT sound library sampled from actual Famicom hardware.',
     },
   },
+  contact: {
+    title: 'Contact Form',
+    subject: 'Subject',
+    name: 'Your Name',
+    email: 'Email Address',
+    body: 'Message',
+    send: 'Send',
+    back: 'Back',
+    validationError: 'Please fill in all fields.',
+    success: 'Your message has been sent.',
+    error: 'Failed to send the message. Please try again later.',
+  },
   common: {
     download: 'here',
     downloadText: 'You can download it from',

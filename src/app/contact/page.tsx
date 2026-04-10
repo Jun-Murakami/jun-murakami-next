@@ -2,10 +2,16 @@
 import { useState } from 'react';
 import ReplyIcon from '@mui/icons-material/Reply';
 import { Box, Button, Card, CircularProgress, Divider, TextField, Typography } from '@mui/material';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { en } from '@/locales/en';
+import { ja } from '@/locales/ja';
 
 const FORMSPARK_URL = 'https://submit-form.com/m3HDLM87d';
 
 export default function ContactForm() {
+  const { language } = useLanguage();
+  const t = language === 'ja' ? ja : en;
+
   const [subject, setSubject] = useState('');
   const [from_name, setFromName] = useState('');
   const [email, setEmail] = useState('');
@@ -18,7 +24,7 @@ export default function ContactForm() {
     e.preventDefault();
 
     if (!subject || !from_name || !email || !message) {
-      setErrorMessage('未入力の項目があります。');
+      setErrorMessage(t.contact.validationError);
       return;
     }
 
@@ -45,7 +51,7 @@ export default function ContactForm() {
       setMessage('');
       setIsSuccess(true);
     } catch (error) {
-      setErrorMessage(`メッセージの送信に失敗しました。時間をおいて再度お試しください。`);
+      setErrorMessage(t.contact.error);
       console.error(error);
     } finally {
       setIsProcessing(false);
@@ -55,14 +61,14 @@ export default function ContactForm() {
   return (
     <>
       <Card sx={{ p: 2, marginY: 4, backgroundColor: 'rgba(50, 50, 50, 0.5)', backdropFilter: 'blur(10px)' }}>
-        <Typography variant='h5'>Contact Form</Typography>
+        <Typography variant='h5'>{t.contact.title}</Typography>
         <Divider sx={{ mb: 2 }} />
-        {isSuccess && <Typography>メッセージを送信しました。</Typography>}
+        {isSuccess && <Typography>{t.contact.success}</Typography>}
         {!isSuccess && (
           <form onSubmit={handleSubmit}>
             <TextField
               name='subject'
-              label='件名'
+              label={t.contact.subject}
               value={subject}
               onChange={(e) => setSubject(e.target.value)}
               required
@@ -72,7 +78,7 @@ export default function ContactForm() {
             />
             <TextField
               name='from_name'
-              label='お名前'
+              label={t.contact.name}
               value={from_name}
               onChange={(e) => setFromName(e.target.value)}
               required
@@ -82,7 +88,7 @@ export default function ContactForm() {
             />
             <TextField
               name='email'
-              label='メールアドレス'
+              label={t.contact.email}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -92,7 +98,7 @@ export default function ContactForm() {
             />
             <TextField
               name='message'
-              label='本文'
+              label={t.contact.body}
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               required
@@ -103,7 +109,7 @@ export default function ContactForm() {
               margin='normal'
             />
             <Button type='submit' variant='contained' color='primary' disabled={isProcessing}>
-              {isProcessing ? <CircularProgress size={22} sx={{ color: 'white' }} /> : '送信'}
+              {isProcessing ? <CircularProgress size={22} sx={{ color: 'white' }} /> : t.contact.send}
             </Button>
             {errorMessage && <Typography color='error'>{errorMessage}</Typography>}
           </form>
@@ -119,7 +125,7 @@ export default function ContactForm() {
           }}
           sx={{ mb: 10, backgroundColor: 'rgba(50, 50, 50, 0.5)', backdropFilter: 'blur(10px)' }}
         >
-          戻る
+          {t.contact.back}
         </Button>
       </Box>
     </>

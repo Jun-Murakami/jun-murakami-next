@@ -100,6 +100,24 @@ export const en = {
       demoSiteText:
         'A web app demo is now available — give it a try in your browser.',
     },
+    zeroLimit: {
+      title: 'ZeroLimit',
+      description:
+        'A simple zero-latency limiter VST3/AU/AAX plugin for broadcast and in-arrangement mastering.',
+      longDescription:
+        'A simple zero-latency limiter plugin ideal for streaming/broadcast and for masters used while arranging. Supports VST3/AU/AAX. Despite running with zero latency, it also includes a multiband limit mode with a configurable number of bands.',
+      demoSiteText:
+        'A web app demo is now available — give it a try in your browser.',
+    },
+    zeroComp: {
+      title: 'ZeroComp',
+      description:
+        'A simple zero-latency compressor VST3/AU/AAX plugin.',
+      longDescription:
+        'A simple zero-latency compressor plugin. Supports VST3/AU/AAX. Includes four different operating modes: VCA, Opt, FET, and Vari-Mu.',
+      demoSiteText:
+        'A web app demo is now available — give it a try in your browser.',
+    },
     vtm: {
       title: 'Vocal Take Manager',
       description:

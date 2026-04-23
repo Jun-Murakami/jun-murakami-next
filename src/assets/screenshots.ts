@@ -22,6 +22,10 @@ import lightroom2Resolve from '@/assets/screenshots/sc_lightroom2resolve.jpg';
 import lightroom2Resolve_s from '@/assets/screenshots/sc_lightroom2resolve_s.webp';
 import vtm from '@/assets/screenshots/sc_vtm.jpg';
 import vtm_s from '@/assets/screenshots/sc_vtm_s.webp';
+import zerocomp from '@/assets/screenshots/sc_zerocomp.jpg';
+import zerocomp_s from '@/assets/screenshots/sc_zerocomp_s.webp';
+import zerolimit from '@/assets/screenshots/sc_zerolimit.jpg';
+import zerolimit_s from '@/assets/screenshots/sc_zerolimit_s.webp';
 
 export {
   aiBrowser,
@@ -48,4 +52,8 @@ export {
   mixCompare_s,
   vtm,
   vtm_s,
+  zerolimit,
+  zerolimit_s,
+  zerocomp,
+  zerocomp_s,
 };

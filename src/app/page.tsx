@@ -167,6 +167,18 @@ export default async function HomePage() {
         sectionId: 'mixCompare',
       },
       {
+        title: t.apps.zeroLimit.title,
+        screenshot: screenshots.zerolimit_s,
+        description: t.apps.zeroLimit.description,
+        sectionId: 'zeroLimit',
+      },
+      {
+        title: t.apps.zeroComp.title,
+        screenshot: screenshots.zerocomp_s,
+        description: t.apps.zeroComp.description,
+        sectionId: 'zeroComp',
+      },
+      {
         title: t.apps.vtm.title,
         screenshot: screenshots.vtm_s,
         description: t.apps.vtm.description,
@@ -417,6 +429,70 @@ export default async function HomePage() {
         macUniversalAppUrl="https://github.com/Jun-Murakami/MixCompare/releases/download/v{{version}}/MixCompare_{{version}}_macOS.pkg"
         windowsZipUrl="https://github.com/Jun-Murakami/MixCompare/releases/download/v{{version}}/MixCompare_{{version}}_Windows_VST3_AAX_Standalone.zip"
         macZipUrl="https://github.com/Jun-Murakami/MixCompare/releases/download/v{{version}}/MixCompare_{{version}}_macOS_VST3_AU_AAX_Standalone.zip"
+        labels={{
+          noteArticle: t.common.noteArticle,
+          zennArticle: t.common.zennArticle,
+          sourceCode: t.common.sourceCode,
+          privacyPolicy: t.common.privacyPolicy,
+        }}
+      />
+
+      <StaticAppCard
+        appName={t.apps.zeroLimit.title}
+        sectionId="zeroLimit"
+        screenshot={screenshots.zerolimit}
+        description={
+          <>
+            {t.apps.zeroLimit.longDescription}
+            <br />
+            <MuiLink
+              href="https://zerolimit-demo.web.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              sx={{ color: 'primary.light' }}
+            >
+              {t.apps.zeroLimit.demoSiteText}
+            </MuiLink>
+          </>
+        }
+        gitHubRepo="Jun-Murakami/ZeroLimit"
+        gitHubUrl="https://github.com/Jun-Murakami/ZeroLimit"
+        windowsAppUrl="https://github.com/Jun-Murakami/ZeroLimit/releases/download/v{{version}}/ZeroLimit_{{version}}_Windows_Setup.exe"
+        macUniversalAppUrl="https://github.com/Jun-Murakami/ZeroLimit/releases/download/v{{version}}/ZeroLimit_{{version}}_macOS.pkg"
+        windowsZipUrl="https://github.com/Jun-Murakami/ZeroLimit/releases/download/v{{version}}/ZeroLimit_{{version}}_Windows_VST3_AAX_Standalone.zip"
+        macZipUrl="https://github.com/Jun-Murakami/ZeroLimit/releases/download/v{{version}}/ZeroLimit_{{version}}_macOS_VST3_AU_AAX_Standalone.zip"
+        labels={{
+          noteArticle: t.common.noteArticle,
+          zennArticle: t.common.zennArticle,
+          sourceCode: t.common.sourceCode,
+          privacyPolicy: t.common.privacyPolicy,
+        }}
+      />
+
+      <StaticAppCard
+        appName={t.apps.zeroComp.title}
+        sectionId="zeroComp"
+        screenshot={screenshots.zerocomp}
+        description={
+          <>
+            {t.apps.zeroComp.longDescription}
+            <br />
+            <MuiLink
+              href="https://zerocomp-demo.web.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              sx={{ color: 'primary.light' }}
+            >
+              {t.apps.zeroComp.demoSiteText}
+            </MuiLink>
+          </>
+        }
+        gitHubRepo="Jun-Murakami/ZeroComp"
+        gitHubUrl="https://github.com/Jun-Murakami/ZeroComp"
+        windowsAppUrl="https://github.com/Jun-Murakami/ZeroComp/releases/download/v{{version}}/ZeroComp_{{version}}_Windows_Setup.exe"
+        macUniversalAppUrl="https://github.com/Jun-Murakami/ZeroComp/releases/download/v{{version}}/ZeroComp_{{version}}_macOS.pkg"
+        windowsZipUrl="https://github.com/Jun-Murakami/ZeroComp/releases/download/v{{version}}/ZeroComp_{{version}}_Windows_VST3_AAX_Standalone.zip"
+        macZipUrl="https://github.com/Jun-Murakami/ZeroComp/releases/download/v{{version}}/ZeroComp_{{version}}_macOS_VST3_AU_AAX_Standalone.zip"
         labels={{
           noteArticle: t.common.noteArticle,
           zennArticle: t.common.zennArticle,

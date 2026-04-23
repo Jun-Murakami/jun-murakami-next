@@ -97,6 +97,24 @@ export const ja = {
       demoSiteText:
         'ブラウザで動くWebアプリ版のデモサイトを作りましたので、こちらもお試しください。',
     },
+    zeroLimit: {
+      title: 'ZeroLimit',
+      description:
+        'ゼロレイテンシーで動作するシンプルなリミッターVST3/AU/AAXプラグイン。',
+      longDescription:
+        '配信/ブロードキャストやアレンジ中のマスターに使用するのに適した、ゼロレイテンシーで動作するシンプルなリミッタープラグインです。VST3/AU/AAX対応。ゼロレイテンシーながら、バンド数可変のマルチバンドリミットモードを搭載しています。',
+      demoSiteText:
+        'ブラウザで動くWebアプリ版のデモサイトを作りましたので、こちらもお試しください。',
+    },
+    zeroComp: {
+      title: 'ZeroComp',
+      description:
+        'ゼロレイテンシーで動作するシンプルなコンプレッサーVST3/AU/AAXプラグイン。',
+      longDescription:
+        'ゼロレイテンシーで動作するシンプルなコンプレッサープラグインです。VST3/AU/AAX対応。VCA、Opt、FET、Vari-Mu、合計4つの異なる動作モードを備えています。',
+      demoSiteText:
+        'ブラウザで動くWebアプリ版のデモサイトを作りましたので、こちらもお試しください。',
+    },
     vtm: {
       title: 'Vocal Take Manager',
       description: 'ボーカルRecディレクションのテイク管理ツールです。',

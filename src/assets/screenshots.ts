@@ -24,6 +24,8 @@ import vtm from '@/assets/screenshots/sc_vtm.jpg';
 import vtm_s from '@/assets/screenshots/sc_vtm_s.webp';
 import zerocomp from '@/assets/screenshots/sc_zerocomp.jpg';
 import zerocomp_s from '@/assets/screenshots/sc_zerocomp_s.webp';
+import zeroeq from '@/assets/screenshots/sc_zeroeq.jpg';
+import zeroeq_s from '@/assets/screenshots/sc_zeroeq_s.webp';
 import zerolimit from '@/assets/screenshots/sc_zerolimit.jpg';
 import zerolimit_s from '@/assets/screenshots/sc_zerolimit_s.webp';
 
@@ -56,4 +58,6 @@ export {
   zerolimit_s,
   zerocomp,
   zerocomp_s,
+  zeroeq,
+  zeroeq_s,
 };

@@ -179,6 +179,12 @@ export default async function HomePage() {
         sectionId: 'zeroComp',
       },
       {
+        title: t.apps.zeroEq.title,
+        screenshot: screenshots.zeroeq_s,
+        description: t.apps.zeroEq.description,
+        sectionId: 'zeroEq',
+      },
+      {
         title: t.apps.vtm.title,
         screenshot: screenshots.vtm_s,
         description: t.apps.vtm.description,
@@ -493,6 +499,38 @@ export default async function HomePage() {
         macUniversalAppUrl="https://github.com/Jun-Murakami/ZeroComp/releases/download/v{{version}}/ZeroComp_{{version}}_macOS.pkg"
         windowsZipUrl="https://github.com/Jun-Murakami/ZeroComp/releases/download/v{{version}}/ZeroComp_{{version}}_Windows_VST3_AAX_Standalone.zip"
         macZipUrl="https://github.com/Jun-Murakami/ZeroComp/releases/download/v{{version}}/ZeroComp_{{version}}_macOS_VST3_AU_AAX_Standalone.zip"
+        labels={{
+          noteArticle: t.common.noteArticle,
+          zennArticle: t.common.zennArticle,
+          sourceCode: t.common.sourceCode,
+          privacyPolicy: t.common.privacyPolicy,
+        }}
+      />
+
+      <StaticAppCard
+        appName={t.apps.zeroEq.title}
+        sectionId="zeroEq"
+        screenshot={screenshots.zeroeq}
+        description={
+          <>
+            {t.apps.zeroEq.longDescription}
+            <br />
+            <MuiLink
+              href="https://zeroeq-demo.web.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              sx={{ color: 'primary.light' }}
+            >
+              {t.apps.zeroEq.demoSiteText}
+            </MuiLink>
+          </>
+        }
+        gitHubRepo="Jun-Murakami/ZeroEQ"
+        gitHubUrl="https://github.com/Jun-Murakami/ZeroEQ"
+        windowsAppUrl="https://github.com/Jun-Murakami/ZeroEQ/releases/download/v{{version}}/ZeroEQ_{{version}}_Windows_Setup.exe"
+        macUniversalAppUrl="https://github.com/Jun-Murakami/ZeroEQ/releases/download/v{{version}}/ZeroEQ_{{version}}_macOS.pkg"
+        windowsZipUrl="https://github.com/Jun-Murakami/ZeroEQ/releases/download/v{{version}}/ZeroEQ_{{version}}_Windows_VST3_AAX_Standalone.zip"
+        macZipUrl="https://github.com/Jun-Murakami/ZeroEQ/releases/download/v{{version}}/ZeroEQ_{{version}}_macOS_VST3_AU_AAX_Standalone.zip"
         labels={{
           noteArticle: t.common.noteArticle,
           zennArticle: t.common.zennArticle,

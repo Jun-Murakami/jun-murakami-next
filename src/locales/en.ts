@@ -118,6 +118,15 @@ export const en = {
       demoSiteText:
         'A web app demo is now available — give it a try in your browser.',
     },
+    zeroEq: {
+      title: 'ZeroEQ',
+      description:
+        'A simple zero-latency equalizer VST3/AU/AAX plugin.',
+      longDescription:
+        'A simple yet carefully designed 11-band equalizer with a built-in spectrum analyzer. Runs lightly with zero latency.',
+      demoSiteText:
+        'A web app demo is now available — give it a try in your browser.',
+    },
     vtm: {
       title: 'Vocal Take Manager',
       description:

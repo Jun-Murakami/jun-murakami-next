@@ -115,6 +115,15 @@ export const ja = {
       demoSiteText:
         'ブラウザで動くWebアプリ版のデモサイトを作りましたので、こちらもお試しください。',
     },
+    zeroEq: {
+      title: 'ZeroEQ',
+      description:
+        'ゼロレイテンシーで動作するシンプルなイコライザーVST3/AU/AAXプラグイン。',
+      longDescription:
+        'シンプルながら、操作性にこだわったスペクトラムアナライザー付き11バンドイコライザーです。ゼロレイテンシーで軽快に動作します。',
+      demoSiteText:
+        'ブラウザで動くWebアプリ版のデモサイトを作りましたので、こちらもお試しください。',
+    },
     vtm: {
       title: 'Vocal Take Manager',
       description: 'ボーカルRecディレクションのテイク管理ツールです。',

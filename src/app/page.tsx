@@ -463,6 +463,7 @@ export default async function HomePage() {
         }
         gitHubRepo="Jun-Murakami/ZeroLimit"
         gitHubUrl="https://github.com/Jun-Murakami/ZeroLimit"
+        zennUrl="https://zenn.dev/jun_murakami/articles/36ab3674237622"
         windowsAppUrl="https://github.com/Jun-Murakami/ZeroLimit/releases/download/v{{version}}/ZeroLimit_{{version}}_Windows_Setup.exe"
         macUniversalAppUrl="https://github.com/Jun-Murakami/ZeroLimit/releases/download/v{{version}}/ZeroLimit_{{version}}_macOS.pkg"
         windowsZipUrl="https://github.com/Jun-Murakami/ZeroLimit/releases/download/v{{version}}/ZeroLimit_{{version}}_Windows_VST3_AAX_Standalone.zip"
@@ -495,6 +496,7 @@ export default async function HomePage() {
         }
         gitHubRepo="Jun-Murakami/ZeroComp"
         gitHubUrl="https://github.com/Jun-Murakami/ZeroComp"
+        zennUrl="https://zenn.dev/jun_murakami/articles/36ab3674237622"
         windowsAppUrl="https://github.com/Jun-Murakami/ZeroComp/releases/download/v{{version}}/ZeroComp_{{version}}_Windows_Setup.exe"
         macUniversalAppUrl="https://github.com/Jun-Murakami/ZeroComp/releases/download/v{{version}}/ZeroComp_{{version}}_macOS.pkg"
         windowsZipUrl="https://github.com/Jun-Murakami/ZeroComp/releases/download/v{{version}}/ZeroComp_{{version}}_Windows_VST3_AAX_Standalone.zip"
@@ -527,6 +529,7 @@ export default async function HomePage() {
         }
         gitHubRepo="Jun-Murakami/ZeroEQ"
         gitHubUrl="https://github.com/Jun-Murakami/ZeroEQ"
+        zennUrl="https://zenn.dev/jun_murakami/articles/36ab3674237622"
         windowsAppUrl="https://github.com/Jun-Murakami/ZeroEQ/releases/download/v{{version}}/ZeroEQ_{{version}}_Windows_Setup.exe"
         macUniversalAppUrl="https://github.com/Jun-Murakami/ZeroEQ/releases/download/v{{version}}/ZeroEQ_{{version}}_macOS.pkg"
         windowsZipUrl="https://github.com/Jun-Murakami/ZeroEQ/releases/download/v{{version}}/ZeroEQ_{{version}}_Windows_VST3_AAX_Standalone.zip"

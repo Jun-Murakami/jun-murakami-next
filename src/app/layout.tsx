@@ -155,8 +155,8 @@ export default async function RootLayout({
                   >
                     <Typography
                       sx={{
-                        mt: { xs: 2, sm: 3 },
-                        mb: { xs: 1.5, sm: 2 },
+                        mt: { xs: 7, sm: 3 },
+                        mb: { xs: 3, sm: 2 },
                         fontWeight: 300,
                         fontSize: { xs: 22, sm: 38, md: 44 },
                         textAlign: { xs: 'center', sm: 'left' },

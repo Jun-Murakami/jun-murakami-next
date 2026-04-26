@@ -17,6 +17,12 @@ export const ja = {
     tools: 'ツール',
     music: '音楽制作',
   },
+  appPage: {
+    backToTop: 'アプリ一覧に戻る',
+    openDemo: 'Webデモを新しいタブで開く',
+    relatedTitle: '他のアプリ',
+    demoTitle: 'ブラウザで試す（Webデモ）',
+  },
   social: {
     note: 'note (ブログ記事など)',
     zenn: 'Zenn (プログラム関連の記事など)',

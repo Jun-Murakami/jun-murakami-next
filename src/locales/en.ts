@@ -17,6 +17,12 @@ export const en = {
     tools: 'Tools',
     music: 'Music Production',
   },
+  appPage: {
+    backToTop: 'Back to all apps',
+    openDemo: 'Open web demo in new tab',
+    relatedTitle: 'More apps',
+    demoTitle: 'Try in browser (web demo)',
+  },
   social: {
     note: 'note (Blog posts)',
     zenn: 'Zenn (Program-related articles)',

@@ -29,6 +29,7 @@ function isLanguage(value: string | null | undefined): value is Language {
 }
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://jun-murakami.web.app'),
   title: 'Jun Murakami App Factory',
   description:
     '音楽ディレクター / プロデューサーの村上純 (高橋純) です。業務の合間に開発したアプリケーションや、音楽制作・DTM用のプラグインやライブラリなどを配布しています。',
@@ -138,7 +139,8 @@ export default async function RootLayout({
                 />
                 <Box
                   sx={{
-                    p: 1,
+                    px: { xs: 1, sm: 3, md: 4 },
+                    py: 1,
                     width: '100%',
                     minHeight: '100vh',
                   }}
@@ -146,20 +148,20 @@ export default async function RootLayout({
                   <Box
                     sx={{
                       position: 'relative',
-                      maxWidth: '980px',
-                      marginX: { xs: 'auto', sm: 0 },
-                      left: { xs: 'auto', sm: '30%' },
-                      width: { xs: '100%', sm: '70%' },
+                      maxWidth: 1600,
+                      mx: 'auto',
+                      width: '100%',
                     }}
                   >
                     <Typography
                       sx={{
-                        mt: { xs: 5, sm: 10 },
-                        mb: 5,
+                        mt: { xs: 2, sm: 3 },
+                        mb: { xs: 1.5, sm: 2 },
                         fontWeight: 300,
-                        fontSize: { xs: 25, sm: 63 },
+                        fontSize: { xs: 22, sm: 38, md: 44 },
                         textAlign: { xs: 'center', sm: 'left' },
                         fontFamily: 'var(--font-urbanist)',
+                        lineHeight: 1.1,
                       }}
                       component="h1"
                     >

@@ -5,7 +5,10 @@
       "WebFetch(domain:github.com)",
       "WebFetch(domain:api.github.com)",
       "Bash(npx tsc:*)",
-      "Bash(npm run *)"
+      "Bash(npm run *)",
+      "Bash(git *)",
+      "Bash(cp D:/Synching/code/Nextjs/jun-murakami-next/.next/server/app/apps/zerocomp/opengraph-image.body /tmp/og-zerocomp.png)",
+      "Read(//tmp/**)"
     ]
   }
 }

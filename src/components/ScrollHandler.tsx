@@ -12,6 +12,13 @@ export const ScrollHandler = () => {
         for (const mutation of mutations) {
           if (mutation.type === 'childList') {
             const hash = window.location.hash;
+            // The hash can be cleared by a client-side redirect (e.g.
+            // LegacyAnchorRedirect) after this observer is set up. Stop
+            // observing once that happens, otherwise querySelector('') throws.
+            if (!hash) {
+              observer.disconnect();
+              return;
+            }
             const targetElement = document.querySelector(hash);
             if (targetElement) {
               setTimeout(() => {

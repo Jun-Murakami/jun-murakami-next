@@ -8,17 +8,13 @@ import XIcon from '@mui/icons-material/X';
 import {
   Box,
   Button,
-  Grid,
   IconButton,
-  Link as MuiLink,
   Tooltip,
   Typography,
 } from '@mui/material';
-import { cookies, headers } from 'next/headers';
 import Link from 'next/link';
 
-import * as screenshots from '@/assets/screenshots';
-import { AppGridCard } from '@/components/AppGridCard';
+import { AppCatalog } from '@/components/AppCatalog';
 import DynamicMobileScrollButton from '@/components/DynamicMobileScrollButton';
 import { GaEventBinder } from '@/components/GaEventBinder';
 import {
@@ -28,41 +24,19 @@ import {
   WikiLogoIcon,
   ZennLogoIcon,
 } from '@/components/Icons';
+import { LegacyAnchorRedirect } from '@/components/LegacyAnchorRedirect';
 import { ScrollToTopButton } from '@/components/ScrollToTop';
-import { StaticAppCard } from '@/components/StaticAppCard';
+import {
+  APP_BY_LEGACY_ANCHOR,
+  APPS,
+  type AppCategory,
+} from '@/data/apps';
 import { en } from '@/locales/en';
 import { ja } from '@/locales/ja';
-import {
-  extractLanguage,
-  SESSION_COOKIE_NAME,
-} from '@/utils/languageSessionCookie';
-
-import type { Language } from '@/utils/languageSessionCookie';
-
-function isLanguage(value: string | null | undefined): value is Language {
-  return value === 'ja' || value === 'en';
-}
+import { resolveServerLanguage } from '@/utils/serverLanguage';
 
 export default async function HomePage() {
-  const cookieStore = await cookies();
-  const sessionValue = cookieStore.get(SESSION_COOKIE_NAME)?.value;
-  const sessionLanguage = extractLanguage(sessionValue);
-  const legacyValue = cookieStore.get('language')?.value;
-  const legacyLanguage =
-    legacyValue === 'ja' || legacyValue === 'en' ? legacyValue : undefined;
-  const headerStore = await headers();
-  const forwardedLanguage = headerStore.get('x-app-language');
-  const acceptLanguageHeader =
-    headerStore.get('accept-language')?.toLowerCase() ?? '';
-  const detectedLanguage = isLanguage(forwardedLanguage)
-    ? forwardedLanguage
-    : acceptLanguageHeader.startsWith('ja')
-      ? 'ja'
-      : acceptLanguageHeader
-        ? 'en'
-        : undefined;
-  const language: Language =
-    sessionLanguage ?? legacyLanguage ?? detectedLanguage ?? 'ja';
+  const language = await resolveServerLanguage();
   const t = language === 'ja' ? ja : en;
 
   const socialLinks = [
@@ -114,123 +88,29 @@ export default async function HomePage() {
     },
   ];
 
-  const appGridItems = {
-    tools: [
-      {
-        title: t.apps.wlsib.title,
-        screenshot: screenshots.wlsib_s,
-        description: t.apps.wlsib.description,
-        sectionId: 'wlsib',
-      },
-      {
-        title: t.apps.aiBrowser.title,
-        screenshot: screenshots.aiBrowser_s,
-        description: t.apps.aiBrowser.description,
-        sectionId: 'aiBrowser',
-      },
-      {
-        title: t.apps.lightroom2Resolve.title,
-        screenshot: screenshots.lightroom2Resolve_s,
-        description: t.apps.lightroom2Resolve.description,
-        sectionId: 'lightroom2Resolve',
-      },
-      {
-        title: t.apps.keyfit.title,
-        screenshot: screenshots.keyfit_s,
-        description: t.apps.keyfit.description,
-        sectionId: 'keyfit',
-      },
-      {
-        title: t.apps.taskTrees.title,
-        screenshot: screenshots.taskTrees_s,
-        description: t.apps.taskTrees.description,
-        sectionId: 'tasktrees',
-      },
-      {
-        title: t.apps.monacoNotepad.title,
-        screenshot: screenshots.monacoNotepad_s,
-        description: t.apps.monacoNotepad.description,
-        sectionId: 'monacoNotepad',
-      },
-      {
-        title: t.apps.dropboxSkipper.title,
-        screenshot: screenshots.dropboxSkipper_s,
-        description: t.apps.dropboxSkipper.description,
-        sectionId: 'dropbox-skipper',
-      },
-    ],
-    music: [
-      {
-        title: t.apps.mixCompare.title,
-        screenshot: screenshots.mixCompare_s,
-        description: t.apps.mixCompare.description,
-        sectionId: 'mixCompare',
-      },
-      {
-        title: t.apps.zeroLimit.title,
-        screenshot: screenshots.zerolimit_s,
-        description: t.apps.zeroLimit.description,
-        sectionId: 'zeroLimit',
-      },
-      {
-        title: t.apps.zeroComp.title,
-        screenshot: screenshots.zerocomp_s,
-        description: t.apps.zeroComp.description,
-        sectionId: 'zeroComp',
-      },
-      {
-        title: t.apps.zeroEq.title,
-        screenshot: screenshots.zeroeq_s,
-        description: t.apps.zeroEq.description,
-        sectionId: 'zeroEq',
-      },
-      {
-        title: t.apps.tinyVu.title,
-        screenshot: screenshots.tinyvu_s,
-        description: t.apps.tinyVu.description,
-        sectionId: 'tinyVu',
-      },
-      {
-        title: t.apps.testTone.title,
-        screenshot: screenshots.testtone_s,
-        description: t.apps.testTone.description,
-        sectionId: 'testTone',
-      },
-      {
-        title: t.apps.vtm.title,
-        screenshot: screenshots.vtm_s,
-        description: t.apps.vtm.description,
-        sectionId: 'vocal-take-manager',
-      },
-      {
-        title: t.apps.yomigana.title,
-        screenshot: screenshots.yomigana_s,
-        description: t.apps.yomigana.description,
-        sectionId: 'yomigana',
-      },
-      {
-        title: t.apps.cubaseDMEditor.title,
-        screenshot: screenshots.cubaseDMEditor_s,
-        description: t.apps.cubaseDMEditor.description,
-        sectionId: 'cubaseDMEditor',
-      },
-      {
-        title: t.apps.famitone.title,
-        screenshot: screenshots.famitone_s,
-        description: t.apps.famitone.description,
-        sectionId: 'famitone',
-      },
-    ],
-  } as const;
+  const titleByLocaleKey: Record<string, string> = {};
+  const descByLocaleKey: Record<string, string> = {};
+  for (const app of APPS) {
+    titleByLocaleKey[app.localeKey] = t.apps[app.localeKey].title;
+    descByLocaleKey[app.localeKey] = t.apps[app.localeKey].description;
+  }
 
-  const appCategories = [
-    { key: 'tools', label: t.appCategories.tools, items: appGridItems.tools },
-    { key: 'music', label: t.appCategories.music, items: appGridItems.music },
-  ] as const;
+  const categoryLabels: Record<AppCategory, string> = {
+    tools: t.appCategories.tools,
+    music: t.appCategories.music,
+  };
+
+  const anchorToSlug = Object.fromEntries(
+    Object.entries(APP_BY_LEGACY_ANCHOR).map(([anchor, app]) => [
+      anchor,
+      app.slug,
+    ]),
+  );
 
   return (
     <>
       <GaEventBinder language={language} />
+      <LegacyAnchorRedirect anchorToSlug={anchorToSlug} />
 
       <Typography variant="body2" sx={{ p: { xs: 1, sm: 0 } }}>
         {t.intro.text}
@@ -241,11 +121,11 @@ export default async function HomePage() {
         </Link>
       </Typography>
 
-      <Box sx={{ mt: 1, mb: 5, textAlign: { xs: 'center', sm: 'left' } }}>
+      <Box sx={{ mt: 0.5, mb: 2, textAlign: { xs: 'center', sm: 'left' } }}>
         {socialLinks.map((link) => (
           <Tooltip title={link.title} key={link.title}>
             <IconButton
-              sx={{ height: { xs: 45, sm: 50 }, width: { xs: 45, sm: 50 } }}
+              sx={{ height: { xs: 40, sm: 44 }, width: { xs: 40, sm: 44 } }}
               component="a"
               {...(link.internal ? {} : { target: '_blank' })}
               href={link.url}
@@ -259,521 +139,12 @@ export default async function HomePage() {
 
       <DynamicMobileScrollButton />
 
-      <Grid
-        container
-        spacing={2}
-        sx={{
-          mb: 10,
-          alignItems: 'stretch',
-          position: 'relative',
-        }}
-        className="digest-grid"
-      >
-        {appCategories.map((category) => (
-          <Grid
-            key={category.key}
-            size={{ xs: 12, md: 6 }}
-            sx={{ display: 'flex' }}
-          >
-            <Box
-              sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: { xs: 1.5, md: 2 },
-                p: { xs: 1.5, md: 2 },
-                borderRadius: 3,
-                border: '1px solid',
-                borderColor:
-                  category.key === 'tools'
-                    ? 'rgba(130, 177, 255, 0.45)'
-                    : 'rgba(244, 143, 177, 0.4)',
-                background:
-                  category.key === 'tools'
-                    ? 'linear-gradient(150deg, rgba(41, 98, 255, 0.28) 0%, rgba(13, 28, 64, 0.75) 55%, rgba(10, 19, 41, 0.0) 100%)'
-                    : 'linear-gradient(150deg, rgba(236, 64, 122, 0.28) 0%, rgba(79, 20, 53, 0.75) 55%, rgba(24, 8, 26, 0.0) 100%)',
-                backdropFilter: 'blur(10px)',
-                boxShadow: '0 8px 30px rgba(0,0,0,0.35)',
-                width: '100%',
-                position: 'relative',
-                overflow: 'hidden',
-              }}
-            >
-              <Box
-                sx={{
-                  position: 'absolute',
-                  inset: 0,
-                  background:
-                    'radial-gradient(circle at top left, rgba(255,255,255,0.12), transparent 65%)',
-                  pointerEvents: 'none',
-                  borderRadius: 'inherit',
-                  zIndex: 0,
-                }}
-              />
-              <Typography
-                variant="subtitle1"
-                component="h2"
-                sx={{
-                  fontWeight: 600,
-                  letterSpacing: '0.08em',
-                  textTransform: 'uppercase',
-                  textAlign: { xs: 'center', md: 'left' },
-                  position: 'relative',
-                  zIndex: 1,
-                }}
-              >
-                {category.label}
-              </Typography>
-              <Grid
-                container
-                spacing={2}
-                sx={{ position: 'relative', zIndex: 1 }}
-              >
-                {category.items.map((app) => (
-                  <Grid
-                    key={app.sectionId}
-                    size={{ xs: 6, md: 6 }}
-                    sx={{ display: 'flex' }}
-                  >
-                    <AppGridCard
-                      {...app}
-                      data-ga-app={app.title}
-                      sx={{ flexGrow: 1 }}
-                    />
-                  </Grid>
-                ))}
-              </Grid>
-            </Box>
-          </Grid>
-        ))}
-      </Grid>
-
-      {/* 以下はそのままサーバで描画 */}
-      <StaticAppCard
-        appName={t.apps.wlsib.title}
-        sectionId="wlsib"
-        screenshot={screenshots.wlsib}
-        description={t.apps.wlsib.longDescription}
-        noteUrl="https://note.com/junmurakami/n/n36b1e198f287"
-        gitHubUrl="https://github.com/Jun-Murakami/wlsib"
-        policyUrl="/privacy-policy-wlsib"
-        appStoreUrl="https://apps.apple.com/jp/app/%E3%83%AC%E3%83%B3%E3%82%BA%E4%BD%95%E6%8C%81%E3%81%A3%E3%81%A6%E3%81%8F/id6480391376"
-        googlePlayUrl="https://play.google.com/store/apps/details?id=com.wlsib.app"
-        webAppUrl="https://lensdore-c55ce.web.app/"
-        labels={{
-          noteArticle: t.common.noteArticle,
-          zennArticle: t.common.zennArticle,
-          sourceCode: t.common.sourceCode,
-          privacyPolicy: t.common.privacyPolicy,
-        }}
-      />
-
-      <StaticAppCard
-        appName={t.apps.aiBrowser.title}
-        sectionId="aiBrowser"
-        screenshot={screenshots.aiBrowser}
-        description={t.apps.aiBrowser.longDescription}
-        gitHubRepo="Jun-Murakami/AI-Browser"
-        noteUrl="https://note.com/junmurakami/n/n5d674f5977e6"
-        zennUrl="https://zenn.dev/jun_murakami/articles/3a885d936e8937"
-        gitHubUrl="https://github.com/Jun-Murakami/AI-Browser"
-        windowsAppUrl="https://github.com/Jun-Murakami/AI-Browser/releases/download/v{{version}}/AI-Browser-{{version}}-setup_win_x64.exe"
-        macUniversalAppUrl="https://github.com/Jun-Murakami/AI-Browser/releases/download/v{{version}}/AI-Browser-{{version}}_mac_universal.dmg"
-        labels={{
-          noteArticle: t.common.noteArticle,
-          zennArticle: t.common.zennArticle,
-          sourceCode: t.common.sourceCode,
-          privacyPolicy: t.common.privacyPolicy,
-        }}
-      />
-
-      <StaticAppCard
-        appName={t.apps.lightroom2Resolve.title}
-        sectionId="lightroom2Resolve"
-        screenshot={screenshots.lightroom2Resolve}
-        description={t.apps.lightroom2Resolve.longDescription}
-        gitHubRepo="Jun-Murakami/LightroomToResolve"
-        noteUrl="https://note.com/junmurakami/n/n2737001eaf88"
-        gitHubUrl="https://github.com/Jun-Murakami/LightroomToResolve"
-        windowsAppUrl="https://github.com/Jun-Murakami/LightroomToResolve/releases/download/v{{version}}/LightroomToResolve_{{version}}_windows.zip"
-        macUniversalAppUrl="https://github.com/Jun-Murakami/LightroomToResolve/releases/download/v{{version}}/LightroomToResolve_{{version}}_macOS.pkg"
-        labels={{
-          noteArticle: t.common.noteArticle,
-          zennArticle: t.common.zennArticle,
-          sourceCode: t.common.sourceCode,
-          privacyPolicy: t.common.privacyPolicy,
-        }}
-      />
-
-      <StaticAppCard
-        appName={t.apps.keyfit.title}
-        sectionId="keyfit"
-        screenshot={screenshots.keyfit}
-        description={t.apps.keyfit.longDescription}
-        gitHubRepo="Jun-Murakami/KeyFit"
-        zennUrl="https://zenn.dev/jun_murakami/articles/b7502bd19a97db"
-        gitHubUrl="https://github.com/Jun-Murakami/KeyFit"
-        windowsAppUrl="https://github.com/Jun-Murakami/KeyFit/releases/download/v{{version}}/KeyFit_{{version}}_x64_en-US.msi"
-        macUniversalAppUrl="https://github.com/Jun-Murakami/KeyFit/releases/download/v{{version}}/KeyFit_{{version}}_universal.dmg"
-        labels={{
-          noteArticle: t.common.noteArticle,
-          zennArticle: t.common.zennArticle,
-          sourceCode: t.common.sourceCode,
-          privacyPolicy: t.common.privacyPolicy,
-        }}
-      />
-
-      <StaticAppCard
-        appName={t.apps.mixCompare.title}
-        sectionId="mixCompare"
-        screenshot={screenshots.mixCompare}
-        description={
-          <>
-            {t.apps.mixCompare.longDescription}
-            <br />
-            <MuiLink
-              href="https://mixcompare-demo.web.app/"
-              target="_blank"
-              rel="noopener noreferrer"
-              sx={{ color: 'primary.light' }}
-            >
-              {t.apps.mixCompare.demoSiteText}
-            </MuiLink>
-          </>
-        }
-        gitHubRepo="Jun-Murakami/MixCompare"
-        zennUrl="https://zenn.dev/jun_murakami/articles/f9b3227fadfe7e"
-        gitHubUrl="https://github.com/Jun-Murakami/MixCompare"
-        windowsAppUrl="https://github.com/Jun-Murakami/MixCompare/releases/download/v{{version}}/MixCompare_{{version}}_Windows_Setup.exe"
-        macUniversalAppUrl="https://github.com/Jun-Murakami/MixCompare/releases/download/v{{version}}/MixCompare_{{version}}_macOS.pkg"
-        windowsZipUrl="https://github.com/Jun-Murakami/MixCompare/releases/download/v{{version}}/MixCompare_{{version}}_Windows_VST3_AAX_Standalone.zip"
-        macZipUrl="https://github.com/Jun-Murakami/MixCompare/releases/download/v{{version}}/MixCompare_{{version}}_macOS_VST3_AU_AAX_Standalone.zip"
-        linuxZipUrl="https://github.com/Jun-Murakami/MixCompare/releases/download/v{{version}}/MixCompare_{{version}}_Linux_VST3_LV2_CLAP_Standalone.zip"
-        labels={{
-          noteArticle: t.common.noteArticle,
-          zennArticle: t.common.zennArticle,
-          sourceCode: t.common.sourceCode,
-          privacyPolicy: t.common.privacyPolicy,
-        }}
-      />
-
-      <StaticAppCard
-        appName={t.apps.zeroLimit.title}
-        sectionId="zeroLimit"
-        screenshot={screenshots.zerolimit}
-        description={
-          <>
-            {t.apps.zeroLimit.longDescription}
-            <br />
-            <MuiLink
-              href="https://zerolimit-demo.web.app/"
-              target="_blank"
-              rel="noopener noreferrer"
-              sx={{ color: 'primary.light' }}
-            >
-              {t.apps.zeroLimit.demoSiteText}
-            </MuiLink>
-          </>
-        }
-        gitHubRepo="Jun-Murakami/ZeroLimit"
-        gitHubUrl="https://github.com/Jun-Murakami/ZeroLimit"
-        zennUrl="https://zenn.dev/jun_murakami/articles/36ab3674237622"
-        windowsAppUrl="https://github.com/Jun-Murakami/ZeroLimit/releases/download/v{{version}}/ZeroLimit_{{version}}_Windows_Setup.exe"
-        macUniversalAppUrl="https://github.com/Jun-Murakami/ZeroLimit/releases/download/v{{version}}/ZeroLimit_{{version}}_macOS.pkg"
-        windowsZipUrl="https://github.com/Jun-Murakami/ZeroLimit/releases/download/v{{version}}/ZeroLimit_{{version}}_Windows_VST3_AAX_Standalone.zip"
-        macZipUrl="https://github.com/Jun-Murakami/ZeroLimit/releases/download/v{{version}}/ZeroLimit_{{version}}_macOS_VST3_AU_AAX_Standalone.zip"
-        linuxZipUrl="https://github.com/Jun-Murakami/ZeroLimit/releases/download/v{{version}}/ZeroLimit_{{version}}_Linux_VST3_LV2_CLAP_Standalone.zip"
-        labels={{
-          noteArticle: t.common.noteArticle,
-          zennArticle: t.common.zennArticle,
-          sourceCode: t.common.sourceCode,
-          privacyPolicy: t.common.privacyPolicy,
-        }}
-      />
-
-      <StaticAppCard
-        appName={t.apps.zeroComp.title}
-        sectionId="zeroComp"
-        screenshot={screenshots.zerocomp}
-        description={
-          <>
-            {t.apps.zeroComp.longDescription}
-            <br />
-            <MuiLink
-              href="https://zerocomp-demo.web.app/"
-              target="_blank"
-              rel="noopener noreferrer"
-              sx={{ color: 'primary.light' }}
-            >
-              {t.apps.zeroComp.demoSiteText}
-            </MuiLink>
-          </>
-        }
-        gitHubRepo="Jun-Murakami/ZeroComp"
-        gitHubUrl="https://github.com/Jun-Murakami/ZeroComp"
-        zennUrl="https://zenn.dev/jun_murakami/articles/36ab3674237622"
-        windowsAppUrl="https://github.com/Jun-Murakami/ZeroComp/releases/download/v{{version}}/ZeroComp_{{version}}_Windows_Setup.exe"
-        macUniversalAppUrl="https://github.com/Jun-Murakami/ZeroComp/releases/download/v{{version}}/ZeroComp_{{version}}_macOS.pkg"
-        windowsZipUrl="https://github.com/Jun-Murakami/ZeroComp/releases/download/v{{version}}/ZeroComp_{{version}}_Windows_VST3_AAX_Standalone.zip"
-        macZipUrl="https://github.com/Jun-Murakami/ZeroComp/releases/download/v{{version}}/ZeroComp_{{version}}_macOS_VST3_AU_AAX_Standalone.zip"
-        linuxZipUrl="https://github.com/Jun-Murakami/ZeroComp/releases/download/v{{version}}/ZeroComp_{{version}}_Linux_VST3_LV2_CLAP_Standalone.zip"
-        labels={{
-          noteArticle: t.common.noteArticle,
-          zennArticle: t.common.zennArticle,
-          sourceCode: t.common.sourceCode,
-          privacyPolicy: t.common.privacyPolicy,
-        }}
-      />
-
-      <StaticAppCard
-        appName={t.apps.zeroEq.title}
-        sectionId="zeroEq"
-        screenshot={screenshots.zeroeq}
-        description={
-          <>
-            {t.apps.zeroEq.longDescription}
-            <br />
-            <MuiLink
-              href="https://zeroeq-demo.web.app/"
-              target="_blank"
-              rel="noopener noreferrer"
-              sx={{ color: 'primary.light' }}
-            >
-              {t.apps.zeroEq.demoSiteText}
-            </MuiLink>
-          </>
-        }
-        gitHubRepo="Jun-Murakami/ZeroEQ"
-        gitHubUrl="https://github.com/Jun-Murakami/ZeroEQ"
-        zennUrl="https://zenn.dev/jun_murakami/articles/36ab3674237622"
-        windowsAppUrl="https://github.com/Jun-Murakami/ZeroEQ/releases/download/v{{version}}/ZeroEQ_{{version}}_Windows_Setup.exe"
-        macUniversalAppUrl="https://github.com/Jun-Murakami/ZeroEQ/releases/download/v{{version}}/ZeroEQ_{{version}}_macOS.pkg"
-        windowsZipUrl="https://github.com/Jun-Murakami/ZeroEQ/releases/download/v{{version}}/ZeroEQ_{{version}}_Windows_VST3_AAX_Standalone.zip"
-        macZipUrl="https://github.com/Jun-Murakami/ZeroEQ/releases/download/v{{version}}/ZeroEQ_{{version}}_macOS_VST3_AU_AAX_Standalone.zip"
-        linuxZipUrl="https://github.com/Jun-Murakami/ZeroEQ/releases/download/v{{version}}/ZeroEQ_{{version}}_Linux_VST3_LV2_CLAP_Standalone.zip"
-        labels={{
-          noteArticle: t.common.noteArticle,
-          zennArticle: t.common.zennArticle,
-          sourceCode: t.common.sourceCode,
-          privacyPolicy: t.common.privacyPolicy,
-        }}
-      />
-
-      <StaticAppCard
-        appName={t.apps.tinyVu.title}
-        sectionId="tinyVu"
-        screenshot={screenshots.tinyvu}
-        description={
-          <>
-            {t.apps.tinyVu.longDescription}
-            <br />
-            <MuiLink
-              href="https://tinyvu-demo.web.app/"
-              target="_blank"
-              rel="noopener noreferrer"
-              sx={{ color: 'primary.light' }}
-            >
-              {t.apps.tinyVu.demoSiteText}
-            </MuiLink>
-          </>
-        }
-        gitHubRepo="Jun-Murakami/TinyVU"
-        gitHubUrl="https://github.com/Jun-Murakami/TinyVU"
-        windowsAppUrl="https://github.com/Jun-Murakami/TinyVU/releases/download/v{{version}}/TinyVU_{{version}}_Windows_Setup.exe"
-        macUniversalAppUrl="https://github.com/Jun-Murakami/TinyVU/releases/download/v{{version}}/TinyVU_{{version}}_macOS.pkg"
-        windowsZipUrl="https://github.com/Jun-Murakami/TinyVU/releases/download/v{{version}}/TinyVU_{{version}}_Windows_VST3_AAX_Standalone.zip"
-        macZipUrl="https://github.com/Jun-Murakami/TinyVU/releases/download/v{{version}}/TinyVU_{{version}}_macOS_VST3_AU_AAX_Standalone.zip"
-        linuxZipUrl="https://github.com/Jun-Murakami/TinyVU/releases/download/v{{version}}/TinyVU_{{version}}_Linux_VST3_LV2_CLAP_Standalone.zip"
-        labels={{
-          noteArticle: t.common.noteArticle,
-          zennArticle: t.common.zennArticle,
-          sourceCode: t.common.sourceCode,
-          privacyPolicy: t.common.privacyPolicy,
-        }}
-      />
-
-      <StaticAppCard
-        appName={t.apps.testTone.title}
-        sectionId="testTone"
-        screenshot={screenshots.testtone}
-        description={
-          <>
-            {t.apps.testTone.longDescription}
-            <br />
-            <MuiLink
-              href="https://testtone-demo.web.app/"
-              target="_blank"
-              rel="noopener noreferrer"
-              sx={{ color: 'primary.light' }}
-            >
-              {t.apps.testTone.demoSiteText}
-            </MuiLink>
-          </>
-        }
-        gitHubRepo="Jun-Murakami/TestTone"
-        gitHubUrl="https://github.com/Jun-Murakami/TestTone"
-        windowsAppUrl="https://github.com/Jun-Murakami/TestTone/releases/download/v{{version}}/TestTone_{{version}}_Windows_Setup.exe"
-        macUniversalAppUrl="https://github.com/Jun-Murakami/TestTone/releases/download/v{{version}}/TestTone_{{version}}_macOS.pkg"
-        windowsZipUrl="https://github.com/Jun-Murakami/TestTone/releases/download/v{{version}}/TestTone_{{version}}_Windows_VST3_AAX_Standalone.zip"
-        macZipUrl="https://github.com/Jun-Murakami/TestTone/releases/download/v{{version}}/TestTone_{{version}}_macOS_VST3_AU_AAX_Standalone.zip"
-        linuxZipUrl="https://github.com/Jun-Murakami/TestTone/releases/download/v{{version}}/TestTone_{{version}}_Linux_VST3_LV2_CLAP_Standalone.zip"
-        labels={{
-          noteArticle: t.common.noteArticle,
-          zennArticle: t.common.zennArticle,
-          sourceCode: t.common.sourceCode,
-          privacyPolicy: t.common.privacyPolicy,
-        }}
-      />
-
-      <StaticAppCard
-        appName={t.apps.vtm.title}
-        sectionId="vocal-take-manager"
-        screenshot={screenshots.vtm}
-        description={t.apps.vtm.longDescription}
-        noteUrl="https://note.com/junmurakami/n/ndd161a2d0bd4"
-        zennUrl="https://zenn.dev/jun_murakami/articles/2f11d63cf9bf9d"
-        gitHubUrl="https://github.com/Jun-Murakami/vocal-take-manager"
-        webAppUrl="https://vocal-take-manager.web.app/"
-        labels={{
-          noteArticle: t.common.noteArticle,
-          zennArticle: t.common.zennArticle,
-          sourceCode: t.common.sourceCode,
-          privacyPolicy: t.common.privacyPolicy,
-        }}
-      />
-
-      <StaticAppCard
-        appName={t.apps.yomigana.title}
-        sectionId="yomigana"
-        screenshot={screenshots.yomigana}
-        description={t.apps.yomigana.longDescription}
-        noteUrl="https://note.com/junmurakami/n/n35cd70b8dc12"
-        gitHubUrl="https://github.com/Jun-Murakami/yomigana3"
-        webAppUrl="https://yomiganaconverterreact.web.app/"
-        labels={{
-          noteArticle: t.common.noteArticle,
-          zennArticle: t.common.zennArticle,
-          sourceCode: t.common.sourceCode,
-          privacyPolicy: t.common.privacyPolicy,
-        }}
-      />
-
-      <StaticAppCard
-        appName={t.apps.taskTrees.title}
-        sectionId="tasktrees"
-        screenshot={screenshots.taskTrees}
-        description={t.apps.taskTrees.longDescription}
-        gitHubRepo="Jun-Murakami/TaskTrees"
-        noteUrl="https://note.com/junmurakami/n/n651efffaf343"
-        gitHubUrl="https://github.com/Jun-Murakami/TaskTrees"
-        policyUrl="/privacy-policy-tasktrees"
-        webAppUrl="https://tasktree-s.web.app/"
-        appStoreUrl="https://apps.apple.com/jp/app/tasktrees/id6482979857"
-        googlePlayUrl="https://play.google.com/store/apps/details?id=com.tasktrees.app"
-        windowsAppUrl="https://github.com/Jun-Murakami/TaskTrees/releases/download/v{{version}}/TaskTrees-{{version}}-setup_win_x64.exe"
-        macUniversalAppUrl="https://github.com/Jun-Murakami/TaskTrees/releases/download/v{{version}}/TaskTrees-{{version}}_mac_universal.dmg"
-        labels={{
-          noteArticle: t.common.noteArticle,
-          zennArticle: t.common.zennArticle,
-          sourceCode: t.common.sourceCode,
-          privacyPolicy: t.common.privacyPolicy,
-        }}
-      />
-
-      <StaticAppCard
-        appName={t.apps.dropboxSkipper.title}
-        sectionId="dropbox-skipper"
-        screenshot={screenshots.dropboxSkipper}
-        description={t.apps.dropboxSkipper.longDescription}
-        zennUrl="https://zenn.dev/jun_murakami/articles/1dc9d0a2ffa3d6"
-        noteUrl="https://note.com/junmurakami/n/n0911c5853082"
-        gitHubUrl="https://github.com/Jun-Murakami/dropboxskipper"
-        gitHubRepo="Jun-Murakami/dropboxskipper"
-        windowsAppUrl="https://github.com/Jun-Murakami/dropboxskipper/releases/download/v{{version}}/DropboxSkipper-win64-installer-{{version}}.exe"
-        macUniversalAppUrl="https://github.com/Jun-Murakami/dropboxskipper/releases/download/v{{version}}/DropboxSkipper-macOS-universal-{{version}}.dmg"
-        labels={{
-          noteArticle: t.common.noteArticle,
-          zennArticle: t.common.zennArticle,
-          sourceCode: t.common.sourceCode,
-          privacyPolicy: t.common.privacyPolicy,
-        }}
-      />
-
-      <StaticAppCard
-        appName={t.apps.monacoNotepad.title}
-        sectionId="monacoNotepad"
-        screenshot={screenshots.monacoNotepad}
-        policyUrl="/privacy-policy-monaco-notepad"
-        description={t.apps.monacoNotepad.longDescription}
-        gitHubRepo="Jun-Murakami/monaco-notepad"
-        zennUrl="https://zenn.dev/jun_murakami/articles/e80016061b4df5"
-        gitHubUrl="https://github.com/Jun-Murakami/monaco-notepad"
-        windowsAppUrl="https://github.com/Jun-Murakami/monaco-notepad/releases/download/v{{version}}/MonacoNotepad-win64-installer-{{version}}.exe"
-        macUniversalAppUrl="https://github.com/Jun-Murakami/monaco-notepad/releases/download/v{{version}}/MonacoNotepad-mac-universal-{{version}}.dmg"
-        labels={{
-          noteArticle: t.common.noteArticle,
-          zennArticle: t.common.zennArticle,
-          sourceCode: t.common.sourceCode,
-          privacyPolicy: t.common.privacyPolicy,
-        }}
-      />
-
-      <StaticAppCard
-        appName={t.apps.cubaseDMEditor.title}
-        sectionId="cubaseDMEditor"
-        screenshot={screenshots.cubaseDMEditor}
-        description={
-          <>
-            {t.apps.cubaseDMEditor.longDescription}
-            <br />
-            {t.common.downloadText}{' '}
-            <a
-              href="https://github.com/Jun-Murakami/CubaseDrumMapEditor/releases/download/v1.0/DrumMaps20230810.zip"
-              target="_blank"
-              rel="noreferrer"
-            >
-              {t.common.download}
-            </a>
-            .
-          </>
-        }
-        gitHubRepo="Jun-Murakami/CubaseDrumMapEditor"
-        noteUrl="https://note.com/junmurakami/n/n13650982fc7f"
-        gitHubUrl="https://github.com/Jun-Murakami/CubaseDrumMapEditor"
-        windowsAppUrl="https://github.com/Jun-Murakami/CubaseDrumMapEditor/releases/download/v{{version}}/CubaseDrumMapEditor_v{{version}}_win.zip"
-        macUniversalAppUrl="https://github.com/Jun-Murakami/CubaseDrumMapEditor/releases/download/v{{version}}/CubaseDrumMapEditor_v{{version}}_mac.dmg"
-        labels={{
-          noteArticle: t.common.noteArticle,
-          zennArticle: t.common.zennArticle,
-          sourceCode: t.common.sourceCode,
-          privacyPolicy: t.common.privacyPolicy,
-        }}
-      />
-
-      <StaticAppCard
-        appName={t.apps.famitone.title}
-        sectionId="famitone"
-        screenshot={screenshots.famitone}
-        description={
-          <>
-            {t.apps.famitone.longDescription}
-            <br />
-            {t.common.downloadText}{' '}
-            <a
-              href="https://github.com/Jun-Murakami/Famitone/releases/download/v1.0/Famitone2A03_v1.0.zip"
-              target="_blank"
-              rel="noreferrer"
-            >
-              {t.common.download}
-            </a>
-            .
-          </>
-        }
-        noteUrl="https://note.com/junmurakami/n/n1e525af59ada"
-        labels={{
-          noteArticle: t.common.noteArticle,
-          zennArticle: t.common.zennArticle,
-          sourceCode: t.common.sourceCode,
-          privacyPolicy: t.common.privacyPolicy,
+      <AppCatalog
+        apps={APPS}
+        texts={{
+          titleByLocaleKey,
+          descByLocaleKey,
+          categoryLabels,
         }}
       />
 

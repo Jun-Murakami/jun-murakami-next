@@ -185,6 +185,18 @@ export default async function HomePage() {
         sectionId: 'zeroEq',
       },
       {
+        title: t.apps.tinyVu.title,
+        screenshot: screenshots.tinyvu_s,
+        description: t.apps.tinyVu.description,
+        sectionId: 'tinyVu',
+      },
+      {
+        title: t.apps.testTone.title,
+        screenshot: screenshots.testtone_s,
+        description: t.apps.testTone.description,
+        sectionId: 'testTone',
+      },
+      {
         title: t.apps.vtm.title,
         screenshot: screenshots.vtm_s,
         description: t.apps.vtm.description,
@@ -435,6 +447,7 @@ export default async function HomePage() {
         macUniversalAppUrl="https://github.com/Jun-Murakami/MixCompare/releases/download/v{{version}}/MixCompare_{{version}}_macOS.pkg"
         windowsZipUrl="https://github.com/Jun-Murakami/MixCompare/releases/download/v{{version}}/MixCompare_{{version}}_Windows_VST3_AAX_Standalone.zip"
         macZipUrl="https://github.com/Jun-Murakami/MixCompare/releases/download/v{{version}}/MixCompare_{{version}}_macOS_VST3_AU_AAX_Standalone.zip"
+        linuxZipUrl="https://github.com/Jun-Murakami/MixCompare/releases/download/v{{version}}/MixCompare_{{version}}_Linux_VST3_LV2_CLAP_Standalone.zip"
         labels={{
           noteArticle: t.common.noteArticle,
           zennArticle: t.common.zennArticle,
@@ -468,6 +481,7 @@ export default async function HomePage() {
         macUniversalAppUrl="https://github.com/Jun-Murakami/ZeroLimit/releases/download/v{{version}}/ZeroLimit_{{version}}_macOS.pkg"
         windowsZipUrl="https://github.com/Jun-Murakami/ZeroLimit/releases/download/v{{version}}/ZeroLimit_{{version}}_Windows_VST3_AAX_Standalone.zip"
         macZipUrl="https://github.com/Jun-Murakami/ZeroLimit/releases/download/v{{version}}/ZeroLimit_{{version}}_macOS_VST3_AU_AAX_Standalone.zip"
+        linuxZipUrl="https://github.com/Jun-Murakami/ZeroLimit/releases/download/v{{version}}/ZeroLimit_{{version}}_Linux_VST3_LV2_CLAP_Standalone.zip"
         labels={{
           noteArticle: t.common.noteArticle,
           zennArticle: t.common.zennArticle,
@@ -501,6 +515,7 @@ export default async function HomePage() {
         macUniversalAppUrl="https://github.com/Jun-Murakami/ZeroComp/releases/download/v{{version}}/ZeroComp_{{version}}_macOS.pkg"
         windowsZipUrl="https://github.com/Jun-Murakami/ZeroComp/releases/download/v{{version}}/ZeroComp_{{version}}_Windows_VST3_AAX_Standalone.zip"
         macZipUrl="https://github.com/Jun-Murakami/ZeroComp/releases/download/v{{version}}/ZeroComp_{{version}}_macOS_VST3_AU_AAX_Standalone.zip"
+        linuxZipUrl="https://github.com/Jun-Murakami/ZeroComp/releases/download/v{{version}}/ZeroComp_{{version}}_Linux_VST3_LV2_CLAP_Standalone.zip"
         labels={{
           noteArticle: t.common.noteArticle,
           zennArticle: t.common.zennArticle,
@@ -534,6 +549,73 @@ export default async function HomePage() {
         macUniversalAppUrl="https://github.com/Jun-Murakami/ZeroEQ/releases/download/v{{version}}/ZeroEQ_{{version}}_macOS.pkg"
         windowsZipUrl="https://github.com/Jun-Murakami/ZeroEQ/releases/download/v{{version}}/ZeroEQ_{{version}}_Windows_VST3_AAX_Standalone.zip"
         macZipUrl="https://github.com/Jun-Murakami/ZeroEQ/releases/download/v{{version}}/ZeroEQ_{{version}}_macOS_VST3_AU_AAX_Standalone.zip"
+        linuxZipUrl="https://github.com/Jun-Murakami/ZeroEQ/releases/download/v{{version}}/ZeroEQ_{{version}}_Linux_VST3_LV2_CLAP_Standalone.zip"
+        labels={{
+          noteArticle: t.common.noteArticle,
+          zennArticle: t.common.zennArticle,
+          sourceCode: t.common.sourceCode,
+          privacyPolicy: t.common.privacyPolicy,
+        }}
+      />
+
+      <StaticAppCard
+        appName={t.apps.tinyVu.title}
+        sectionId="tinyVu"
+        screenshot={screenshots.tinyvu}
+        description={
+          <>
+            {t.apps.tinyVu.longDescription}
+            <br />
+            <MuiLink
+              href="https://tinyvu-demo.web.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              sx={{ color: 'primary.light' }}
+            >
+              {t.apps.tinyVu.demoSiteText}
+            </MuiLink>
+          </>
+        }
+        gitHubRepo="Jun-Murakami/TinyVU"
+        gitHubUrl="https://github.com/Jun-Murakami/TinyVU"
+        windowsAppUrl="https://github.com/Jun-Murakami/TinyVU/releases/download/v{{version}}/TinyVU_{{version}}_Windows_Setup.exe"
+        macUniversalAppUrl="https://github.com/Jun-Murakami/TinyVU/releases/download/v{{version}}/TinyVU_{{version}}_macOS.pkg"
+        windowsZipUrl="https://github.com/Jun-Murakami/TinyVU/releases/download/v{{version}}/TinyVU_{{version}}_Windows_VST3_AAX_Standalone.zip"
+        macZipUrl="https://github.com/Jun-Murakami/TinyVU/releases/download/v{{version}}/TinyVU_{{version}}_macOS_VST3_AU_AAX_Standalone.zip"
+        linuxZipUrl="https://github.com/Jun-Murakami/TinyVU/releases/download/v{{version}}/TinyVU_{{version}}_Linux_VST3_LV2_CLAP_Standalone.zip"
+        labels={{
+          noteArticle: t.common.noteArticle,
+          zennArticle: t.common.zennArticle,
+          sourceCode: t.common.sourceCode,
+          privacyPolicy: t.common.privacyPolicy,
+        }}
+      />
+
+      <StaticAppCard
+        appName={t.apps.testTone.title}
+        sectionId="testTone"
+        screenshot={screenshots.testtone}
+        description={
+          <>
+            {t.apps.testTone.longDescription}
+            <br />
+            <MuiLink
+              href="https://testtone-demo.web.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              sx={{ color: 'primary.light' }}
+            >
+              {t.apps.testTone.demoSiteText}
+            </MuiLink>
+          </>
+        }
+        gitHubRepo="Jun-Murakami/TestTone"
+        gitHubUrl="https://github.com/Jun-Murakami/TestTone"
+        windowsAppUrl="https://github.com/Jun-Murakami/TestTone/releases/download/v{{version}}/TestTone_{{version}}_Windows_Setup.exe"
+        macUniversalAppUrl="https://github.com/Jun-Murakami/TestTone/releases/download/v{{version}}/TestTone_{{version}}_macOS.pkg"
+        windowsZipUrl="https://github.com/Jun-Murakami/TestTone/releases/download/v{{version}}/TestTone_{{version}}_Windows_VST3_AAX_Standalone.zip"
+        macZipUrl="https://github.com/Jun-Murakami/TestTone/releases/download/v{{version}}/TestTone_{{version}}_macOS_VST3_AU_AAX_Standalone.zip"
+        linuxZipUrl="https://github.com/Jun-Murakami/TestTone/releases/download/v{{version}}/TestTone_{{version}}_Linux_VST3_LV2_CLAP_Standalone.zip"
         labels={{
           noteArticle: t.common.noteArticle,
           zennArticle: t.common.zennArticle,

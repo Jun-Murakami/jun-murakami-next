@@ -32,6 +32,7 @@ interface DynamicAppCardProps {
   macUniversalAppUrl?: string | null;
   windowsZipUrl?: string;
   macZipUrl?: string;
+  linuxZipUrl?: string;
   error?: string; // GitHub APIエラー情報を追加
 }
 
@@ -49,6 +50,7 @@ const DynamicAppCard = ({
   macUniversalAppUrl,
   windowsZipUrl,
   macZipUrl,
+  linuxZipUrl,
   error, // エラー情報を受け取る
 }: DynamicAppCardProps) => {
   const { language } = useLanguage();
@@ -125,7 +127,8 @@ const DynamicAppCard = ({
         windowsAppUrl ||
         macAppleSiliconAppUrl ||
         macIntelAppUrl ||
-        macUniversalAppUrl) && (
+        macUniversalAppUrl ||
+        linuxZipUrl) && (
         <>
           <Divider sx={{ mb: 2 }} />
           <Box sx={{ marginY: 2 }}>
@@ -292,6 +295,27 @@ const DynamicAppCard = ({
                     alt="Universal Mac"
                     height={45}
                   />
+                </Button>
+              </Tooltip>
+            )}
+            {linuxZipUrl && (
+              <Tooltip
+                title={
+                  language === 'ja'
+                    ? 'Linux版をダウンロード'
+                    : 'Download Linux app'
+                }
+              >
+                <Button
+                  sx={openAppStyle}
+                  component="a"
+                  href={linuxZipUrl}
+                  download
+                  onClick={() =>
+                    sendLogEvent('linux_app_click', { url: linuxZipUrl })
+                  }
+                >
+                  <Image src={badges.linux} alt="Linux" height={45} />
                 </Button>
               </Tooltip>
             )}

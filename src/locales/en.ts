@@ -94,36 +94,54 @@ export const en = {
     mixCompare: {
       title: 'MixCompare',
       description:
-        'A VST3/AU/AAX plugin that lets you compare your DAW mix with reference tracks.',
+        'A VST3/AU/AAX/LV2/CLAP plugin that lets you compare your DAW mix with reference tracks.',
       longDescription:
-        "A VST3/AU/AAX plugin that loads audio files so you can compare them against the mix you're working on in your DAW. With host-synced playback you can perform precise A/B checks between different mix versions. It's useful for recording engineers and music directors, and especially for composers who manage many tracks, such as scoring, game soundtrack, and competition writers.",
+        "A VST3/AU/AAX/LV2/CLAP plugin that loads audio files so you can compare them against the mix you're working on in your DAW. Runs on macOS, Windows, and Linux. With host-synced playback you can perform precise A/B checks between different mix versions. It's useful for recording engineers and music directors, and especially for composers who manage many tracks, such as scoring, game soundtrack, and competition writers.",
       demoSiteText:
         'A web app demo is now available — give it a try in your browser.',
     },
     zeroLimit: {
       title: 'ZeroLimit',
       description:
-        'A simple zero-latency limiter VST3/AU/AAX plugin for broadcast and in-arrangement mastering.',
+        'A simple zero-latency limiter VST3/AU/AAX/LV2/CLAP plugin for broadcast and in-arrangement mastering.',
       longDescription:
-        'A simple zero-latency limiter plugin ideal for streaming/broadcast and for masters used while arranging. Supports VST3/AU/AAX. Despite running with zero latency, it also includes a multiband limit mode with a configurable number of bands.',
+        'A simple zero-latency limiter plugin ideal for streaming/broadcast and for masters used while arranging. Supports VST3/AU/AAX/LV2/CLAP and runs on macOS, Windows, and Linux. Despite running with zero latency, it also includes a multiband limit mode with a configurable number of bands.',
       demoSiteText:
         'A web app demo is now available — give it a try in your browser.',
     },
     zeroComp: {
       title: 'ZeroComp',
       description:
-        'A simple zero-latency compressor VST3/AU/AAX plugin.',
+        'A simple zero-latency compressor VST3/AU/AAX/LV2/CLAP plugin.',
       longDescription:
-        'A simple zero-latency compressor plugin. Supports VST3/AU/AAX. Includes four different operating modes: VCA, Opt, FET, and Vari-Mu.',
+        'A simple zero-latency compressor plugin. Supports VST3/AU/AAX/LV2/CLAP and runs on macOS, Windows, and Linux. Includes four different operating modes: VCA, Opt, FET, and Vari-Mu.',
       demoSiteText:
         'A web app demo is now available — give it a try in your browser.',
     },
     zeroEq: {
       title: 'ZeroEQ',
       description:
-        'A simple zero-latency equalizer VST3/AU/AAX plugin.',
+        'A simple zero-latency equalizer VST3/AU/AAX/LV2/CLAP plugin.',
       longDescription:
-        'A simple yet carefully designed 11-band equalizer with a built-in spectrum analyzer. Runs lightly with zero latency.',
+        'A simple yet carefully designed 11-band equalizer with a built-in spectrum analyzer. Supports VST3/AU/AAX/LV2/CLAP and runs on macOS, Windows, and Linux. Runs lightly with zero latency.',
+      demoSiteText:
+        'A web app demo is now available — give it a try in your browser.',
+    },
+    tinyVu: {
+      title: 'TinyVU',
+      description:
+        "The world's smallest VU meter VST3/AU/AAX/LV2/CLAP plugin.",
+      longDescription:
+        "A VU meter plugin that can be shrunk down to a very small size. It's useful for event sound and live streaming on a laptop where every bit of screen space matters while still keeping an eye on levels. The meter behavior is modeled on the Waves VU meter and tracks it very closely. Supports VST3/AU/AAX/LV2/CLAP and runs on macOS, Windows, and Linux.",
+      demoSiteText:
+        'A web app demo is now available — give it a try in your browser.',
+    },
+    testTone: {
+      title: 'TestTone',
+      description:
+        'A simple test signal generator VST3/AU/AAX/LV2/CLAP plugin.',
+      longDescription:
+        'A very simple test signal generator that lets you send the signal you need right away. Useful for setting up gear and various checks. Supports VST3/AU/AAX/LV2/CLAP and runs on macOS, Windows, and Linux.',
       demoSiteText:
         'A web app demo is now available — give it a try in your browser.',
     },

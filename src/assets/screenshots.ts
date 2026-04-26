@@ -14,6 +14,10 @@ import monacoNotepad from '@/assets/screenshots/sc_monaco_notepad.jpg';
 import monacoNotepad_s from '@/assets/screenshots/sc_monaco_notepad_s.webp';
 import taskTrees from '@/assets/screenshots/sc_tasktrees.jpg';
 import taskTrees_s from '@/assets/screenshots/sc_tasktrees_s.webp';
+import testtone from '@/assets/screenshots/sc_testtone.jpg';
+import testtone_s from '@/assets/screenshots/sc_testtone_s.webp';
+import tinyvu from '@/assets/screenshots/sc_tinyvu.jpg';
+import tinyvu_s from '@/assets/screenshots/sc_tinyvu_s.webp';
 import wlsib from '@/assets/screenshots/sc_wlsib.jpg';
 import wlsib_s from '@/assets/screenshots/sc_wlsib_s.webp';
 import yomigana from '@/assets/screenshots/sc_yomigana.jpg';
@@ -40,6 +44,10 @@ export {
   famitone_s,
   taskTrees,
   taskTrees_s,
+  testtone,
+  testtone_s,
+  tinyvu,
+  tinyvu_s,
   wlsib,
   wlsib_s,
   yomigana,

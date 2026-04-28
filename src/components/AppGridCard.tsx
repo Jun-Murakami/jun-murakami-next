@@ -112,6 +112,7 @@ export function AppGridCard({
               display: '-webkit-box',
               WebkitBoxOrient: 'vertical',
               WebkitLineClamp: 3,
+              wordBreak: 'break-all',
             }}
           >
             {description}
@@ -173,6 +174,7 @@ export function AppGridCard({
               fontSize: '0.78rem',
               lineHeight: 1.45,
               color: 'rgba(255,255,255,0.9)',
+              wordBreak: 'break-all',
             }}
           >
             {description}

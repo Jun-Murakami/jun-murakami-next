@@ -97,9 +97,7 @@ Google Drive sync is optional. If you choose to connect Google Drive, the App us
 
 On mobile, the App uses the Google Drive API appDataFolder scope and stores note data in the App's dedicated application data area within your Google Drive. This area is not normally visible in the Google Drive UI and is used only by the App.
 
-On mobile, the App's access to Google Drive is limited to this App-specific application data area. The App cannot view, read, modify, or delete files, folders, photos, documents, or other Google Drive data in your regular My Drive.
-
-On desktop, for compatibility and migration from older versions, the App may check, migrate, or delete App-specific data stored in Google Drive. In all cases, the App uses Google Drive only as needed for note synchronization.
+The App's access to Google Drive is limited to this App-specific application data area. The App cannot view, read, modify, or delete files, folders, photos, documents, or other Google Drive data in your regular My Drive.
 
 Google authentication information and access tokens are stored on your device to provide the sync feature. They are not sent to the service provider's servers.
 

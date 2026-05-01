@@ -12,7 +12,7 @@ import { AppGridCard } from '@/components/AppGridCard';
 import { GaEventBinder } from '@/components/GaEventBinder';
 import { ScrollToTopButton } from '@/components/ScrollToTop';
 import { StaticAppCard } from '@/components/StaticAppCard';
-import { APP_BY_SLUG, APPS } from '@/data/apps';
+import { APP_BY_SLUG, APPS, resolveLocalizedUrl } from '@/data/apps';
 import { en } from '@/locales/en';
 import { ja } from '@/locales/ja';
 import { resolveServerLanguage } from '@/utils/serverLanguage';
@@ -112,7 +112,7 @@ export default async function AppDetailPage({ params }: AppPageProps) {
         gitHubUrl={app.gitHubUrl}
         policyUrl={app.policyUrl}
         gitHubRepo={app.gitHubRepo}
-        appStoreUrl={app.appStoreUrl}
+        appStoreUrl={resolveLocalizedUrl(app.appStoreUrl, language)}
         googlePlayUrl={app.googlePlayUrl}
         webAppUrl={app.webAppUrl}
         windowsAppUrl={app.windowsAppUrl}

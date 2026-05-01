@@ -11,11 +11,12 @@ import {
   Typography,
   CircularProgress,
 } from '@mui/material';
-import Image, { type StaticImageData } from 'next/image';
+import type { StaticImageData } from 'next/image';
 
 import { NoteSmallLogoIcon, ZennLogoIcon } from '@/components/Icons';
 
 import { AppCardLoader } from '@/components/AppCardLoader';
+import { ScreenshotLightbox } from '@/components/ScreenshotLightbox';
 
 interface StaticAppCardProps {
   appName: string;
@@ -81,17 +82,7 @@ export const StaticAppCard = ({
         {appName}
       </Typography>
       <Divider sx={{ mb: 2 }} />
-      <Box sx={{ maxWidth: 500, mb: 2 }}>
-        <Image
-          src={screenshot}
-          alt={appName}
-          priority
-          style={{
-            width: '100%',
-            height: 'auto',
-          }}
-        />
-      </Box>
+      <ScreenshotLightbox src={screenshot} alt={appName} />
       <Typography variant="body1">{description}</Typography>
       {(noteUrl || zennUrl || gitHubUrl || policyUrl) && (
         <Box sx={{ marginY: 2 }}>

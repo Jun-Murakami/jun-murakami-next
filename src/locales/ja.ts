@@ -72,9 +72,9 @@ export const ja = {
     monacoNotepad: {
       title: 'Monaco Notepad',
       description:
-        'Evernoteと、VSCodeと、メモ帳を、足して10くらいで割ったアプリです。',
+        'メモ帳 × VSCode × Evernote を足して10で割ったメモアプリです。iOS版・Android版もあります。',
       longDescription:
-        'Evernoteと、VSCodeと、メモ帳を、足して10くらいで割ったアプリです。プログラマー向け。 エディタ部分はMonacoEditor (VSCodeと同じエディタエンジン)。 ファイルを開いて直接編集することもできますし、Google Driveでクラウド同期できるメモ帳に変換して保持することができます。Google DriveはユーザーのGoogleアカウントの専用フォルダを使用します。（このアプリは専用フォルダにしかアクセスしません）',
+        'メモ帳 × VSCode × Evernote を足して10で割ったメモアプリです。プログラマー向け。エディタ部分はMonaco Editor (VSCodeと同じエディタエンジン) を使用しています。ローカルのファイルを開いて直接編集することもできますし、Google Driveで同期できるノートに変換して保持することもできます。50種類以上の言語のシンタックスハイライト、GFM (GitHub Flavored Markdown) およびMermaidダイアグラムに対応したMarkdownプレビュー、全文検索、分割編集モードなどに対応しています。iOS版・Android版もリリースしました。デスクトップ版と同じGoogle Drive上の専用フォルダを参照するため、複数デバイス間でノートが同期されます。Google DriveはユーザーのGoogleアカウントの専用フォルダを使用します。（このアプリは専用フォルダにしかアクセスしません）',
     },
     yomigana: {
       title: 'よみがなコンバーター',

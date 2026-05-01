@@ -73,9 +73,9 @@ export const en = {
     monacoNotepad: {
       title: 'Monaco Notepad',
       description:
-        "An app that's like Evernote, VSCode, and Notepad combined and divided by about 10.",
+        "Notepad × VS Code × Evernote, divided by 10. iOS and Android versions are also available.",
       longDescription:
-        "An app that's like Evernote, VSCode, and Notepad combined and divided by about 10. Designed for programmers. The editor part uses Monaco Editor (the same editor engine as VSCode). You can open and edit files directly, or convert them into notes that can be cloud-synced with Google Drive. Google Drive uses a dedicated folder in the user's Google account. (This app only accesses the dedicated folder)",
+        "Notepad × VS Code × Evernote, divided by 10. Designed for programmers. The editor part uses Monaco Editor (the same editor engine as VS Code). You can open and edit local files directly, or convert them into notes that sync via Google Drive. Features include syntax highlighting for over 50 languages, Markdown preview with GitHub Flavored Markdown (GFM) and Mermaid diagram support, full-text search, and a side-by-side editing mode. iOS and Android companion apps are also available — they share the same Google Drive dedicated folder as the desktop version, so notes stay in sync across all your devices. Google Drive uses a dedicated folder in the user's Google account. (This app only accesses that dedicated folder.)",
     },
     yomigana: {
       title: 'Yomigana Converter',

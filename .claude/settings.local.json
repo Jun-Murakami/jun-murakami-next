@@ -8,7 +8,9 @@
       "Bash(npm run *)",
       "Bash(git *)",
       "Bash(cp D:/Synching/code/Nextjs/jun-murakami-next/.next/server/app/apps/zerocomp/opengraph-image.body /tmp/og-zerocomp.png)",
-      "Read(//tmp/**)"
+      "Read(//tmp/**)",
+      "Bash(gh api *)",
+      "Bash(xargs curl *)"
     ]
   }
 }

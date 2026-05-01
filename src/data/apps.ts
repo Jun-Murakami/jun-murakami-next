@@ -17,6 +17,17 @@ export type AppPlatform =
 
 export type AppLocaleKey = keyof typeof ja.apps;
 
+export type LocalizedUrl = string | { en: string; ja: string };
+
+export const resolveLocalizedUrl = (
+  url: LocalizedUrl | undefined,
+  language: 'en' | 'ja',
+): string | undefined => {
+  if (!url) return undefined;
+  if (typeof url === 'string') return url;
+  return url[language];
+};
+
 export interface AppDefinition {
   slug: string;
   legacyAnchor: string;
@@ -32,7 +43,7 @@ export interface AppDefinition {
   gitHubUrl?: string;
   policyUrl?: string;
   gitHubRepo?: string;
-  appStoreUrl?: string;
+  appStoreUrl?: LocalizedUrl;
   googlePlayUrl?: string;
   webAppUrl?: string;
   windowsAppUrl?: string;
@@ -57,8 +68,10 @@ export const APPS: AppDefinition[] = [
     noteUrl: 'https://note.com/junmurakami/n/n36b1e198f287',
     gitHubUrl: 'https://github.com/Jun-Murakami/wlsib',
     policyUrl: '/privacy-policy-wlsib',
-    appStoreUrl:
-      'https://apps.apple.com/jp/app/%E3%83%AC%E3%83%B3%E3%82%BA%E4%BD%95%E6%8C%81%E3%81%A3%E3%81%A6%E3%81%8F/id6480391376',
+    appStoreUrl: {
+      ja: 'https://apps.apple.com/jp/app/%E3%83%AC%E3%83%B3%E3%82%BA%E4%BD%95%E6%8C%81%E3%81%A3%E3%81%A6%E3%81%8F/id6480391376',
+      en: 'https://apps.apple.com/us/app/wlsib/id6480391376',
+    },
     googlePlayUrl:
       'https://play.google.com/store/apps/details?id=com.wlsib.app',
     webAppUrl: 'https://lensdore-c55ce.web.app/',
@@ -82,21 +95,28 @@ export const APPS: AppDefinition[] = [
       'https://github.com/Jun-Murakami/AI-Browser/releases/download/v{{version}}/AI-Browser-{{version}}_mac_universal.dmg',
   },
   {
-    slug: 'lightroom-to-resolve',
-    legacyAnchor: 'lightroom2Resolve',
+    slug: 'monaco-notepad',
+    legacyAnchor: 'monacoNotepad',
     category: 'tools',
-    platforms: ['desktop'],
-    localeKey: 'lightroom2Resolve',
-    screenshot: screenshots.lightroom2Resolve,
-    thumbnail: screenshots.lightroom2Resolve_s,
-    screenshotFile: 'sc_lightroom2resolve.jpg',
-    gitHubRepo: 'Jun-Murakami/LightroomToResolve',
-    noteUrl: 'https://note.com/junmurakami/n/n2737001eaf88',
-    gitHubUrl: 'https://github.com/Jun-Murakami/LightroomToResolve',
+    platforms: ['desktop', 'mobile'],
+    localeKey: 'monacoNotepad',
+    screenshot: screenshots.monacoNotepad,
+    thumbnail: screenshots.monacoNotepad_s,
+    screenshotFile: 'sc_monaco_notepad.jpg',
+    gitHubRepo: 'Jun-Murakami/monaco-notepad',
+    zennUrl: 'https://zenn.dev/jun_murakami/articles/e80016061b4df5',
+    gitHubUrl: 'https://github.com/Jun-Murakami/monaco-notepad',
+    policyUrl: '/privacy-policy-monaco-notepad',
+    appStoreUrl: {
+      ja: 'https://apps.apple.com/jp/app/monaco-notepad/id6764434901',
+      en: 'https://apps.apple.com/us/app/monaco-notepad/id6764434901',
+    },
+    googlePlayUrl:
+      'https://play.google.com/store/apps/details?id=dev.junmurakami.monaconotepad',
     windowsAppUrl:
-      'https://github.com/Jun-Murakami/LightroomToResolve/releases/download/v{{version}}/LightroomToResolve_{{version}}_windows.zip',
+      'https://github.com/Jun-Murakami/monaco-notepad/releases/download/v{{version}}/MonacoNotepad-win64-installer-{{version}}.exe',
     macUniversalAppUrl:
-      'https://github.com/Jun-Murakami/LightroomToResolve/releases/download/v{{version}}/LightroomToResolve_{{version}}_macOS.pkg',
+      'https://github.com/Jun-Murakami/monaco-notepad/releases/download/v{{version}}/MonacoNotepad-mac-universal-{{version}}.dmg',
   },
   {
     slug: 'keyfit',
@@ -129,7 +149,10 @@ export const APPS: AppDefinition[] = [
     gitHubUrl: 'https://github.com/Jun-Murakami/TaskTrees',
     policyUrl: '/privacy-policy-tasktrees',
     webAppUrl: 'https://tasktree-s.web.app/',
-    appStoreUrl: 'https://apps.apple.com/jp/app/tasktrees/id6482979857',
+    appStoreUrl: {
+      ja: 'https://apps.apple.com/jp/app/tasktrees/id6482979857',
+      en: 'https://apps.apple.com/us/app/tasktrees/id6482979857',
+    },
     googlePlayUrl:
       'https://play.google.com/store/apps/details?id=com.tasktrees.app',
     windowsAppUrl:
@@ -138,22 +161,21 @@ export const APPS: AppDefinition[] = [
       'https://github.com/Jun-Murakami/TaskTrees/releases/download/v{{version}}/TaskTrees-{{version}}_mac_universal.dmg',
   },
   {
-    slug: 'monaco-notepad',
-    legacyAnchor: 'monacoNotepad',
+    slug: 'lightroom-to-resolve',
+    legacyAnchor: 'lightroom2Resolve',
     category: 'tools',
     platforms: ['desktop'],
-    localeKey: 'monacoNotepad',
-    screenshot: screenshots.monacoNotepad,
-    thumbnail: screenshots.monacoNotepad_s,
-    screenshotFile: 'sc_monaco_notepad.jpg',
-    gitHubRepo: 'Jun-Murakami/monaco-notepad',
-    zennUrl: 'https://zenn.dev/jun_murakami/articles/e80016061b4df5',
-    gitHubUrl: 'https://github.com/Jun-Murakami/monaco-notepad',
-    policyUrl: '/privacy-policy-monaco-notepad',
+    localeKey: 'lightroom2Resolve',
+    screenshot: screenshots.lightroom2Resolve,
+    thumbnail: screenshots.lightroom2Resolve_s,
+    screenshotFile: 'sc_lightroom2resolve.jpg',
+    gitHubRepo: 'Jun-Murakami/LightroomToResolve',
+    noteUrl: 'https://note.com/junmurakami/n/n2737001eaf88',
+    gitHubUrl: 'https://github.com/Jun-Murakami/LightroomToResolve',
     windowsAppUrl:
-      'https://github.com/Jun-Murakami/monaco-notepad/releases/download/v{{version}}/MonacoNotepad-win64-installer-{{version}}.exe',
+      'https://github.com/Jun-Murakami/LightroomToResolve/releases/download/v{{version}}/LightroomToResolve_{{version}}_windows.zip',
     macUniversalAppUrl:
-      'https://github.com/Jun-Murakami/monaco-notepad/releases/download/v{{version}}/MonacoNotepad-mac-universal-{{version}}.dmg',
+      'https://github.com/Jun-Murakami/LightroomToResolve/releases/download/v{{version}}/LightroomToResolve_{{version}}_macOS.pkg',
   },
   {
     slug: 'dropbox-skipper',

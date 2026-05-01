@@ -1,13 +1,14 @@
 {
   "hosting": {
-    "source": ".",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
+    "rewrites": [
+      {
+        "source": "**",
+        "run": {
+          "serviceId": "jun-murakami-next",
+          "region": "asia-east1"
+        }
+      }
     ],
-    "frameworksBackend": {
-      "region": "asia-east1"
-    }
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"]
   }
 }
